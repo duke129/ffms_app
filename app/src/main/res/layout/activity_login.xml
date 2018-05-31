@@ -1,0 +1,132 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/footer_RL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_bottom_shape" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/footer_text_margin_top"
+                android:text="@string/footer_textView_powered_by"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/footerText"
+                android:textSize="@dimen/footer_text_size" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/logo_description"
+                android:src="@drawable/hm_icon" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/main_RL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer_RL" >
+
+        <RelativeLayout
+            android:id="@+id/hm_logo_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_form_linearr_layout_margin_top" >
+
+            <ImageView
+                android:id="@+id/hm_logo_IV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/logo_description"
+                android:src="@drawable/ffms_logo" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/login_RL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="@+id/hm_logo_RL"
+            android:layout_below="@+id/hm_logo_RL"
+            android:layout_marginTop="@dimen/login_form_linearr_layout_margin_top" >
+
+            <EditText
+                android:id="@+id/username_ET"
+                android:layout_width="@dimen/login_form_edittext_textWidth"
+                android:layout_height="@dimen/edittext_text_height"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/login_form_editText_margin_left"
+                android:background="@drawable/textfield_style"
+                android:ems="10"
+                android:hint="Username"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:padding="@dimen/edittext_text_padding"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorBlack" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/password_ET"
+                android:layout_width="@dimen/login_form_edittext_textWidth"
+                android:layout_height="@dimen/edittext_text_height"
+                android:layout_alignParentLeft="@+id/username_ET"
+                android:layout_below="@+id/username_ET"
+                android:layout_marginLeft="@dimen/login_form_editText_margin_left"
+                android:layout_marginTop="@dimen/login_form_linearr_layout_margin_top"
+                android:background="@drawable/textfield_style"
+                android:ems="10"
+                android:hint="Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="@dimen/edittext_text_padding"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorBlack" />
+
+            <Button
+                android:id="@+id/login_BT"
+                android:layout_width="@dimen/login_form_edittext_textWidth"
+                android:layout_height="@dimen/edittext_text_height"
+                android:layout_below="@+id/password_ET"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/login_form_linearr_layout_margin_top"
+                android:background="@drawable/button_style"
+                android:text="@string/action_sign_in"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/version_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="23dp"
+                android:layout_marginRight="28dp"
+                android:text="@string/app_version"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hmHomeBackground" >
+
+    <!-- Header aligned to top -->
+
+
+    <!-- The Main Content View -->
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/banner_RL"
+        android:layout_width="@dimen/banner_relativeLayout_width"
+        android:layout_height="@dimen/banner_relativeLayout_height"
+        android:background="@color/hmBannerBackground"
+        android:visibility="visible" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/banner_left_margin"
+            android:layout_marginRight="@dimen/banner_right_margin" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollableContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/banner_RL"
+        android:layout_margin="@dimen/grid_layout_margin" >
+
+        <RelativeLayout
+            android:id="@+id/button_grid_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:id="@+id/buttonMainLayout_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/buttonLayoutFirstRow_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_button_row_height"
+                    android:orientation="horizontal"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:id="@+id/newLeads_LL"
+                        android:layout_width="@dimen/grid_button_middle_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/newLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/newLeads_bucket_text"
+                            android:src="@drawable/new_leads" />
+
+                        <TextView
+                            android:id="@+id/newLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/newLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/inProgressLeads_LL"
+                        android:layout_width="@dimen/grid_button_side_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_margin"
+                        android:layout_marginRight="@dimen/grid_middle_button_right_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/inProgressLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/inProgressLeads_bucket_text"
+                            android:src="@drawable/in_progress_leads" />
+
+                        <TextView
+                            android:id="@+id/inProgressLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/inProgressLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/completedLeads_LL"
+                        android:layout_width="@dimen/grid_button_side_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/completedLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/completedLeads_bucket_text"
+                            android:src="@drawable/completed_leads" />
+
+                        <TextView
+                            android:id="@+id/completedLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/completedLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/buttonLayoutSecondRow_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_button_row_height"
+                    android:layout_marginTop="@dimen/grid_row_top_margin"
+                    android:orientation="horizontal"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:id="@+id/searchLeads_LL"
+                        android:layout_width="@dimen/grid_button_middle_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/searchLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:src="@drawable/search_leads" />
+
+                        <TextView
+                            android:id="@+id/searchLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/searchLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/createNewLeads_LL"
+                        android:layout_width="@dimen/grid_button_side_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_margin"
+                        android:layout_marginRight="@dimen/grid_middle_button_right_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/createNewLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/createNewLeads_bucket_text"
+                            android:src="@drawable/create_new_leads" />
+
+                        <TextView
+                            android:id="@+id/createNewLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/createNewLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/rejectedLeads_LL"
+                        android:layout_width="@dimen/grid_button_side_width"
+                        android:layout_height="@dimen/grid_button_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_margin"
+                        android:layout_marginRight="@dimen/grid_middle_button_right_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/rejectedLeads_IV"
+                            android:layout_width="@dimen/grid_logo_width"
+                            android:layout_height="@dimen/grid_logo_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/createNewLeads_bucket_text"
+                            android:src="@drawable/rejected_leads" />
+
+                        <TextView
+                            android:id="@+id/rejectedLeads_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/rejectedLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer_RL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_bottom_shape" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/footer_powered_by_text_label_top"
+                android:text="@string/footer_textView_powered_by"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/footer_label_text_color"
+                android:textSize="@dimen/footer_powered_by_text_label" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/logo_description"
+                android:src="@drawable/hm_icon" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ScrollView>
+
+</RelativeLayout>

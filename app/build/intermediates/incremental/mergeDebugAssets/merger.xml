@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/adarsh/Development/Android_Studio/Projects/FFMS/workspace/app/src/main/assets"/><source path="/home/adarsh/Development/Android_Studio/Projects/FFMS/workspace/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/adarsh/Development/Android_Studio/Projects/FFMS/workspace/app/src/debug/assets"/></dataSet></merger>

@@ -1,0 +1,4 @@
+#Wed May 30 18:13:04 IST 2018
+base.0=/home/adarsh/Development/Android_Studio/Projects/FFMS/workspace/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

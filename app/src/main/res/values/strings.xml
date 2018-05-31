@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- app details-->
+
+    <string name="app_name">FFMS</string>
+    <string name="app_version">1.0.0</string>
+
+    <!--login page-->
+
+    <string name="footer_textView_powered_by">Powered By :</string>
+    <string name="logo_description">Company Logo</string>
+    <string name="action_sign_in">Login</string>
+
+    <!--login validation-->
+
+    <string name="username_empty">Please enter username</string>
+    <string name="password_empty">Please enter password</string>
+    <string name="invalid_credential">Invalid credential</string>
+    <string name="se_user">setest</string>
+    <string name="ne_user">netest</string>
+
+    <!-- SE grid button -->
+    <string name="newLeads_bucket_text">New Leads</string>
+    <string name="inProgressLeads_bucket_text">In Progress Leads</string>
+    <string name="completedLeads_bucket_text">Completed Leads</string>
+    <string name="searchLeads_bucket_text">Search Leads</string>
+    <string name="createNewLeads_bucket_text">Create New Leads</string>
+    <string name="rejectedLeads_bucket_text">Rejected Leads</string>
+
+    <!-- Action Bar -->
+    <string name="contentDescription_profile_menu">Profile Menu</string>
+    <string name="welcome_text">Welcome  </string>
+    <string name="switch_button_off">OFF</string>
+    <string name="switch_button_on">ON</string>
+    <string name="contentDescription_refresh">Refresh Icon</string>
+
+    <string name="data_not_available">Data not available..!</string>
+
+    <string name="createdDateLabel">Created </string>
+    <string name="addressLabel">Address</string>
+
+
+
+</resources>
