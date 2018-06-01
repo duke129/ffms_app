@@ -104,7 +104,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/grid_logo_margin_top"
                             android:contentDescription="@string/inProgressLeads_bucket_text"
-                            android:src="@drawable/in_progress_leads" />
+                            android:src="@drawable/inprogress_icon" />
 
                         <TextView
                             android:id="@+id/inProgressLeads_TV"

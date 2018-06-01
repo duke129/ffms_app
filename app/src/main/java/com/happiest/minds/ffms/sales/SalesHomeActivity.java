@@ -1,11 +1,11 @@
 package com.happiest.minds.ffms.sales;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +23,7 @@ import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.CustomPageAdapter;
 import com.happiest.minds.ffms.R;
+import com.happiest.minds.ffms.UserProfileFragment;
 
 
 public class SalesHomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,7 +34,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     View actionBar_V;
 
-    ImageView profileMenu_IV, refresh_IV;
+    ImageView profileMenu_IV, notification_IV;
 
     Switch user_SB;
 
@@ -57,6 +58,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     SalesLeadsCardView salesCardViewFragment;
 
+    UserProfileFragment userProfileFragment;
+
     public static boolean flag,isOnHome,isOnProfile,isOnProspectDetails,isOnCardView,isSearch;
 
     @Override
@@ -67,11 +70,13 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         context = this;
 
         flag = false;
-        isOnHome = false;
+        isOnHome = true;
         isOnProfile = false;
         isOnProspectDetails = false;
         isOnCardView = false;
         isSearch = false;
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         getActionBarTitle();
 
@@ -100,7 +105,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                 R.string.welcome_text)
                 + " " + "HM");
         user_SB = (Switch) actionBar_V.findViewById(R.id.user_SB);
-        refresh_IV = (ImageView) actionBar_V.findViewById(R.id.refresh_IV);
+        notification_IV = (ImageView) actionBar_V.findViewById(R.id.notification_IV);
 
         actionBar.setCustomView(actionBar_V);
 
@@ -110,7 +115,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         profileMenu_IV.setOnClickListener(this);
         user_SB.setOnClickListener(this);
-        refresh_IV.setOnClickListener(this);
+        notification_IV.setOnClickListener(this);
 
     }
 
@@ -191,19 +196,23 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                             R.string.welcome_text)
                             + " " + "HM");
 
-                    //redirectToUserProfileFragment();
+                    user_SB.setVisibility(View.VISIBLE);
 
-                    refresh_IV.setVisibility(View.GONE);
+                    redirectToUserProfileFragment();
+
+                    notification_IV.setVisibility(View.VISIBLE);
 
                 } else if (isOnProspectDetails) {
-                    refresh_IV.setVisibility(View.VISIBLE);
+
+                    notification_IV.setVisibility(View.VISIBLE);
+
+                    user_SB.setVisibility(View.GONE);
 
                     removeFragmentFromHome();
 
-                   // redirectToSalesExecutiveProspectCardViewFragment();
+                    // redirectToSalesExecutiveProspectCardViewFragment();
 
                 } else {
-                    refresh_IV.setVisibility(View.VISIBLE);
 
                     onHomeButtonClick();
 
@@ -215,18 +224,18 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 break;
 
-        case R.id.newLeads_LL:
+            case R.id.newLeads_LL:
 
-        CommonUtility.saveSeButtonClickedValue(context,
-                Constant.NEW_LEADS);
+                CommonUtility.saveSeButtonClickedValue(context,
+                        Constant.NEW_LEADS);
 
-        welcome_TV.setText(context.getResources().getString(
-                R.string.newLeads_bucket_text));
+                welcome_TV.setText(context.getResources().getString(
+                        R.string.newLeads_bucket_text));
 
 
-            redirectToCardViewFragment();
+                redirectToCardViewFragment();
 
-            break;
+                break;
         }
 
 
@@ -235,7 +244,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     private void redirectToCardViewFragment() {
 
-       // boolean ticketAvailable = checkTicketCount();
+        // boolean ticketAvailable = checkTicketCount();
 
         boolean ticketAvailable = false;
 
@@ -339,10 +348,24 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 isOnCardView = false;
 
-            } else {
+            }else if (userProfileFragment != null
+                    && getFragmentManager()
+                    .findFragmentById(
+                            this.userProfileFragment
+                                    .getId()) != null) {
 
-                Log.i(TAG, "salesCardViewFragment is null");
+                fragmentContainerFrameLayout.setVisibility(View.GONE);
 
+                getFragmentManager().beginTransaction()
+                        .remove(userProfileFragment)
+                        .addToBackStack(null).addToBackStack(null)
+                        .commitAllowingStateLoss();
+
+                isOnProfile = false;
+
+            } else{
+
+                Log.i(TAG, "Something went wrong in removeFragmentFromHome");
             }
         }
     }
@@ -356,7 +379,11 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         hide();
 
-        profileMenu_IV.setImageResource(R.drawable.profile_menu);
+        profileMenu_IV.setImageResource(R.drawable.user_profile_icon);
+
+        user_SB.setVisibility(View.GONE);
+
+        notification_IV.setVisibility(View.VISIBLE);
 
         fragmentContainerFrameLayout.setVisibility(View.GONE);
 
@@ -365,5 +392,41 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         button_grid_RL.setVisibility(View.VISIBLE);
 
         removeFragmentFromHome();
+    }
+
+    private void redirectToUserProfileFragment() {
+
+        flag = false;
+
+        isOnHome = false;
+        isOnProfile = true;
+        isOnProspectDetails = false;
+        isOnCardView = false;
+
+        hide();
+
+        welcome_TV.setText(context.getResources().getString(
+                R.string.profile_text));
+
+        profileMenu_IV.setImageResource(R.drawable.back_button);
+
+        footer_RL.setVisibility(View.GONE);
+        banner_RL.setVisibility(View.GONE);
+        button_grid_RL.setVisibility(View.GONE);
+
+        fragmentContainerFrameLayout.setVisibility(View.VISIBLE);
+
+        userProfileFragment = new UserProfileFragment();
+
+        if (userProfileFragment != null) {
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, userProfileFragment)
+                    .addToBackStack(null).commitAllowingStateLoss();
+        } else {
+
+            Log.i(TAG, " userProfileFragment is null");
+        }
+
     }
 }

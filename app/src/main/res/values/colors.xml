@@ -14,4 +14,8 @@
     <color name="hmWhite">#FFFFFF</color>
     <color name="card_view_header_text_color">#0d0d0c</color>
     <color name="card_view_address_color">#4d4d4d</color>
+    <color name="roleValue_color">#4d4d4d</color>
+    <color name="textView_label_color">#4d4d4d</color>
+    <color name="textView_value_color">#8c8c8c</color>
+    <color name="editable_text_color">#1a1a1a</color>
 </resources>

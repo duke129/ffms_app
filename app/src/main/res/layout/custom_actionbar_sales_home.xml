@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/action_bar_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:minWidth="@dimen/action_bar_width"
     android:orientation="horizontal"
-    android:weightSum="4" >
+    android:weightSum="4">
 
     <ImageView
         android:id="@+id/profileMenu_IV"
@@ -15,7 +16,7 @@
         android:layout_marginTop="@dimen/profile_menu_top_margin"
         android:layout_weight="0.2"
         android:contentDescription="@string/contentDescription_profile_menu"
-        android:src="@drawable/profile_menu" />
+        android:src="@drawable/user_profile_icon" />
 
     <TextView
         android:id="@+id/welcome_TV"
@@ -30,15 +31,6 @@
         android:textSize="@dimen/medium_font_size"
         android:textStyle="normal" />
 
-    <ImageView
-        android:id="@+id/refresh_IV"
-        android:layout_width="@dimen/refresh_icon_width"
-        android:layout_height="@dimen/refresh_icon_height"
-        android:layout_marginTop="5dp"
-        android:layout_weight=".4"
-        android:contentDescription="@string/contentDescription_refresh"
-        android:src="@drawable/refresh_icon_white" />
-
     <Switch
         android:id="@+id/user_SB"
         android:layout_width="wrap_content"
@@ -51,6 +43,18 @@
         android:textOn="@string/switch_button_on"
         android:textSize="@dimen/switch_button_text_size"
         android:thumb="@drawable/switch_thumb"
+        android:visibility="gone"
         android:track="@drawable/switch_track" />
+
+    <ImageView
+        android:id="@+id/notification_IV"
+        android:layout_width="@dimen/refresh_icon_width"
+        android:layout_height="@dimen/refresh_icon_height"
+        android:layout_marginTop="5dp"
+        android:layout_weight=".4"
+        android:contentDescription="@string/contentDescription_notificatiom"
+        android:src="@drawable/notification" />
+
+
 
 </LinearLayout>
