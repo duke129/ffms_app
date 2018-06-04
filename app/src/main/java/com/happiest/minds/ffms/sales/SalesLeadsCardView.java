@@ -100,6 +100,7 @@ public class SalesLeadsCardView extends Fragment {
 
             salesCardViewPojo.setAddress("ABC");
             salesCardViewPojo.setCreatedDate("" + new Date());
+            salesCardViewPojo.setEtr("" + new Date());
             salesCardViewPojo.setCustomerName("XYZ");
             salesCardViewPojo.setMobileNo("9876543210");
             salesCardViewPojo.setProspectNo("123");

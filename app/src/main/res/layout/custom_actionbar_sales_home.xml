@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/action_bar_height"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:minWidth="@dimen/action_bar_width"
     android:orientation="horizontal"
@@ -14,7 +14,7 @@
         android:layout_width="@dimen/profile_menu_width"
         android:layout_height="@dimen/profile_menu_height"
         android:layout_marginTop="@dimen/profile_menu_top_margin"
-        android:layout_weight="0.2"
+        android:layout_weight=".2"
         android:contentDescription="@string/contentDescription_profile_menu"
         android:src="@drawable/user_profile_icon" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/welcome_text_right_margin"
         android:layout_marginTop="@dimen/welcome_text_top_margin"
-        android:layout_weight="3"
+        android:layout_weight="3.5"
         android:singleLine="true"
         android:text="@string/welcome_text"
         android:textColor="@color/hmWhite"
@@ -37,24 +37,23 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/switch_button_right_margin"
         android:layout_marginTop="@dimen/switch_button_top_margin"
-        android:layout_weight=".5"
+        android:layout_weight=".2"
         android:textColor="@color/hmWhite"
         android:textOff="@string/switch_button_off"
         android:textOn="@string/switch_button_on"
         android:textSize="@dimen/switch_button_text_size"
         android:thumb="@drawable/switch_thumb"
-        android:visibility="gone"
-        android:track="@drawable/switch_track" />
+        android:track="@drawable/switch_track"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/notification_IV"
         android:layout_width="@dimen/refresh_icon_width"
         android:layout_height="@dimen/refresh_icon_height"
         android:layout_marginTop="5dp"
-        android:layout_weight=".4"
+        android:layout_weight=".1"
         android:contentDescription="@string/contentDescription_notificatiom"
         android:src="@drawable/notification" />
-
 
 
 </LinearLayout>

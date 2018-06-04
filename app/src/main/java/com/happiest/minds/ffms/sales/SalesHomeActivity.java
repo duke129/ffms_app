@@ -117,6 +117,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         user_SB.setOnClickListener(this);
         notification_IV.setOnClickListener(this);
 
+        user_SB.setChecked(true);
+
     }
 
     private void loadBanner() {

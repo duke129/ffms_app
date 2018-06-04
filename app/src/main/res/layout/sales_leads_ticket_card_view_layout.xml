@@ -32,7 +32,7 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/prospectNo_CV_TV"
+                    android:id="@+id/ticketNo_CV_TV"
                     android:layout_width="@dimen/ne_card_view_text_width"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -102,10 +102,37 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/SE_address_RL"
+            android:id="@+id/SE_ETR_RL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/SE_createdDate_RL"
+            android:layout_margin="@dimen/se_address_rl_margin">
+
+            <TextView
+                android:id="@+id/etrLabel_CV_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/sales_cardview_textView_margin_leftt"
+                android:text="@string/etrLabel"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+
+            <TextView
+                android:id="@+id/etr_CV_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/se_address_value_margin_left"
+                android:layout_toRightOf="@+id/etrLabel_CV_TV"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SE_address_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SE_ETR_RL"
             android:layout_margin="@dimen/se_address_rl_margin">
 
             <TextView
@@ -126,6 +153,83 @@
                 android:layout_toRightOf="@+id/addressLabel_CV_TV"
                 android:textColor="@color/card_view_address_color"
                 android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/SE_demarcation_RL"
+        android:layout_width="@dimen/demarcation_rl_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SE_address_RL"
+        android:layout_marginBottom="@dimen/demarcation_rl_bottom_margin"
+        android:layout_marginTop="@dimen/headRow3_linear_layout_margin_top" >
+
+        <RelativeLayout
+            android:id="@+id/demo_demarcation_RL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/demarcation_rl_right_margin_tariff"
+            android:background="@drawable/first_grey_arrow"
+            android:padding="@dimen/relative_padding" >
+
+            <TextView
+                android:id="@+id/demo_CV_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/activity_demo"
+                android:textSize="@dimen/activity_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/order_demarcation_RL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/demarcation_rl_right_margin_document"
+            android:layout_toRightOf="@+id/demo_demarcation_RL"
+            android:background="@drawable/grey_arrow"
+            android:padding="@dimen/relative_padding" >
+
+            <TextView
+                android:id="@+id/order_CV_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/activity_order"
+                android:textSize="@dimen/activity_text_size" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SE_update_status_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SE_demarcation_RL"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/update_status_rl_bottom_margin"
+            android:layout_margin="@dimen/se_address_rl_margin">
+
+            <ImageView
+                android:id="@+id/lock_Status_IV"
+                android:layout_width="@dimen/update_status_icon_width"
+                android:layout_height="@dimen/update_status_icon_height"
+                android:contentDescription="@string/contentDescription_lock_status"
+                android:src="@drawable/lock"
+                android:layout_alignParentLeft="true"/>
+
+            <ImageView
+                android:id="@+id/update_Status_IV"
+                android:layout_width="@dimen/update_status_icon_width"
+                android:layout_height="@dimen/update_status_icon_height"
+                android:contentDescription="@string/contentDescription_update_status"
+                android:src="@drawable/update_status"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
     </RelativeLayout>

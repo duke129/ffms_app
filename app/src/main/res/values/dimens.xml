@@ -60,10 +60,10 @@
     <dimen name="se_card_view_header_padding">10dp</dimen>
     <dimen name="se_card_view_header_radius">5dp</dimen>
     <dimen name="se_card_view_header_margin">2dp</dimen>
-    <dimen name="se_address_rl_margin">10dp</dimen>
+    <dimen name="se_address_rl_margin">5dp</dimen>
     <dimen name="se_address_value_margin_left">30dp</dimen>
     <dimen name="demarcation_rl_width">650dp</dimen>
-    <dimen name="demarcation_rl_bottom_margin">10dp</dimen>
+    <dimen name="demarcation_rl_bottom_margin">5dp</dimen>
     <dimen name="demarcation_rl_right_margin_tariff">-18dp</dimen>
     <dimen name="demarcation_rl_right_margin_document">-20dp</dimen>
     <dimen name="demarcation_rl_right_margin_payment">-24dp</dimen>
@@ -71,6 +71,8 @@
     <dimen name="activity_text_size">16dp</dimen>
     <dimen name="demarcation_rl_width_ne">600dp</dimen>
     <dimen name="demarcation_rl_flag_width_ne">110dp</dimen>
+    <dimen name="headRow3_linear_layout_margin_top">5dp</dimen>
+    <dimen name="relative_padding">5dp</dimen>
 
     <dimen name="relative_layout_setting_height_cardview">45dp</dimen>
     <dimen name="ne_card_view_text_width">130dp</dimen>
@@ -79,6 +81,9 @@
     <dimen name="font_size_large">20dp</dimen>
     <dimen name="ne_card_view_mobile_text_width">120dp</dimen>
     <dimen name="sales_cardview_textView_margin_leftt">7dp</dimen>
+    <dimen name="update_status_icon_width">25dp</dimen>
+    <dimen name="update_status_icon_height">25dp</dimen>
+    <dimen name="update_status_rl_bottom_margin">5dp</dimen>
 
     <!-- profile -->
 

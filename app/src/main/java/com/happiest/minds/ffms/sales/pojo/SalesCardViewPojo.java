@@ -7,6 +7,7 @@ public class SalesCardViewPojo {
     private String mobileNo;
     private String createdDate;
     private String address;
+    private String etr;
 
     public String getProspectNo() {
         return prospectNo;
@@ -48,6 +49,14 @@ public class SalesCardViewPojo {
         this.address = address;
     }
 
+    public String getEtr() {
+        return etr;
+    }
+
+    public void setEtr(String etr) {
+        this.etr = etr;
+    }
+
     @Override
     public String toString() {
         return "SalesCardViewPojo{" +
@@ -56,6 +65,7 @@ public class SalesCardViewPojo {
                 ", mobileNo='" + mobileNo + '\'' +
                 ", createdDate='" + createdDate + '\'' +
                 ", address='" + address + '\'' +
+                ", etr='" + etr + '\'' +
                 '}';
     }
 }
