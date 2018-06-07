@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hiddenLayout_demo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:id="@+id/demo_activity_LL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hmWhite"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/assetCategory_SP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_arrowColor="@color/colorPrimary"
+            app:ms_arrowSize="@dimen/spinner_arrow_size"
+            app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+            app:ms_floatingLabelText="@string/assetCategory_spinner_floating_label"
+            app:ms_hint="@string/assetCategory_hint"
+            app:ms_hintColor="@color/spinner_hint"
+            app:ms_hintTextSize="@dimen/spinner_hint_size"
+            app:ms_multiline="true" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+            <EditText
+                android:id="@+id/assetDetails_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/assetDetails" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/order_activity_LL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hmWhite"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/assetCategory_or_SP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_arrowColor="@color/colorPrimary"
+            app:ms_arrowSize="@dimen/spinner_arrow_size"
+            app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+            app:ms_floatingLabelText="@string/assetCategory_spinner_floating_label"
+            app:ms_hint="@string/assetCategory_hint"
+            app:ms_hintColor="@color/spinner_hint"
+            app:ms_hintTextSize="@dimen/spinner_hint_size"
+            app:ms_multiline="true" />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/assetQuantity_SP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_arrowColor="@color/colorPrimary"
+            app:ms_arrowSize="@dimen/spinner_arrow_size"
+            app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+            app:ms_floatingLabelText="@string/assetQuantity_spinner_floating_label"
+            app:ms_hint="@string/assetQuantity_hint"
+            app:ms_hintColor="@color/spinner_hint"
+            app:ms_hintTextSize="@dimen/spinner_hint_size"
+            app:ms_multiline="true" />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/assetModel_SP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_arrowColor="@color/colorPrimary"
+            app:ms_arrowSize="@dimen/spinner_arrow_size"
+            app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+            app:ms_floatingLabelText="@string/assetModel_spinner_floating_label"
+            app:ms_hint="@string/assetModel_hint"
+            app:ms_hintColor="@color/spinner_hint"
+            app:ms_hintTextSize="@dimen/spinner_hint_size"
+            app:ms_multiline="true" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+            <EditText
+                android:id="@+id/amountCharged_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/amountCharged" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+            <EditText
+                android:id="@+id/discountGiven_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/discountGiven" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+            <EditText
+                android:id="@+id/actualAmountToBePaid_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/actualAmountToBePaid" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

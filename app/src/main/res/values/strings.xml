@@ -43,6 +43,8 @@
 
     <!-- User Profile -->
     <string name="profile_text">Profile</string>
+    <string name="lead_details_text">Lead Details</string>
+    <string name="lead_card_view_text">Lead Card View</string>
     <string name="role_text">Role</string>
     <string name="branch_text">Branch</string>
     <string name="city_text">City</string>
@@ -68,5 +70,65 @@
     <string name="activity_order">Order</string>
     <string name="contentDescription_lock_status">Notification Icon</string>
     <string name="contentDescription_update_status">Update Status</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Ticket Details-->
+    <string name="ticket_number">Ticket Number</string>
+    <string name="created_date">Created Date</string>
+    <string name="committed_etr">Committed Etr</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mobile_no">Mobile Number</string>
+    <string name="alternate_mobile_no">Alternate Mobile Number</string>
+    <string name="office_number">Office Number</string>
+    <string name="email_id">Email Id</string>
+    <string name="alternate_email_id">Alternate Email Id</string>
+    <string name="city">City</string>
+    <string name="current_addressLine1">Current Address Line1</string>
+    <string name="current_addressLine2">Current Address Line2</string>
+    <string name="current_addressLandmark">Current Address Landmark</string>
+    <string name="current_addressPincode">Current Address Pincode</string>
+    <string name="billing_addressLine1">Billing Address Line1</string>
+    <string name="billing_addressLine2">Billing Address Line2</string>
+    <string name="billing_addressLandmark">Billing Address Landmark</string>
+    <string name="billing_addressPincode">Billing Address Pincode</string>
+
+    <string name="activity_name_demo">Demo</string>
+    <string name="activity_name_order">Order</string>
+
+    <string name="title_spinner_floating_label">Title</string>
+    <string name="title_spinner_hint">Select Title</string>
+    <string name="branch_spinner_floating_label">Branch</string>
+    <string name="branch_spinner_hint">Select Branch</string>
+    <string name="area_spinner_floating_label">Area</string>
+    <string name="area_spinner_hint">Select Area</string>
+
+    <!--sales activity-->
+
+    <string name="assetCategory_spinner_floating_label">Asset Category</string>
+    <string name="assetCategory_hint">Select Asset Category</string>
+    <string name="assetDetails">Asset Details</string>
+
+    <string name="assetQuantity_spinner_floating_label">Asset Quantity</string>
+    <string name="assetQuantity_hint">Select Asset Quantity</string>
+
+    <string name="assetModel_spinner_floating_label">Asset Model</string>
+    <string name="assetModel_hint">Select Asset Model</string>
+
+    <string name="amountCharged">Amount Charged</string>
+    <string name="discountGiven">Discount Given</string>
+    <string name="actualAmountToBePaid">Actual Amount To Be Paid</string>
+
+    <string name="title_prompt">Title</string>
+    <string-array name="title_array">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Dr</item>
+        <item>Er</item>
+    </string-array>
+
 
 </resources>

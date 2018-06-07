@@ -200,6 +200,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                     user_SB.setVisibility(View.VISIBLE);
 
+                    removeFragmentFromHome();
+
                     redirectToUserProfileFragment();
 
                     notification_IV.setVisibility(View.VISIBLE);
@@ -211,6 +213,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                     user_SB.setVisibility(View.GONE);
 
                     removeFragmentFromHome();
+
+                    redirectToCardViewFragment();
 
                     // redirectToSalesExecutiveProspectCardViewFragment();
 
@@ -234,6 +238,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                 welcome_TV.setText(context.getResources().getString(
                         R.string.newLeads_bucket_text));
 
+                removeFragmentFromHome();
 
                 redirectToCardViewFragment();
 
@@ -262,6 +267,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             hide();
 
             profileMenu_IV.setImageResource(R.drawable.back_button);
+
+            welcome_TV.setText(context.getResources().getString(R.string.lead_card_view_text));
 
             footer_RL.setVisibility(View.GONE);
             banner_RL.setVisibility(View.GONE);
@@ -332,6 +339,9 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     private void removeFragmentFromHome() {
 
         isOnHome = true;
+        isOnProfile = false;
+        isOnProspectDetails = false;
+        isOnCardView = false;
 
         if (isOnCardView) {
 
@@ -430,5 +440,11 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             Log.i(TAG, " userProfileFragment is null");
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        // super.onBackPressed();
     }
 }

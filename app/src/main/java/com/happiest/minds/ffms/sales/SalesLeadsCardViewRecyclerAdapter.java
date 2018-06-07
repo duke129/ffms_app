@@ -1,5 +1,6 @@
 package com.happiest.minds.ffms.sales;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,22 +18,25 @@ import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.sales.pojo.SalesCardViewPojo;
 
-public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SalesLeadsCardViewRecyclerAdapter.SalesViewHolder>  {
+public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SalesLeadsCardViewRecyclerAdapter.SalesViewHolder> {
 
-    private static final String TAG =  SalesLeadsCardViewRecyclerAdapter.class.getSimpleName();
+    private static final String TAG = SalesLeadsCardViewRecyclerAdapter.class.getSimpleName();
 
     private ArrayList<SalesCardViewPojo> salesCardViewPojoArrayList;
 
     Context context;
 
-    public SalesLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<SalesCardViewPojo> salesCardViewPojoArrayListCons){
+    SalesTicketDetailsFragment salesTicketDetailsFragment;
+
+
+    public SalesLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<SalesCardViewPojo> salesCardViewPojoArrayListCons) {
 
 
         context = contextCons;
 
         salesCardViewPojoArrayList = salesCardViewPojoArrayListCons;
 
-        Log.i(TAG, "salesCardViewPojoArrayList :"+salesCardViewPojoArrayList.toString());
+        Log.i(TAG, "salesCardViewPojoArrayList :" + salesCardViewPojoArrayList.toString());
 
 
     }
@@ -98,7 +102,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
         CardView cardView;
 
         TextView prospectNo_CV_TV, customerName_CV_TV, mobileNo_CV_TV,
-                createdDate_CV_TV,etr_CV_TV, address_CV_TV;
+                createdDate_CV_TV, etr_CV_TV, address_CV_TV;
 
         RelativeLayout demo_demarcation_RL, order_demarcation_RL;
 
@@ -126,7 +130,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
             demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_RL);
             order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_RL);
-            lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
+            //lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
             update_Status_IV = (ImageView) itemView.findViewById(R.id.update_Status_IV);
 
 
@@ -135,9 +139,33 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                 @Override
                 public void onClick(View v) {
 
-                    Log.i(TAG, "Card view clicked");
+                    redirectToSalesTicketDetailsFragment();
                 }
             });
         }
+    }
+
+    private void redirectToSalesTicketDetailsFragment() {
+
+        SalesHomeActivity.isOnHome = false;
+        SalesHomeActivity.isOnHome = false;
+        SalesHomeActivity.isOnProfile = false;
+        SalesHomeActivity.isOnProspectDetails = true;
+        SalesHomeActivity.isOnCardView = false;
+        SalesHomeActivity.welcome_TV.setText(context.getResources().getString(
+                R.string.lead_details_text));
+
+        salesTicketDetailsFragment = new SalesTicketDetailsFragment();
+
+        if (salesTicketDetailsFragment != null
+                && context != null && !((Activity) context).isFinishing()) {
+
+            ((Activity) context).getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, salesTicketDetailsFragment)
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss();
+        }
+
     }
 }

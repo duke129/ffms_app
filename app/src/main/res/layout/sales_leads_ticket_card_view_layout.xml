@@ -155,81 +155,80 @@
                 android:textSize="@dimen/font_size_medium" />
         </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/SE_demarcation_RL"
-        android:layout_width="@dimen/demarcation_rl_width"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SE_address_RL"
-        android:layout_marginBottom="@dimen/demarcation_rl_bottom_margin"
-        android:layout_marginTop="@dimen/headRow3_linear_layout_margin_top" >
-
         <RelativeLayout
-            android:id="@+id/demo_demarcation_RL"
-            android:layout_width="wrap_content"
+            android:id="@+id/SE_demarcation_RL"
+            android:layout_width="@dimen/demarcation_rl_width"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/demarcation_rl_right_margin_tariff"
-            android:background="@drawable/first_grey_arrow"
-            android:padding="@dimen/relative_padding" >
+            android:layout_below="@+id/SE_address_RL"
+            android:layout_marginBottom="@dimen/demarcation_rl_bottom_margin"
+            android:layout_marginTop="@dimen/headRow3_linear_layout_margin_top">
 
-            <TextView
-                android:id="@+id/demo_CV_TV"
+            <RelativeLayout
+                android:id="@+id/demo_demarcation_RL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="@string/activity_demo"
-                android:textSize="@dimen/activity_text_size" />
-        </RelativeLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/demarcation_rl_right_margin_tariff"
+                android:background="@drawable/first_grey_arrow"
+                android:padding="@dimen/relative_padding">
 
-        <RelativeLayout
-            android:id="@+id/order_demarcation_RL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/demarcation_rl_right_margin_document"
-            android:layout_toRightOf="@+id/demo_demarcation_RL"
-            android:background="@drawable/grey_arrow"
-            android:padding="@dimen/relative_padding" >
+                <TextView
+                    android:id="@+id/demo_CV_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/activity_demo"
+                    android:textSize="@dimen/activity_text_size" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/order_CV_TV"
+            <RelativeLayout
+                android:id="@+id/order_demarcation_RL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="@string/activity_order"
-                android:textSize="@dimen/activity_text_size" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/demarcation_rl_right_margin_document"
+                android:layout_toRightOf="@+id/demo_demarcation_RL"
+                android:background="@drawable/grey_arrow"
+                android:padding="@dimen/relative_padding">
 
-        <RelativeLayout
-            android:id="@+id/SE_update_status_RL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/SE_demarcation_RL"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="@dimen/update_status_rl_bottom_margin"
-            android:layout_margin="@dimen/se_address_rl_margin">
+                <TextView
+                    android:id="@+id/order_CV_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/activity_order"
+                    android:textSize="@dimen/activity_text_size" />
+            </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/lock_Status_IV"
-                android:layout_width="@dimen/update_status_icon_width"
-                android:layout_height="@dimen/update_status_icon_height"
-                android:contentDescription="@string/contentDescription_lock_status"
-                android:src="@drawable/lock"
-                android:layout_alignParentLeft="true"/>
+            <RelativeLayout
+                android:id="@+id/SE_update_status_RL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/se_address_rl_margin"
+                android:layout_marginBottom="@dimen/update_status_rl_bottom_margin">
 
-            <ImageView
-                android:id="@+id/update_Status_IV"
-                android:layout_width="@dimen/update_status_icon_width"
-                android:layout_height="@dimen/update_status_icon_height"
-                android:contentDescription="@string/contentDescription_update_status"
-                android:src="@drawable/update_status"
-                android:layout_alignParentRight="true"/>
+               <!-- <ImageView
+                    android:id="@+id/lock_Status_IV"
+                    android:layout_width="@dimen/update_status_icon_width"
+                    android:layout_height="@dimen/update_status_icon_height"
+                    android:layout_alignParentLeft="true"
+                    android:contentDescription="@string/contentDescription_lock_status"
+                    android:src="@drawable/lock" />-->
+
+                <ImageView
+                    android:id="@+id/update_Status_IV"
+                    android:layout_width="@dimen/update_status_icon_width"
+                    android:layout_height="@dimen/update_status_icon_height"
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="@string/contentDescription_update_status"
+                    android:src="@drawable/update_status" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </RelativeLayout>

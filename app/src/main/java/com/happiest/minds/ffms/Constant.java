@@ -12,4 +12,6 @@ public interface Constant {
     int SEARCH_LEADS = 104;
     int CREATE_NEW_LEADS = 105;
     int REJECTED_LEADS = 106;
+    String SALES_ACTIVITY_DEMO = "Demo";
+    String SALES_ACTIVITY_ORDER = "Order";
 }

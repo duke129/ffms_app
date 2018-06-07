@@ -18,4 +18,6 @@
     <color name="textView_label_color">#4d4d4d</color>
     <color name="textView_value_color">#8c8c8c</color>
     <color name="editable_text_color">#1a1a1a</color>
+    <color name="spinner_floating_lebel">#9d9d9d</color>
+    <color name="spinner_hint">#44000000</color>
 </resources>

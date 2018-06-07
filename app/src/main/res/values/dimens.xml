@@ -83,7 +83,15 @@
     <dimen name="sales_cardview_textView_margin_leftt">7dp</dimen>
     <dimen name="update_status_icon_width">25dp</dimen>
     <dimen name="update_status_icon_height">25dp</dimen>
-    <dimen name="update_status_rl_bottom_margin">5dp</dimen>
+    <dimen name="update_status_rl_bottom_margin">0dp</dimen>
+    <dimen name="linear_layout_margin_bottom_top">2dp</dimen>
+
+    <!-- activity accordian -->
+
+    <dimen name="activity_accordian_height">60dp</dimen>
+    <dimen name="activity_ll_bottom_margin">10dp</dimen>
+    <dimen name="activity_ll_top_margin">5dp</dimen>
+    <dimen name="header_textSize">20dp</dimen>
 
     <!-- profile -->
 
@@ -132,4 +140,10 @@
     <dimen name="app_version_layout_bottom_margin">5dp</dimen>
     <dimen name="app_version_right_margin">10dp</dimen>
     <dimen name="app_version_text_size">22dp</dimen>
+
+    <!--ticket details-->
+
+    <dimen name="details_edittext_margin_top">5dp</dimen>
+    <dimen name="spinner_arrow_size">16dp</dimen>
+    <dimen name="spinner_hint_size">16dp</dimen>
 </resources>

@@ -80,7 +80,7 @@ public class SalesLeadsCardView extends Fragment {
 
         Log.i(TAG, "cardview count :: " + salesCardViewPojoArrayList.size());
 
-        salesCardViewRecyclerAdapter = new SalesLeadsCardViewRecyclerAdapter(context, salesCardViewPojoArrayList);
+        salesCardViewRecyclerAdapter = new SalesLeadsCardViewRecyclerAdapter(getActivity(), salesCardViewPojoArrayList);
 
         // create an Object for Adapter
 
