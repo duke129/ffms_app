@@ -12,32 +12,50 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.happiest.minds.ffms.CommonUtility;
+import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
-import com.happiest.minds.ffms.sales.pojo.SalesCardViewPojo;
+import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
+import com.happiest.minds.ffms.sales.pojo.TicketDetails;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SalesLeadsCardViewRecyclerAdapter.SalesViewHolder> {
 
     private static final String TAG = SalesLeadsCardViewRecyclerAdapter.class.getSimpleName();
 
-    private ArrayList<SalesCardViewPojo> salesCardViewPojoArrayList;
+    private ArrayList<TicketCardViewData> ticketCardViewDataArrayList;
 
     Context context;
 
     SalesTicketDetailsFragment salesTicketDetailsFragment;
 
+    FFMSRequestQueue ffmsRequestQueue;
+    ObjectMapper objectMapper;
+    public static ArrayList<TicketDetails> ticketDetailsArrayList;
 
-    public SalesLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<SalesCardViewPojo> salesCardViewPojoArrayListCons) {
+
+    public SalesLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<TicketCardViewData> ticketCardViewDataArrayListCons) {
 
 
         context = contextCons;
 
-        salesCardViewPojoArrayList = salesCardViewPojoArrayListCons;
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
 
-        Log.i(TAG, "salesCardViewPojoArrayList :" + salesCardViewPojoArrayList.toString());
+        objectMapper = new ObjectMapper();
 
+        ticketCardViewDataArrayList = ticketCardViewDataArrayListCons;
 
     }
 
@@ -61,21 +79,22 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
         holder.setIsRecyclable(false);
 
-        holder.prospectNo_CV_TV.setText(salesCardViewPojoArrayList.get(
-                position).getProspectNo());
+        holder.ticketNo_CV_TV.setText(ticketCardViewDataArrayList.get(
+                position).getTicketNumber());
 
-        holder.address_CV_TV.setText(salesCardViewPojoArrayList.get(
-                position).getAddress());
+        holder.address_CV_TV.setText(ticketCardViewDataArrayList.get(
+                position).getCustomerAddress());
 
-        holder.createdDate_CV_TV.setText(salesCardViewPojoArrayList.get(
-                position).getCreatedDate());
+        holder.createdDate_CV_TV.setText("" + ticketCardViewDataArrayList.get(
+                position).getTicketCreationDate());
 
-        holder.etr_CV_TV.setText(salesCardViewPojoArrayList.get(position).getEtr());
+        holder.etr_CV_TV.setText(ticketCardViewDataArrayList.get(
+                position).getCommittedETR());
 
-        holder.mobileNo_CV_TV.setText(salesCardViewPojoArrayList.get(
-                position).getMobileNo());
+        holder.mobileNo_CV_TV.setText(ticketCardViewDataArrayList.get(
+                position).getCustomerMobileNumber());
 
-        holder.customerName_CV_TV.setText(salesCardViewPojoArrayList.get(
+        holder.customerName_CV_TV.setText(ticketCardViewDataArrayList.get(
                 position).getCustomerName());
 
         holder.update_Status_IV.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +109,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
     @Override
     public int getItemCount() {
-        return salesCardViewPojoArrayList.size();
+        return ticketCardViewDataArrayList.size();
     }
 
     @Override
@@ -101,7 +120,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
     public class SalesViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
 
-        TextView prospectNo_CV_TV, customerName_CV_TV, mobileNo_CV_TV,
+        TextView ticketNo_CV_TV, customerName_CV_TV, mobileNo_CV_TV,
                 createdDate_CV_TV, etr_CV_TV, address_CV_TV;
 
         RelativeLayout demo_demarcation_RL, order_demarcation_RL;
@@ -113,7 +132,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
             cardView = (CardView) itemView.findViewById(R.id.se_card_view);
 
-            prospectNo_CV_TV = (TextView) itemView
+            ticketNo_CV_TV = (TextView) itemView
                     .findViewById(R.id.ticketNo_CV_TV);
             customerName_CV_TV = (TextView) itemView
                     .findViewById(R.id.customerName_CV_TV);
@@ -139,10 +158,87 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                 @Override
                 public void onClick(View v) {
 
-                    redirectToSalesTicketDetailsFragment();
+
+                    String ticketId = String
+                            .valueOf(ticketCardViewDataArrayList.get(
+                                    getAdapterPosition()).getTicketId());
+
+                    callServiceForTicketDetails(ticketId);
+
+                    //redirectToSalesTicketDetailsFragment();
                 }
             });
         }
+    }
+
+    private void callServiceForTicketDetails(String ticketId) {
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.SALES_LEAD_DETAILS;
+        String url = host + "" + uri + "/" + ticketId;
+
+        Log.i(TAG, "url : " + url);
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG,
+                                "callServiceForTicketDetails  response : "
+                                        + response);
+
+                        try {
+
+                            ticketDetailsArrayList = objectMapper.readValue(
+                                    response,
+                                    TypeFactory.defaultInstance()
+                                            .constructCollectionType(
+                                                    ArrayList.class,
+                                                    TicketDetails.class));
+                            redirectToSalesTicketDetailsFragment();
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callServiceForTicketDetails onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " SALES_LEAD_DETAILS");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(stringRequest);
+
     }
 
     private void redirectToSalesTicketDetailsFragment() {

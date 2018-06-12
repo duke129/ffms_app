@@ -15,40 +15,8 @@
             android:background="@color/hmWhite"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/ticketNumber_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/ticket_number"
-                    android:shadowColor="@color/colorPrimary"
-                    android:text="12345"
-                    android:textColorHint="@color/colorPrimary" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/ticketCreatedDate_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/created_date"
-                    android:text="06-06-2018 05:57PM" />
-
-            </android.support.design.widget.TextInputLayout>
-
             <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/title_SP"
+                android:id="@+id/title_CN_SP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ms_arrowColor="@color/colorPrimary"
@@ -66,7 +34,7 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/firstName_ET"
+                    android:id="@+id/firstName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name" />
@@ -92,7 +60,7 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/lastName_ET"
+                    android:id="@+id/lastName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name" />
@@ -105,10 +73,12 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/mobileNo_ET"
+                    android:id="@+id/mobileNo_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/mobile_no" />
+                    android:hint="@string/mobile_no"
+                    android:inputType="phone"
+                    android:maxLength="10" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -121,7 +91,9 @@
                     android:id="@+id/alternateMobileNo_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/alternate_mobile_no" />
+                    android:hint="@string/alternate_mobile_no"
+                    android:inputType="phone"
+                    android:maxLength="10" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -131,10 +103,12 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/officeNo_ET"
+                    android:id="@+id/officeNo_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/office_number" />
+                    android:hint="@string/office_number"
+                    android:inputType="phone"
+                    android:maxLength="10" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -147,7 +121,8 @@
                     android:id="@+id/email_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email_id" />
+                    android:hint="@string/email_id"
+                    android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -157,10 +132,11 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/aternateEmail_ET"
+                    android:id="@+id/alternateEmail_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/alternate_email_id" />
+                    android:hint="@string/alternate_email_id"
+                    android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -170,7 +146,7 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/city_ET"
+                    android:id="@+id/city_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -180,7 +156,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/branch_SP"
+                android:id="@+id/branch_CN_SP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ms_arrowColor="@color/colorPrimary"
@@ -193,7 +169,7 @@
                 app:ms_multiline="true" />
 
             <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/area_SP"
+                android:id="@+id/area_CN_SP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ms_arrowColor="@color/colorPrimary"
@@ -208,10 +184,11 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
+                android:layout_marginTop="@dimen/details_edittext_margin_top"
+                android:visibility="gone">
 
                 <EditText
-                    android:id="@+id/current_addressLine1_ET"
+                    android:id="@+id/current_address_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/current_addressLine1" />
@@ -224,106 +201,71 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/current_addressLine2_ET"
+                    android:id="@+id/communication_address_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/current_addressLine2" />
+                    android:hint="@string/communication_address" />
 
             </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/current_addressLandmark_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/current_addressLandmark" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/current_addressPincode_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/current_addressPincode" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/billing_addressLine1_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLine1" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/billing_addressLine2_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLine2" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/billing_addressLandmark_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLandmark" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-                <EditText
-                    android:id="@+id/billing_addressPincode_ET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressPincode" />
-
-            </android.support.design.widget.TextInputLayout>
-
 
             <LinearLayout
-                android:id="@+id/sales_activity_LL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/linear_layout_margin_bottom_top"
-                android:layout_marginTop="@dimen/linear_layout_margin_bottom_top"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/activity_recycler_view"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical" />
+                    android:layout_marginTop="@dimen/details_edittext_margin_top"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/preferredCallTime_CN_ET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="@string/preferred_callTime" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/calendar_IB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/ticketDetails_linear_layout_text_margin"
+                    android:layout_toRightOf="@+id/preferedDateValueET"
+                    android:background="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:src="@drawable/cal" />
+
             </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/submit_button_RL"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal|center">
+
+                <Button
+                    android:id="@+id/submit_CN_BT"
+                    android:layout_width="@dimen/sales_button_setting_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ticketDetails_linear_layout_text_margin"
+                    android:background="@color/colorPrimary"
+                    android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+                    android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding"
+                    android:text="@string/submit_button"
+                    android:textColor="@color/hmWhite"
+                    android:textSize="@dimen/button_text_size" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 

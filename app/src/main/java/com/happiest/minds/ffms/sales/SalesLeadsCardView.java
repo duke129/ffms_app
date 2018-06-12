@@ -76,11 +76,7 @@ public class SalesLeadsCardView extends Fragment {
         // use a linear layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<SalesCardViewPojo> salesCardViewPojoArrayList = generateDummyData();
-
-        Log.i(TAG, "cardview count :: " + salesCardViewPojoArrayList.size());
-
-        salesCardViewRecyclerAdapter = new SalesLeadsCardViewRecyclerAdapter(getActivity(), salesCardViewPojoArrayList);
+        salesCardViewRecyclerAdapter = new SalesLeadsCardViewRecyclerAdapter(getActivity(), SalesHomeActivity.ticketCardViewDataList);
 
         // create an Object for Adapter
 
@@ -90,26 +86,5 @@ public class SalesLeadsCardView extends Fragment {
 
     }
 
-    private ArrayList<SalesCardViewPojo> generateDummyData() {
-
-        ArrayList<SalesCardViewPojo> salesCardViewPojoArrayList = new ArrayList<SalesCardViewPojo>();
-
-        for (int i = 0; i <= 5; i++) {
-
-            SalesCardViewPojo salesCardViewPojo = new SalesCardViewPojo();
-
-            salesCardViewPojo.setAddress("ABC");
-            salesCardViewPojo.setCreatedDate("" + new Date());
-            salesCardViewPojo.setEtr("" + new Date());
-            salesCardViewPojo.setCustomerName("XYZ");
-            salesCardViewPojo.setMobileNo("9876543210");
-            salesCardViewPojo.setProspectNo("123");
-
-            salesCardViewPojoArrayList.add(salesCardViewPojo);
-        }
-
-        return salesCardViewPojoArrayList;
-    }
-
-
 }
+

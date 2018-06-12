@@ -146,4 +146,5 @@
     <dimen name="details_edittext_margin_top">5dp</dimen>
     <dimen name="spinner_arrow_size">16dp</dimen>
     <dimen name="spinner_hint_size">16dp</dimen>
+    <dimen name="sales_button_setting_width">150dp</dimen>
 </resources>

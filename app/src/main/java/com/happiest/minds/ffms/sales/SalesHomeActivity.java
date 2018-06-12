@@ -1,10 +1,10 @@
 package com.happiest.minds.ffms.sales;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,14 +16,29 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.CustomPageAdapter;
+import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.UserProfileFragment;
+import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 
 public class SalesHomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -58,9 +73,16 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     SalesLeadsCardView salesCardViewFragment;
 
+    SalesCreateNewLeads salesCreateNewLeads;
+
     UserProfileFragment userProfileFragment;
 
-    public static boolean flag,isOnHome,isOnProfile,isOnProspectDetails,isOnCardView,isSearch;
+    public static boolean flag,isOnHome,isOnProfile,isOnProspectDetails,isOnCardView,isSearch,isOnCreate;
+
+    FFMSRequestQueue ffmsRequestQueue;
+    ObjectMapper objectMapper;
+    public static ArrayList<TicketCardViewData> ticketCardViewDataList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +91,16 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         context = this;
 
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
         flag = false;
         isOnHome = true;
         isOnProfile = false;
         isOnProspectDetails = false;
         isOnCardView = false;
         isSearch = false;
+        isOnCreate = false;
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
@@ -216,7 +242,14 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                     redirectToCardViewFragment();
 
-                    // redirectToSalesExecutiveProspectCardViewFragment();
+
+                }else if (isOnCreate) {
+
+                    onHomeButtonClick();
+
+                    welcome_TV.setText(context.getResources().getString(
+                            R.string.welcome_text)
+                            + " " + "HM");
 
                 } else {
 
@@ -232,15 +265,37 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.newLeads_LL:
 
-                CommonUtility.saveSeButtonClickedValue(context,
-                        Constant.NEW_LEADS);
+                callServiceForCardView();
 
-                welcome_TV.setText(context.getResources().getString(
-                        R.string.newLeads_bucket_text));
+                break;
+
+            case R.id.inProgressLeads_LL:
+
+                callServiceForCardView();
+
+                break;
+
+            case R.id.completedLeads_LL:
+
+                callServiceForCardView();
+
+                break;
+
+            case R.id.rejectedLeads_LL:
+
+                callServiceForCardView();
+
+                break;
+
+            case R.id.createNewLeads_LL:
+
+                notification_IV.setVisibility(View.VISIBLE);
+
+                user_SB.setVisibility(View.GONE);
 
                 removeFragmentFromHome();
 
-                redirectToCardViewFragment();
+                redirectToCreateNewFragment();
 
                 break;
         }
@@ -263,6 +318,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             isOnProspectDetails = false;
             isSearch = false;
             isOnCardView = true;
+            isOnCreate = false;
 
             hide();
 
@@ -296,6 +352,67 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 CommonUtility.showToastMessage(context, context
                         .getResources().getString(R.string.data_not_available));
+            }
+
+            if (context != null) {
+                welcome_TV.setText(context.getResources().getString(
+                        R.string.welcome_text)
+                        + " " + "HM");
+            }
+
+            return;
+        }
+
+    }
+
+    private void redirectToCreateNewFragment(){
+
+        // boolean ticketAvailable = checkTicketCount();
+
+        boolean ticketAvailable = false;
+
+        if (!ticketAvailable) {
+
+            flag = false;
+            isOnHome = false;
+            isOnProfile = false;
+            isOnProspectDetails = false;
+            isSearch = false;
+            isOnCardView = false;
+            isOnCreate = true;
+
+            hide();
+
+            profileMenu_IV.setImageResource(R.drawable.back_button);
+
+            welcome_TV.setText(context.getResources().getString(R.string.create_new_lead_text));
+
+            footer_RL.setVisibility(View.GONE);
+            banner_RL.setVisibility(View.GONE);
+            button_grid_RL.setVisibility(View.GONE);
+
+            fragmentContainerFrameLayout.setVisibility(View.VISIBLE);
+
+            salesCreateNewLeads = new SalesCreateNewLeads();
+
+            if (salesCreateNewLeads != null) {
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer,
+                                salesCreateNewLeads)
+                        .addToBackStack(null).commitAllowingStateLoss();
+
+            } else {
+
+                Log.i(TAG, " salesCreateNewLeads is null");
+            }
+
+        } else {
+            if (context != null) {
+
+                CommonUtility.showToastMessage(context, context
+                        .getResources().getString(R.string.somthing_went_wrong));
             }
 
             if (context != null) {
@@ -385,6 +502,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     private void onHomeButtonClick() {
 
+        removeFragmentFromHome();
+
         flag = false;
 
         isSearch = false;
@@ -403,7 +522,6 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         banner_RL.setVisibility(View.VISIBLE);
         button_grid_RL.setVisibility(View.VISIBLE);
 
-        removeFragmentFromHome();
     }
 
     private void redirectToUserProfileFragment() {
@@ -446,5 +564,94 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     public void onBackPressed() {
         // TODO Auto-generated method stub
         // super.onBackPressed();
+    }
+
+
+    private void callServiceForCardView(){
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.SALES_CARD_VIEW_URI;
+        String url = host + "" + uri;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG,
+                                "callServiceForCardView  response : "
+                                        + response);
+
+                        try {
+
+                            ticketCardViewDataList = objectMapper.readValue(
+                                    response,
+                                    TypeFactory.defaultInstance()
+                                            .constructCollectionType(
+                                                    ArrayList.class,
+                                                    TicketCardViewData.class));
+
+                            processForCardViewRedirect();
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                    if (error != null) {
+
+                        Log.e(TAG,
+                                "callServiceForCardView onErrorResponse : "
+                                        + error.toString());
+
+                    }
+                    if (!SalesHomeActivity.this.isFinishing()) {
+
+                        if (context != null
+                                && !SalesHomeActivity.this
+                                .isFinishing()) {
+                            CommonUtility
+                                    .showServerResponseMessage(
+                                            context,
+                                            context.getResources()
+                                                    .getString(
+                                                            R.string.invalid_server_response_for_webservice)
+                                                    + " SALES_CARD_VIEW_URI");
+                        }
+                    }
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(stringRequest);
+
+    }
+
+    private void processForCardViewRedirect(){
+
+        CommonUtility.saveSeButtonClickedValue(context,
+                Constant.NEW_LEADS);
+
+        welcome_TV.setText(context.getResources().getString(
+                R.string.newLeads_bucket_text));
+
+        removeFragmentFromHome();
+
+        redirectToCardViewFragment();
     }
 }
