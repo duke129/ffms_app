@@ -77,7 +77,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     UserProfileFragment userProfileFragment;
 
-    public static boolean flag,isOnHome,isOnProfile,isOnProspectDetails,isOnCardView,isSearch,isOnCreate;
+    public static boolean flag,isOnHome,isOnProfile, isOnLeadsDetails,isOnCardView,isSearch,isOnCreate;
 
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
@@ -97,7 +97,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         flag = false;
         isOnHome = true;
         isOnProfile = false;
-        isOnProspectDetails = false;
+        isOnLeadsDetails = false;
         isOnCardView = false;
         isSearch = false;
         isOnCreate = false;
@@ -232,7 +232,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                     notification_IV.setVisibility(View.VISIBLE);
 
-                } else if (isOnProspectDetails) {
+                } else if (isOnLeadsDetails) {
 
                     notification_IV.setVisibility(View.VISIBLE);
 
@@ -315,7 +315,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             flag = false;
             isOnHome = false;
             isOnProfile = false;
-            isOnProspectDetails = false;
+            isOnLeadsDetails = false;
             isSearch = false;
             isOnCardView = true;
             isOnCreate = false;
@@ -376,7 +376,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             flag = false;
             isOnHome = false;
             isOnProfile = false;
-            isOnProspectDetails = false;
+            isOnLeadsDetails = false;
             isSearch = false;
             isOnCardView = false;
             isOnCreate = true;
@@ -457,7 +457,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         isOnHome = true;
         isOnProfile = false;
-        isOnProspectDetails = false;
+        isOnLeadsDetails = false;
         isOnCardView = false;
 
         if (isOnCardView) {
@@ -530,7 +530,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         isOnHome = false;
         isOnProfile = true;
-        isOnProspectDetails = false;
+        isOnLeadsDetails = false;
         isOnCardView = false;
 
         hide();

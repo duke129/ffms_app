@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:background="@color/colorPrimary"
+    android:minWidth="@dimen/action_bar_width"
+    android:orientation="horizontal"
+    android:weightSum="4">
+
+    <ImageView
+        android:id="@+id/profileMenu_SR_IV"
+        android:layout_width="@dimen/profile_menu_width"
+        android:layout_height="@dimen/profile_menu_height"
+        android:layout_marginTop="@dimen/profile_menu_top_margin"
+        android:layout_weight=".2"
+        android:contentDescription="@string/contentDescription_profile_menu"
+        android:src="@drawable/user_profile_icon" />
+
+    <TextView
+        android:id="@+id/welcome_SR_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/welcome_text_right_margin"
+        android:layout_marginTop="@dimen/welcome_text_top_margin"
+        android:layout_weight="3.5"
+        android:singleLine="true"
+        android:text="@string/welcome_text"
+        android:textColor="@color/hmWhite"
+        android:textSize="@dimen/medium_font_size"
+        android:textStyle="normal" />
+
+    <Switch
+        android:id="@+id/user_SR_SB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/switch_button_right_margin"
+        android:layout_marginTop="@dimen/switch_button_top_margin"
+        android:layout_weight=".2"
+        android:textColor="@color/hmWhite"
+        android:textOff="@string/switch_button_off"
+        android:textOn="@string/switch_button_on"
+        android:textSize="@dimen/switch_button_text_size"
+        android:thumb="@drawable/switch_thumb"
+        android:track="@drawable/switch_track"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/notification_SR_IV"
+        android:layout_width="@dimen/refresh_icon_width"
+        android:layout_height="@dimen/refresh_icon_height"
+        android:layout_marginTop="5dp"
+        android:layout_weight=".1"
+        android:contentDescription="@string/contentDescription_notificatiom"
+        android:src="@drawable/notification" />
+
+
+</LinearLayout>

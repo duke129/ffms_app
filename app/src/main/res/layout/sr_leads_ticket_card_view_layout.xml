@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sr_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/se_card_view_margin_left"
+    android:layout_marginRight="@dimen/se_card_view_margin_right"
+    android:layout_marginTop="@dimen/se_card_view_margin_top"
+    card_view:cardCornerRadius="@dimen/se_card_view_radius"
+    card_view:cardElevation="@dimen/se_card_view_elevation"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/SR_cardView_parent_RL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/SR_cardview_parent_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/SR_cardView_header_LL"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/relative_layout_setting_height_cardview"
+                android:layout_margin="@dimen/se_card_view_header_margin"
+                android:background="@drawable/card_view_header_shape"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/ticketNo_CV_SR_TV"
+                    android:layout_width="@dimen/ne_card_view_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/headRow_linear_layout_margin_left"
+                    android:layout_marginRight="@dimen/headRow_linear_layout_margin_left"
+                    android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
+                    android:layout_weight="0.5"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/card_view_header_text_color"
+                    android:textSize="@dimen/font_size_large" />
+
+                <TextView
+                    android:id="@+id/customerName_CV_SR_TV"
+                    android:layout_width="@dimen/ne_card_view_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
+                    android:layout_weight="2"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/card_view_header_text_color"
+                    android:textSize="@dimen/font_size_large" />
+
+                <TextView
+                    android:id="@+id/mobileNo_CV_SR_TV"
+                    android:layout_width="@dimen/ne_card_view_mobile_text_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/card_view_header_text_color"
+                    android:textSize="@dimen/font_size_large" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/SR_createdDate_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SR_cardview_parent_LL"
+            android:layout_margin="@dimen/se_address_rl_margin">
+
+            <TextView
+                android:id="@+id/createdDateLabel_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/sales_cardview_textView_margin_leftt"
+                android:text="@string/createdDateLabel"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+
+            <TextView
+                android:id="@+id/createdDate_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/se_address_value_margin_left"
+                android:layout_toRightOf="@+id/createdDateLabel_CV_SR_TV"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SR_ETR_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SR_createdDate_RL"
+            android:layout_margin="@dimen/se_address_rl_margin">
+
+            <TextView
+                android:id="@+id/etrLabel_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/sales_cardview_textView_margin_leftt"
+                android:text="@string/etrLabel"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+
+            <TextView
+                android:id="@+id/etr_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/se_address_value_margin_left"
+                android:layout_toRightOf="@+id/etrLabel_CV_SR_TV"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SR_address_SR_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SR_ETR_RL"
+            android:layout_margin="@dimen/se_address_rl_margin">
+
+            <TextView
+                android:id="@+id/addressLabel_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/sales_cardview_textView_margin_leftt"
+                android:text="@string/addressLabel"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+
+            <TextView
+                android:id="@+id/address_CV_SR_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/se_address_value_margin_left"
+                android:layout_toRightOf="@+id/addressLabel_CV_SR_TV"
+                android:textColor="@color/card_view_address_color"
+                android:textSize="@dimen/font_size_medium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SR_demarcation_RL"
+            android:layout_width="@dimen/demarcation_rl_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SR_address_SR_RL"
+            android:layout_marginBottom="@dimen/demarcation_rl_bottom_margin"
+            android:layout_marginTop="@dimen/headRow3_linear_layout_margin_top">
+
+            <!--<RelativeLayout
+                android:id="@+id/demo_demarcation_SR_RL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/demarcation_rl_right_margin_tariff"
+                android:background="@drawable/first_grey_arrow"
+                android:padding="@dimen/relative_padding">
+
+                <TextView
+                    android:id="@+id/demo_CV_SR_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/activity_demo"
+                    android:textSize="@dimen/activity_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/order_demarcation_SR_RL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/demarcation_rl_right_margin_document"
+                android:layout_toRightOf="@+id/demo_demarcation_SR_RL"
+                android:background="@drawable/grey_arrow"
+                android:padding="@dimen/relative_padding">
+
+                <TextView
+                    android:id="@+id/order_CV_SR_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/activity_order"
+                    android:textSize="@dimen/activity_text_size" />
+            </RelativeLayout>-->
+
+            <RelativeLayout
+                android:id="@+id/SR_update_status_RL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/se_address_rl_margin"
+                android:layout_marginBottom="@dimen/update_status_rl_bottom_margin">
+
+                <ImageView
+                    android:id="@+id/lock_Status_IV"
+                    android:layout_width="@dimen/update_status_icon_width"
+                    android:layout_height="@dimen/update_status_icon_height"
+                    android:layout_alignParentLeft="true"
+                    android:contentDescription="@string/contentDescription_lock_status"
+                    android:src="@drawable/open_lock" />
+
+                <ImageView
+                    android:id="@+id/update_Status_SR_IV"
+                    android:layout_width="@dimen/update_status_icon_width"
+                    android:layout_height="@dimen/update_status_icon_height"
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="@string/contentDescription_update_status"
+                    android:src="@drawable/update_status" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

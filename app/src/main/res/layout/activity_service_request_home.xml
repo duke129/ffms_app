@@ -1,9 +1,337 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sr.ServiceRequestHomeActivity">
+    android:background="@color/hmHomeBackground">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Header aligned to top -->
+
+
+    <!-- The Main Content View -->
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer_SR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/banner_SR_RL"
+        android:layout_width="@dimen/banner_relativeLayout_width"
+        android:layout_height="@dimen/banner_relativeLayout_height"
+        android:background="@color/hmBannerBackground"
+        android:visibility="visible">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_SR"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/banner_left_margin"
+            android:layout_marginRight="@dimen/banner_right_margin" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollableContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/banner_SR_RL"
+        android:layout_margin="@dimen/grid_layout_margin">
+
+        <RelativeLayout
+            android:id="@+id/button_grid_SR_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/buttonMainLayout_SR_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/buttonLayoutFirstRow_SR_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_button_row_sr_height"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/newLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/newLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/newLeads_bucket_text"
+                            android:src="@drawable/new_sr" />
+
+                        <TextView
+                            android:id="@+id/newLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/newLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+
+                        <TextView
+                            android:id="@+id/newLeadsCount_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/default_count_text"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/grid_button_count_text_size" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/inProgressLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_sr_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/inProgressLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/inProgressLeads_bucket_text"
+                            android:src="@drawable/inprogress_sr" />
+
+                        <TextView
+                            android:id="@+id/inProgressLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/inProgressLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+
+                        <TextView
+                            android:id="@+id/inprogressCount_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/default_count_text"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/grid_button_count_text_size"  />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/buttonLayoutSecondRow_SR_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_button_row_sr_height"
+                    android:layout_marginTop="@dimen/grid_row_top_margin"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/completedLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/completedLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/completedLeads_bucket_text"
+                            android:src="@drawable/completed_sr" />
+
+                        <TextView
+                            android:id="@+id/completedLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/completedLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+
+                        <TextView
+                            android:id="@+id/completedCount_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/default_count_text"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/grid_button_count_text_size"  />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/rejectedLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_sr_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/rejectedLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/createNewLeads_bucket_text"
+                            android:src="@drawable/rejected_sr" />
+
+                        <TextView
+                            android:id="@+id/rejectedLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/rejectedLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+
+                        <TextView
+                            android:id="@+id/rejectedCount_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/default_count_text"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/grid_button_count_text_size" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/buttonLayoutThirdRow_SR_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/grid_button_row_sr_height"
+                    android:layout_marginTop="@dimen/grid_row_top_margin"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/createNewLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/createNewLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:contentDescription="@string/createNewLeads_bucket_text"
+                            android:src="@drawable/create_sr" />
+
+                        <TextView
+                            android:id="@+id/createNewLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/createNewLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/searchLeads_SR_LL"
+                        android:layout_width="@dimen/grid_button_sr_width"
+                        android:layout_height="@dimen/grid_button_sr_height"
+                        android:layout_marginLeft="@dimen/grid_middle_button_left_sr_margin"
+                        android:layout_weight="1"
+                        android:background="@color/hmGridButtonBackground"
+                        android:clickable="true"
+                        android:padding="@dimen/grid_button_sr_padding"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/searchLeads_SR_IV"
+                            android:layout_width="@dimen/grid_logo_sr_width"
+                            android:layout_height="@dimen/grid_logo_sr_height"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_logo_margin_top"
+                            android:src="@drawable/search_sr" />
+
+                        <TextView
+                            android:id="@+id/searchLeads_SR_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/grid_text_top_margin"
+                            android:text="@string/searchLeads_bucket_text"
+                            android:textSize="@dimen/grid_button_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer_SR_RL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_bottom_shape">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/footer_powered_by_text_label_top"
+                android:text="@string/footer_textView_powered_by"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/footer_label_text_color"
+                android:textSize="@dimen/footer_powered_by_text_label" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/logo_description"
+                android:src="@drawable/hm_icon" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

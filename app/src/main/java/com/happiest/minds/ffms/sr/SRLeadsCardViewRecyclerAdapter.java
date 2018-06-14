@@ -1,6 +1,5 @@
-package com.happiest.minds.ffms.sales;
+package com.happiest.minds.ffms.sr;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -31,22 +30,21 @@ import org.codehaus.jackson.map.type.TypeFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SalesLeadsCardViewRecyclerAdapter.SalesCardViewHolder> {
 
-    private static final String TAG = SalesLeadsCardViewRecyclerAdapter.class.getSimpleName();
+public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeadsCardViewRecyclerAdapter.SRCardViewHolder> {
+
+    private static final String TAG = SRLeadsCardViewRecyclerAdapter.class.getSimpleName();
 
     private ArrayList<TicketCardViewData> ticketCardViewDataArrayList;
 
     Context context;
-
-    SalesTicketDetailsFragment salesTicketDetailsFragment;
 
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
     public static ArrayList<TicketDetails> ticketDetailsArrayList;
 
 
-    public SalesLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<TicketCardViewData> ticketCardViewDataArrayListCons) {
+    public SRLeadsCardViewRecyclerAdapter(Context contextCons, ArrayList<TicketCardViewData> ticketCardViewDataArrayListCons) {
 
 
         context = contextCons;
@@ -60,22 +58,22 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
     }
 
     @Override
-    public SalesCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SRLeadsCardViewRecyclerAdapter.SRCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.sales_leads_ticket_card_view_layout,
+                R.layout.sr_leads_ticket_card_view_layout,
                 parent, false);
 
-        SalesCardViewHolder seHeaderButtonTicketListCardViewHolder = new SalesCardViewHolder(
+        SRLeadsCardViewRecyclerAdapter.SRCardViewHolder srHeaderButtonTicketListCardViewHolder = new SRLeadsCardViewRecyclerAdapter.SRCardViewHolder(
                 v);
 
         Log.i(TAG, "onCreateViewHolder");
 
-        return seHeaderButtonTicketListCardViewHolder;
+        return srHeaderButtonTicketListCardViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(SalesCardViewHolder holder, int position) {
+    public void onBindViewHolder(SRLeadsCardViewRecyclerAdapter.SRCardViewHolder holder, int position) {
 
         holder.setIsRecyclable(false);
 
@@ -117,7 +115,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public class SalesCardViewHolder extends RecyclerView.ViewHolder {
+    public class SRCardViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
 
         TextView ticketNo_CV_TV, customerName_CV_TV, mobileNo_CV_TV,
@@ -127,30 +125,30 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
         ImageView lock_Status_IV, update_Status_IV;
 
-        SalesCardViewHolder(View itemView) {
+        SRCardViewHolder(View itemView) {
             super(itemView);
 
-            cardView = (CardView) itemView.findViewById(R.id.se_card_view);
+            cardView = (CardView) itemView.findViewById(R.id.sr_card_view);
 
             ticketNo_CV_TV = (TextView) itemView
-                    .findViewById(R.id.ticketNo_CV_TV);
+                    .findViewById(R.id.ticketNo_CV_SR_TV);
             customerName_CV_TV = (TextView) itemView
-                    .findViewById(R.id.customerName_CV_TV);
+                    .findViewById(R.id.customerName_CV_SR_TV);
             mobileNo_CV_TV = (TextView) itemView
-                    .findViewById(R.id.mobileNo_CV_TV);
+                    .findViewById(R.id.mobileNo_CV_SR_TV);
 
             createdDate_CV_TV = (TextView) itemView
-                    .findViewById(R.id.createdDate_CV_TV);
+                    .findViewById(R.id.createdDate_CV_SR_TV);
 
-            etr_CV_TV = (TextView) itemView.findViewById(R.id.etr_CV_TV);
+            etr_CV_TV = (TextView) itemView.findViewById(R.id.etr_CV_SR_TV);
 
             address_CV_TV = (TextView) itemView
-                    .findViewById(R.id.address_CV_TV);
+                    .findViewById(R.id.address_CV_SR_TV);
 
-            demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_RL);
-            order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_RL);
-            //lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
-            update_Status_IV = (ImageView) itemView.findViewById(R.id.update_Status_IV);
+           // demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_SR_RL);
+           // order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_SR_RL);
+            lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
+            update_Status_IV = (ImageView) itemView.findViewById(R.id.update_Status_SR_IV);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +161,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                             .valueOf(ticketCardViewDataArrayList.get(
                                     getAdapterPosition()).getTicketId());
 
-                    callServiceForTicketDetails(ticketId);
+                    // callServiceForTicketDetails(ticketId);
 
                     //redirectToSalesTicketDetailsFragment();
                 }
@@ -243,12 +241,12 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
 
     private void redirectToSalesTicketDetailsFragment() {
 
-        SalesHomeActivity.isOnHome = false;
-        SalesHomeActivity.isOnHome = false;
-        SalesHomeActivity.isOnProfile = false;
-        SalesHomeActivity.isOnLeadsDetails = true;
-        SalesHomeActivity.isOnCardView = false;
-        SalesHomeActivity.welcome_TV.setText(context.getResources().getString(
+       /* ServiceRequestHomeActivity.isOnHome = false;
+        ServiceRequestHomeActivity.isOnHome = false;
+        ServiceRequestHomeActivity.isOnProfile = false;
+        ServiceRequestHomeActivity.isOnLeadsDetails = true;
+        ServiceRequestHomeActivity.isOnCardView = false;
+        ServiceRequestHomeActivity.welcome_TV.setText(context.getResources().getString(
                 R.string.lead_details_text));
 
         salesTicketDetailsFragment = new SalesTicketDetailsFragment();
@@ -263,5 +261,6 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                     .commitAllowingStateLoss();
         }
 
+    }*/
     }
 }

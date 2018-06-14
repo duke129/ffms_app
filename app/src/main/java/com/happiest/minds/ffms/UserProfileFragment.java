@@ -110,7 +110,20 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             userFullName_TV
                     .setText("HM User");
 
-            roleValue_TV.setText("Sales Executive");
+            String username = CommonUtility.getUserName(context);
+
+            Log.i(TAG, username);
+
+            if(username.equalsIgnoreCase(context.getResources().getString(R.string.se_user))) {
+
+                Log.i(TAG, username);
+
+                roleValue_TV.setText("Sales Executive");
+
+            }else if(username.equalsIgnoreCase(context.getResources().getString(R.string.sr_user))){
+
+                roleValue_TV.setText("Service Executive");
+            }
 
             branchValue_TV.setText("Madiwala");
 

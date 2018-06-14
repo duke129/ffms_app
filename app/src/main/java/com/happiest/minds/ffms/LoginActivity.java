@@ -1,12 +1,10 @@
 package com.happiest.minds.ffms;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -102,8 +100,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }else if(username.equals(context.getString(R.string.se_user))){
 
+            CommonUtility.saveUserName(context,username);
+            CommonUtility.savePassword(context,password);
             redirectToSalesHomePage();
 
+        }else if(username.equals(context.getString(R.string.sr_user))){
+
+            CommonUtility.saveUserName(context,username);
+            CommonUtility.savePassword(context,password);
+
+            redirectToServiceRequestHomePage();
         }
 
 

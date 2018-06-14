@@ -25,13 +25,25 @@
     <dimen name="grid_logo_height">50dp</dimen>
     <dimen name="grid_logo_margin_top">20dp</dimen>
     <dimen name="grid_text_top_margin">10dp</dimen>
+    <dimen name="grid_button_text_sr_size">20dp</dimen>
     <dimen name="grid_button_text_size">16dp</dimen>
+    <dimen name="grid_button_count_text_size">20dp</dimen>
     <dimen name="grid_button_side_width">190dp</dimen>
     <dimen name="grid_middle_button_left_margin">2dp</dimen>
-    <dimen name="grid_middle_button_right_margin">2dp</dimen>
-    <dimen name="grid_row_top_margin">2dp</dimen>
+    <dimen name="grid_middle_button_left_sr_margin">5dp</dimen>
+    <dimen name="grid_middle_button_right_margin">0dp</dimen>
+    <dimen name="grid_row_top_margin">5dp</dimen>
     <dimen name="footer_powered_by_text_label">20dp</dimen>
     <dimen name="footer_powered_by_text_label_top">14dp</dimen>
+
+    <dimen name="grid_button_row_sr_height">210dp</dimen>
+    <dimen name="grid_button_sr_width">250dp</dimen>
+    <dimen name="grid_button_sr_height">210dp</dimen>
+    <dimen name="grid_logo_sr_width">75dp</dimen>
+    <dimen name="grid_logo_sr_height">75dp</dimen>
+    <dimen name="count_bg_sr_width">50dp</dimen>
+    <dimen name="count_bg_sr_height">50dp</dimen>
+    <dimen name="grid_button_sr_padding">15dp</dimen>
 
     <!-- Action Bar -->
     <dimen name="action_bar_width">600dp</dimen>
@@ -81,8 +93,10 @@
     <dimen name="font_size_large">20dp</dimen>
     <dimen name="ne_card_view_mobile_text_width">120dp</dimen>
     <dimen name="sales_cardview_textView_margin_leftt">7dp</dimen>
-    <dimen name="update_status_icon_width">25dp</dimen>
-    <dimen name="update_status_icon_height">25dp</dimen>
+    <dimen name="lock_icon_width">30dp</dimen>
+    <dimen name="lock_icon_height">30dp</dimen>
+    <dimen name="update_status_icon_width">30dp</dimen>
+    <dimen name="update_status_icon_height">30dp</dimen>
     <dimen name="update_status_rl_bottom_margin">0dp</dimen>
     <dimen name="linear_layout_margin_bottom_top">2dp</dimen>
 

@@ -21,14 +21,66 @@ public class CommonUtility {
     public static SharedPreferences.Editor editor;
     public static ProgressDialog progressDialog;
 
-    public static void showToastMessage(Context context, String message){
+    public static void showToastMessage(Context context, String message) {
 
-       Toast toast = Toast
+        Toast toast = Toast
                 .makeText(context, message, Toast.LENGTH_SHORT);
 
         toast.setGravity(Gravity.CENTER, Gravity.CENTER, Gravity.CENTER);
 
         toast.show();
+    }
+
+    public static void saveUserName(Context context,
+                                    String username) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+
+        editor.putString("username", username);
+
+        editor.commit();
+
+    }
+
+    public static String getUserName(Context context) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        String username = sharedPreferences.getString("username", "");
+
+
+        return username;
+
+    }
+
+    public static void savePassword(Context context,
+                                    String password) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+
+        editor.putString("password", password);
+
+        editor.commit();
+
+    }
+
+    public static String getPassword(Context context) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        String password = sharedPreferences.getString("password", "");
+
+
+        return password;
+
     }
 
     public static void saveSeButtonClickedValue(Context context,

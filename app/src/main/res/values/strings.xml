@@ -17,7 +17,7 @@
     <string name="password_empty">Please enter password</string>
     <string name="invalid_credential">Invalid credential</string>
     <string name="se_user">setest</string>
-    <string name="ne_user">netest</string>
+    <string name="sr_user">srtest</string>
 
     <!-- SE grid button -->
     <string name="newLeads_bucket_text">New Leads</string>
@@ -26,6 +26,8 @@
     <string name="searchLeads_bucket_text">Search Leads</string>
     <string name="createNewLeads_bucket_text">Create New Leads</string>
     <string name="rejectedLeads_bucket_text">Rejected Leads</string>
+    <string name="count_text">Count</string>
+    <string name="default_count_text">0</string>
 
     <!-- Action Bar -->
     <string name="contentDescription_profile_menu">Profile Menu</string>
