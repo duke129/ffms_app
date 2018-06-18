@@ -27,6 +27,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.FFMSRequestQueue;
@@ -36,15 +39,8 @@ import com.happiest.minds.ffms.sales.pojo.CustomerVo;
 import com.happiest.minds.ffms.sales.pojo.ProspectCreation;
 import com.happiest.minds.ffms.sales.pojo.SpinnerItems;
 import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

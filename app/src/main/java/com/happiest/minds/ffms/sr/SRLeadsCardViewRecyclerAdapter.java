@@ -1,6 +1,8 @@
 package com.happiest.minds.ffms.sr;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,18 +17,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
 import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
 import com.happiest.minds.ffms.sales.pojo.TicketDetails;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -81,7 +81,7 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
                 position).getTicketNumber());
 
         holder.address_CV_TV.setText(ticketCardViewDataArrayList.get(
-                position).getCustomerAddress());
+                position).getCustomerAddress().getAddress1());
 
         holder.createdDate_CV_TV.setText("" + ticketCardViewDataArrayList.get(
                 position).getTicketCreationDate());
@@ -100,6 +100,7 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
             public void onClick(View v) {
 
                 CommonUtility.showToastMessage(context, "Activity not available");
+
             }
         });
 
@@ -145,8 +146,8 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
             address_CV_TV = (TextView) itemView
                     .findViewById(R.id.address_CV_SR_TV);
 
-           // demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_SR_RL);
-           // order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_SR_RL);
+            // demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_SR_RL);
+            // order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_SR_RL);
             lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
             update_Status_IV = (ImageView) itemView.findViewById(R.id.update_Status_SR_IV);
 
@@ -161,9 +162,7 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
                             .valueOf(ticketCardViewDataArrayList.get(
                                     getAdapterPosition()).getTicketId());
 
-                    // callServiceForTicketDetails(ticketId);
-
-                    //redirectToSalesTicketDetailsFragment();
+                    callServiceForTicketDetails(ticketId);
                 }
             });
         }
@@ -195,7 +194,7 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
                                             .constructCollectionType(
                                                     ArrayList.class,
                                                     TicketDetails.class));
-                            redirectToSalesTicketDetailsFragment();
+                            redirectToSRLeadDetailsActivity();
 
                         } catch (JsonParseException e) {
                             // TODO Auto-generated catch block
@@ -239,9 +238,9 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
 
     }
 
-    private void redirectToSalesTicketDetailsFragment() {
+    private void redirectToSRLeadDetailsActivity() {
 
-       /* ServiceRequestHomeActivity.isOnHome = false;
+        ServiceRequestHomeActivity.isOnHome = false;
         ServiceRequestHomeActivity.isOnHome = false;
         ServiceRequestHomeActivity.isOnProfile = false;
         ServiceRequestHomeActivity.isOnLeadsDetails = true;
@@ -249,18 +248,10 @@ public class SRLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SRLeads
         ServiceRequestHomeActivity.welcome_TV.setText(context.getResources().getString(
                 R.string.lead_details_text));
 
-        salesTicketDetailsFragment = new SalesTicketDetailsFragment();
+        Intent srLeadsDetailsActivity = new Intent(context, SRLeadsDetailsActivity.class);
+        context.startActivity(srLeadsDetailsActivity);
 
-        if (salesTicketDetailsFragment != null
-                && context != null && !((Activity) context).isFinishing()) {
 
-            ((Activity) context).getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, salesTicketDetailsFragment)
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss();
-        }
-
-    }*/
     }
 }
+

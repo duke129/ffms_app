@@ -160,6 +160,7 @@
         <item>Dr</item>
         <item>Er</item>
     </string-array>
-
+    <string name="title_activity_srleads_details">SRLeadsDetailsActivity</string>
+    <string name="service_request_lead">Service Request Lead</string>
 
 </resources>

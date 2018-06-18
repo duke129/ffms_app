@@ -8,7 +8,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="baground_color">#FBFCFC</color>
     <color name="hmHomeBackground">#D9D9D9</color>
-    <color name="hmBannerBackground">#6A6A6A</color>
+    <color name="hmBannerBackground">#FFFFFF</color>
     <color name="hmGridButtonBackground">#FFFFFF</color>
     <color name="footer_label_text_color">#000000</color>
     <color name="hmWhite">#FFFFFF</color>

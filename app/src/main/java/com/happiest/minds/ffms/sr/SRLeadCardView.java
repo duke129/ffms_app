@@ -13,9 +13,9 @@ import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.R;
 
 
-public class SRLeadCradView extends Fragment {
+public class SRLeadCardView extends Fragment {
 
-    private static final String TAG = SRLeadCradView.class
+    private static final String TAG = SRLeadCardView.class
             .getSimpleName();
 
     Context context;

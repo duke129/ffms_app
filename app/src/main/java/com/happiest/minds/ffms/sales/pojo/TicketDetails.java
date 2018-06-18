@@ -20,7 +20,7 @@ public class TicketDetails {
 	private Long ticketTypeId;
 	private String ticketTypeName;
 	private String ticketSource;
-	private Date prefferdCallTime;
+	private Date preferredCallTime;
 	
 	private Long assetId;
 	private Long assetTypeId;
@@ -31,16 +31,23 @@ public class TicketDetails {
 	private String assetLong;
 	
 	private Long customerId;
-	private String customerTittle;
-	private String customerFirstName;
-	private String customerMiddletName;
-	private String customerLastName;
-	private String customerMobileNumber;
-	private String customerAternateMobileNumber;
-	private String customerOfficeNumber;
-	private String customerEmailId;
-	private String customerAternateEmailId;
-	private String customerCommunicationAddress;
+	private String title;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String mobileNumber;
+	private String alternateMobileNumber;
+	private String officeNumber;
+	private String emailId;
+	private String alternateEmailId;
+	private AddressVo communicationAddress;
+	
+	private Long cityId;
+	private String cityName;
+	private Long branchId;
+	private String branchName;
+	private Long areaId;
+	private String areaName;
 	
 	
 	public Long getTicketId() {
@@ -104,10 +111,10 @@ public class TicketDetails {
 		this.ticketSource = ticketSource;
 	}
 	public Date getPrefferdCallTime() {
-		return prefferdCallTime;
+		return preferredCallTime;
 	}
-	public void setPrefferdCallTime(Date prefferdCallTime) {
-		this.prefferdCallTime = prefferdCallTime;
+	public void setPrefferdCallTime(Date preferredCallTime) {
+		this.preferredCallTime = preferredCallTime;
 	}
 	public Long getAssetId() {
 		return assetId;
@@ -157,100 +164,107 @@ public class TicketDetails {
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	public String getCustomerTittle() {
-		return customerTittle;
+	public String getTitle() {
+		return title;
 	}
-	public void setCustomerTittle(String customerTittle) {
-		this.customerTittle = customerTittle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getCustomerFirstName() {
-		return customerFirstName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setCustomerFirstName(String customerFirstName) {
-		this.customerFirstName = customerFirstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getCustomerMiddletName() {
-		return customerMiddletName;
+	public String getMiddleName() {
+		return middleName;
 	}
-	public void setCustomerMiddletName(String customerMiddletName) {
-		this.customerMiddletName = customerMiddletName;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
-	public String getCustomerLastName() {
-		return customerLastName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setCustomerLastName(String customerLastName) {
-		this.customerLastName = customerLastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getCustomerMobileNumber() {
-		return customerMobileNumber;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
-	public void setCustomerMobileNumber(String customerMobileNumber) {
-		this.customerMobileNumber = customerMobileNumber;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
-	public String getCustomerAternateMobileNumber() {
-		return customerAternateMobileNumber;
+	public String getAlternateMobileNumber() {
+		return alternateMobileNumber;
 	}
-	public void setCustomerAternateMobileNumber(String customerAternateMobileNumber) {
-		this.customerAternateMobileNumber = customerAternateMobileNumber;
+	public void setAlternateMobileNumber(String alternateMobileNumber) {
+		this.alternateMobileNumber = alternateMobileNumber;
 	}
-	public String getCustomerOfficeNumber() {
-		return customerOfficeNumber;
+	public String getOfficeNumber() {
+		return officeNumber;
 	}
-	public void setCustomerOfficeNumber(String customerOfficeNumber) {
-		this.customerOfficeNumber = customerOfficeNumber;
+	public void setOfficeNumber(String officeNumber) {
+		this.officeNumber = officeNumber;
 	}
-	public String getCustomerEmailId() {
-		return customerEmailId;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setCustomerEmailId(String customerEmailId) {
-		this.customerEmailId = customerEmailId;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
-	public String getCustomerAternateEmailId() {
-		return customerAternateEmailId;
+	public String getAlternateEmailId() {
+		return alternateEmailId;
 	}
-	public void setCustomerAternateEmailId(String customerAternateEmailId) {
-		this.customerAternateEmailId = customerAternateEmailId;
+	public void setAlternateEmailId(String alternateEmailId) {
+		this.alternateEmailId = alternateEmailId;
 	}
-	public String getCustomerCommunicationAddress() {
-		return customerCommunicationAddress;
+	public AddressVo getCommunicationAddress() {
+		return communicationAddress;
 	}
-	public void setCustomerCommunicationAddress(String customerCommunicationAddress) {
-		this.customerCommunicationAddress = customerCommunicationAddress;
+	public void setCommunicationAddress(AddressVo communicationAddress) {
+		this.communicationAddress = communicationAddress;
 	}
+	public Long getCityId() {
+		return cityId;
+	}
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public Long getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(Long branchId) {
+		this.branchId = branchId;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public Long getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	
+	
+	
+	
+	
+	
 
-
-	@Override
-	public String toString() {
-		return "TicketDetails{" +
-				"ticketId=" + ticketId +
-				", ticketNo='" + ticketNo + '\'' +
-				", ticketDescription='" + ticketDescription + '\'' +
-				", currentAssigneeId=" + currentAssigneeId +
-				", currentAssigneeName='" + currentAssigneeName + '\'' +
-				", ticketStatus=" + ticketStatus +
-				", ticketCreatedTime=" + ticketCreatedTime +
-				", ticketTypeId=" + ticketTypeId +
-				", ticketTypeName='" + ticketTypeName + '\'' +
-				", ticketSource='" + ticketSource + '\'' +
-				", prefferdCallTime=" + prefferdCallTime +
-				", assetId=" + assetId +
-				", assetTypeId=" + assetTypeId +
-				", assetTypeName='" + assetTypeName + '\'' +
-				", assetDescription='" + assetDescription + '\'' +
-				", assetInstallationAddress='" + assetInstallationAddress + '\'' +
-				", assetLat='" + assetLat + '\'' +
-				", assetLong='" + assetLong + '\'' +
-				", customerId=" + customerId +
-				", customerTittle='" + customerTittle + '\'' +
-				", customerFirstName='" + customerFirstName + '\'' +
-				", customerMiddletName='" + customerMiddletName + '\'' +
-				", customerLastName='" + customerLastName + '\'' +
-				", customerMobileNumber='" + customerMobileNumber + '\'' +
-				", customerAternateMobileNumber='" + customerAternateMobileNumber + '\'' +
-				", customerOfficeNumber='" + customerOfficeNumber + '\'' +
-				", customerEmailId='" + customerEmailId + '\'' +
-				", customerAternateEmailId='" + customerAternateEmailId + '\'' +
-				", customerCommunicationAddress='" + customerCommunicationAddress + '\'' +
-				'}';
-	}
 }

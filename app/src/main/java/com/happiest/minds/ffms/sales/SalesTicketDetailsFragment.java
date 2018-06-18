@@ -177,26 +177,26 @@ public class SalesTicketDetailsFragment extends Fragment {
 
         ticketNumber_ET.setText(ticketDetails.getTicketNo());
         ticketCreatedDate_ET.setText("" + ticketDetails.getTicketCreatedTime());
-        firstName_ET.setText(ticketDetails.getCustomerFirstName());
-        middleName_ET.setText(ticketDetails.getCustomerMiddletName());
-        lastName_ET.setText(ticketDetails.getCustomerLastName());
-        mobileNo_ET.setText(ticketDetails.getCustomerMobileNumber());
-        alternateMobileNo_ET.setText(ticketDetails.getCustomerAternateMobileNumber());
-        officeNo_ET.setText(ticketDetails.getCustomerOfficeNumber());
-        email_ET.setText(ticketDetails.getCustomerEmailId());
-        aternateEmail_ET.setText(ticketDetails.getCustomerAternateEmailId());
-        city_ET.setText("Bangalore");
-        current_addressLine1_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        // current_addressLine2_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        // current_addressLandmark_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        // current_addressPincode_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        billing_addressLine1_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        // billing_addressLine2_ET .setText(ticketDetails.getCustomerCommunicationAddress());
-        // billing_addressLandmark_ET.setText(ticketDetails.getCustomerCommunicationAddress());
-        //billing_addressPincode_ET.setText(ticketDetails.getCustomerCommunicationAddress());
+        firstName_ET.setText(ticketDetails.getFirstName());
+        middleName_ET.setText(ticketDetails.getMiddleName());
+        lastName_ET.setText(ticketDetails.getLastName());
+        mobileNo_ET.setText(ticketDetails.getMobileNumber());
+        alternateMobileNo_ET.setText(ticketDetails.getAlternateMobileNumber());
+        officeNo_ET.setText(ticketDetails.getOfficeNumber());
+        email_ET.setText(ticketDetails.getEmailId());
+        aternateEmail_ET.setText(ticketDetails.getAlternateEmailId());
+        city_ET.setText(ticketDetails.getCityName());
+        current_addressLine1_ET.setText(ticketDetails.getCommunicationAddress().getAddress1());
+        current_addressLine2_ET.setText(ticketDetails.getCommunicationAddress().getAddress2());
+        current_addressLandmark_ET.setText(ticketDetails.getCommunicationAddress().getLandmark());
+        current_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
+        billing_addressLine1_ET.setText(ticketDetails.getCommunicationAddress().getAddress1());
+        billing_addressLine2_ET .setText(ticketDetails.getCommunicationAddress().getAddress2());
+        billing_addressLandmark_ET.setText(ticketDetails.getCommunicationAddress().getLandmark());
+        billing_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
 
         ArrayList<String> titleArrayList = new ArrayList<String>();
-        titleArrayList.add(ticketDetails.getCustomerTittle());
+        titleArrayList.add(ticketDetails.getTitle());
         title_adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, titleArrayList);
         title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -204,7 +204,7 @@ public class SalesTicketDetailsFragment extends Fragment {
         title_SP.setPaddingSafe(0, 0, 0, 0);
 
         int titleSpinnerPosition = title_adapter
-                .getPosition(ticketDetails.getCustomerTittle());
+                .getPosition(ticketDetails.getTitle());
         Log.i(TAG, "titleSpinnerPosition :"+titleSpinnerPosition);
         title_SP.setSelection(1);
 

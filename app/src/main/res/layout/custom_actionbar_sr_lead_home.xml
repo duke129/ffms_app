@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:background="@color/colorPrimary"
+    android:minWidth="@dimen/action_bar_width"
+    android:orientation="horizontal"
+    >
+
+    <RelativeLayout
+        android:id="@+id/sr_lead_details_actionbar_RL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/se_address_rl_margin"
+        android:layout_marginBottom="@dimen/update_status_rl_bottom_margin">
+
+        <ImageView
+            android:id="@+id/backButton_IV"
+            android:layout_width="@dimen/profile_menu_width"
+            android:layout_height="@dimen/profile_menu_height"
+            android:layout_marginTop="@dimen/profile_menu_top_margin"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/contentDescription_profile_menu"
+            android:src="@drawable/back_button" />
+
+        <TextView
+            android:id="@+id/titleLabel_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/service_request_lead"
+            android:textColor="@color/hmWhite"
+            android:textSize="@dimen/medium_font_size"
+            android:layout_marginTop="@dimen/profile_menu_top_margin"
+            android:layout_marginLeft="175dp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+
+</LinearLayout>

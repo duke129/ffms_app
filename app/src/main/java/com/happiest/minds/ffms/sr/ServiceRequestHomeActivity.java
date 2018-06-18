@@ -20,6 +20,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.CustomPageAdapter;
@@ -27,15 +31,7 @@ import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.UserProfileFragment;
 import com.happiest.minds.ffms.Webserver;
-import com.happiest.minds.ffms.sales.SalesCreateNewLeads;
-import com.happiest.minds.ffms.sales.SalesLeadsCardView;
 import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -73,7 +69,7 @@ public class ServiceRequestHomeActivity extends AppCompatActivity implements Vie
 
     private CustomPageAdapter customPagerAdapter;
 
-    SRLeadCradView srLeadCradView;
+    SRLeadCardView srLeadCradView;
 
     UserProfileFragment userProfileFragment;
 
@@ -332,7 +328,7 @@ public class ServiceRequestHomeActivity extends AppCompatActivity implements Vie
 
             fragmentContainerFrameLayout.setVisibility(View.VISIBLE);
 
-            srLeadCradView = new SRLeadCradView();
+            srLeadCradView = new SRLeadCardView();
 
             if (srLeadCradView != null) {
 

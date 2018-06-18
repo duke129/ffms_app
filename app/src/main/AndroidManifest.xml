@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.happiest.minds.ffms">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ffms_only_icon"
+        android:icon="@drawable/ffms_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ffms_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".sales.SalesHomeActivity" />
-        <activity android:name=".sr.ServiceRequestHomeActivity"></activity>
+        <activity android:name=".sr.ServiceRequestHomeActivity" />
+        <activity
+            android:name=".sr.SRLeadsDetailsActivity"
+            android:label="@string/title_activity_srleads_details"
+            ></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollablContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/hmWhite"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/ticketNumber_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/ticket_number"
+                    android:shadowColor="@color/colorPrimary"
+                    android:text="12345"
+                    android:textColorHint="@color/colorPrimary" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/ticketCreatedDate_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/created_date"
+                    android:text="06-06-2018 05:57PM" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/title_SR_SP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/colorPrimary"
+                app:ms_arrowSize="@dimen/spinner_arrow_size"
+                app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+                app:ms_floatingLabelText="@string/title_spinner_floating_label"
+                app:ms_hint="@string/title_spinner_hint"
+                app:ms_hintColor="@color/spinner_hint"
+                app:ms_hintTextSize="@dimen/spinner_hint_size"
+                app:ms_multiline="true" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/firstName_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/middleName_CN_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/middle_name" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/lastName_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/mobileNo_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mobile_no" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/alternateMobileNo_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/alternate_mobile_no" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/officeNo_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/office_number" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/email_CN_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email_id" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/aternateEmail_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/alternate_email_id" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/city_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/city"
+                    android:text="Bangalore" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/branch_SR_SP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/colorPrimary"
+                app:ms_arrowSize="@dimen/spinner_arrow_size"
+                app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+                app:ms_floatingLabelText="@string/branch_spinner_floating_label"
+                app:ms_hint="@string/branch_spinner_hint"
+                app:ms_hintColor="@color/spinner_hint"
+                app:ms_hintTextSize="@dimen/spinner_hint_size"
+                app:ms_multiline="true" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/area_SR_SP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/colorPrimary"
+                app:ms_arrowSize="@dimen/spinner_arrow_size"
+                app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+                app:ms_floatingLabelText="@string/area_spinner_floating_label"
+                app:ms_hint="@string/area_spinner_hint"
+                app:ms_hintColor="@color/spinner_hint"
+                app:ms_hintTextSize="@dimen/spinner_hint_size"
+                app:ms_multiline="true" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/current_addressLine1_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/current_addressLine1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/current_addressLine2_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/current_addressLine2" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/current_addressLandmark_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/current_addressLandmark" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/current_addressPincode_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/current_addressPincode" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/billing_addressLine1_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/billing_addressLine1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/billing_addressLine2_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/billing_addressLine2" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/billing_addressLandmark_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/billing_addressLandmark" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/billing_addressPincode_SR_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/billing_addressPincode" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!--<LinearLayout
+                android:id="@+id/sales_activity_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/linear_layout_margin_bottom_top"
+                android:layout_marginTop="@dimen/linear_layout_margin_bottom_top"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/activity_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+-->
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

@@ -161,4 +161,5 @@
     <dimen name="spinner_arrow_size">16dp</dimen>
     <dimen name="spinner_hint_size">16dp</dimen>
     <dimen name="sales_button_setting_width">150dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
