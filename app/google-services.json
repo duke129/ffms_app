@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "642716163280",
+    "firebase_url": "https://ffms-app.firebaseio.com",
+    "project_id": "ffms-app",
+    "storage_bucket": "ffms-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642716163280:android:461800f30a043eb5",
+        "android_client_info": {
+          "package_name": "com.happiest.minds.ffms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642716163280-s99io4ihjge7f4ndv1mu58f7qsumc3c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwoP5D36gvGp7blYR_I6u0WxwfjiDj6UY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
