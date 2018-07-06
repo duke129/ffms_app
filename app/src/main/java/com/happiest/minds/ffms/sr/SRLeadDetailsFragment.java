@@ -1,24 +1,15 @@
 package com.happiest.minds.ffms.sr;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.happiest.minds.ffms.R;
-import com.happiest.minds.ffms.sales.SalesActivityExpandableAdapter;
-import com.happiest.minds.ffms.sales.SalesLeadsCardViewRecyclerAdapter;
 import com.happiest.minds.ffms.sales.pojo.TicketDetails;
 
 import java.util.ArrayList;

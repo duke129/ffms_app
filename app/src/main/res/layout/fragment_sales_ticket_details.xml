@@ -18,6 +18,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_size"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -26,15 +28,18 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="@string/ticket_number"
-                    android:shadowColor="@color/colorPrimary"
                     android:text="12345"
-                    android:textColorHint="@color/colorPrimary" />
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
+                     />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_size"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -43,6 +48,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="@string/created_date"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:text="06-06-2018 05:57PM" />
 
             </android.support.design.widget.TextInputLayout>
@@ -57,18 +64,20 @@
                 app:ms_floatingLabelText="@string/title_spinner_floating_label"
                 app:ms_hint="@string/title_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
                 app:ms_multiline="true" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/firstName_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/first_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -76,12 +85,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/middleName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/middle_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -89,12 +101,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/lastName_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/last_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -102,12 +117,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/mobileNo_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/mobile_no" />
 
             </android.support.design.widget.TextInputLayout>
@@ -115,12 +133,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/alternateMobileNo_ET"
+                    android:id="@+id/alternateMobileNo_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/alternate_mobile_no" />
 
             </android.support.design.widget.TextInputLayout>
@@ -128,12 +149,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/officeNo_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/office_number" />
 
             </android.support.design.widget.TextInputLayout>
@@ -141,12 +165,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/email_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/email_id" />
 
             </android.support.design.widget.TextInputLayout>
@@ -154,12 +181,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/aternateEmail_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/alternate_email_id" />
 
             </android.support.design.widget.TextInputLayout>
@@ -167,6 +197,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -175,6 +206,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="@string/city"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:text="Bangalore" />
 
             </android.support.design.widget.TextInputLayout>
@@ -189,7 +222,7 @@
                 app:ms_floatingLabelText="@string/branch_spinner_floating_label"
                 app:ms_hint="@string/branch_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
+                app:ms_baseColor="@color/text_color"
                 app:ms_multiline="true" />
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -202,18 +235,21 @@
                 app:ms_floatingLabelText="@string/area_spinner_floating_label"
                 app:ms_hint="@string/area_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
+                app:ms_baseColor="@color/text_color"
                 app:ms_multiline="true" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/current_addressLine1_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/current_addressLine1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -221,12 +257,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/current_addressLine2_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/current_addressLine2" />
 
             </android.support.design.widget.TextInputLayout>
@@ -234,12 +273,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/current_addressLandmark_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/current_addressLandmark" />
 
             </android.support.design.widget.TextInputLayout>
@@ -247,12 +289,17 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/current_addressPincode_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
+                    android:inputType="number"
+                    android:maxLength="6"
                     android:hint="@string/current_addressPincode" />
 
             </android.support.design.widget.TextInputLayout>
@@ -260,12 +307,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/billing_addressLine1_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/billing_addressLine1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -273,12 +323,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/billing_addressLine2_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/billing_addressLine2" />
 
             </android.support.design.widget.TextInputLayout>
@@ -286,12 +339,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/billing_addressLandmark_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/billing_addressLandmark" />
 
             </android.support.design.widget.TextInputLayout>
@@ -299,16 +355,81 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/billing_addressPincode_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
+                    android:inputType="number"
+                    android:maxLength="6"
                     android:hint="@string/billing_addressPincode" />
 
             </android.support.design.widget.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/text_hint"
+                    android:layout_marginTop="@dimen/details_edittext_margin_top"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/preferredCallTime_ET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size"
+                        android:hint="@string/preferred_callTime" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/calendar_IB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/ticketDetails_linear_layout_text_margin"
+                    android:layout_toRightOf="@+id/preferedDateValueET"
+                    android:background="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:src="@drawable/cal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/basicInfo_update_BT_LL"
+                android:layout_width="@dimen/basic_info_bt_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/userProfileDetails_margin"
+                android:layout_marginRight="@dimen/userProfileDetails_margin"
+                android:layout_marginTop="@dimen/logout_top_margin"
+                android:background="@drawable/logout_button_style"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:padding="@dimen/logout_padding" >
+
+                <TextView
+                    android:id="@+id/baiscInfo_update_BT_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/basic_info_bt_text_left_margin"
+                    android:text="@string/basic_info_update_bt_text"
+                    android:textColor="@color/hmWhite"
+                    android:textSize="@dimen/logout_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/sales_activity_LL"
@@ -316,6 +437,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/linear_layout_margin_bottom_top"
                 android:layout_marginTop="@dimen/linear_layout_margin_bottom_top"
+                android:visibility="visible"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView

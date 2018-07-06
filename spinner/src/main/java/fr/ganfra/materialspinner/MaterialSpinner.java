@@ -154,13 +154,13 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
     private void initAttributes(Context context, AttributeSet attrs) {
 
         TypedArray defaultArray = context.obtainStyledAttributes(new int[]{R.attr.colorControlNormal, R.attr.colorAccent});
-        int defaultBaseColor = defaultArray.getColor(0, 0);
-        int defaultHighlightColor = defaultArray.getColor(1, 0);
+        int defaultBaseColor =context.getResources().getColor(R.color.disabled_color);
+        int defaultHighlightColor = context.getResources().getColor(R.color.disabled_color);
         int defaultErrorColor = context.getResources().getColor(R.color.error_color);
         defaultArray.recycle();
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.MaterialSpinner);
-        baseColor = array.getColor(R.styleable.MaterialSpinner_ms_baseColor, defaultBaseColor);
+        baseColor = context.getResources().getColor(R.color.disabled_color);
         highlightColor = array.getColor(R.styleable.MaterialSpinner_ms_highlightColor, defaultHighlightColor);
         errorColor = array.getColor(R.styleable.MaterialSpinner_ms_errorColor, defaultErrorColor);
         disabledColor = context.getResources().getColor(R.color.disabled_color);

@@ -22,7 +22,7 @@
         <activity android:name=".sr.ServiceRequestHomeActivity" />
         <activity
             android:name=".sr.SRLeadsDetailsActivity"
-            android:label="@string/title_activity_srleads_details"></activity>
+            android:label="@string/title_activity_srleads_details" />
 
         <service android:name=".FFMSFirebaseMessagingService">
             <intent-filter>
@@ -34,6 +34,12 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".sales.ProductDetailsActivity"
+            >
+
+        </activity>
     </application>
 
 </manifest>

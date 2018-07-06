@@ -178,4 +178,37 @@ public class CommonUtility {
             progressDialog.cancel();
         }
     }
+
+
+    public static void saveSelectedProductId(Context context,
+                                                String modelId) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+
+        editor.putString("modelId", modelId);
+
+        editor.commit();
+
+        Log.i(TAG,
+                "Selected model id has been saved to shared prefrence : "
+                        + modelId);
+
+    }
+
+    public static String getSelectedProductId(Context context) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        String modelId = sharedPreferences.getString("modelId", null);
+
+        Log.i(TAG, "Selected model id returned from  SharedPreference : "
+                + modelId);
+
+        return modelId;
+
+    }
 }

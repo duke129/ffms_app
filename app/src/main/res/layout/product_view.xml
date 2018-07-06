@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/product_cardview_margin_left_right"
+    android:layout_marginRight="@dimen/product_cardview_margin_left_right"
+    card_view:cardCornerRadius="@dimen/product_cardview_radius"
+    card_view:cardElevation="@dimen/product_cardview_radius_elevation">
+
+    <LinearLayout
+        android:id="@+id/product_LL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/product_row_height"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:id="@+id/first_product_LL"
+            android:layout_width="@dimen/product_width"
+            android:layout_height="@dimen/product_row_height"
+            android:background="@color/product_background"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:padding="@dimen/product_padding">
+
+            <ImageView
+                android:id="@+id/first_product_IV"
+                android:layout_width="@dimen/product_image_width"
+                android:layout_height="@dimen/product_image_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_image_margin_top"
+                android:contentDescription="@string/product_description_text"
+                android:src="@drawable/product_1" />
+
+            <TextView
+                android:id="@+id/first_product_model_name_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <TextView
+                android:id="@+id/first_product_model_id_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <TextView
+                android:id="@+id/first_product_price_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <LinearLayout
+                android:id="@+id/firstAddToOrderList_LL"
+                android:layout_width="@dimen/addToOrderList_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logout_button_style"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/addToOrderList_padding" >
+
+                <TextView
+                    android:id="@+id/firstToOrderList_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/add_to_order_list"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/hmWhite"
+                    android:textSize="@dimen/addToOrderList_text_size"
+                     />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/second_product_LL"
+            android:layout_width="@dimen/product_width"
+            android:layout_height="@dimen/product_row_height"
+            android:layout_marginLeft="@dimen/product_left_margin"
+            android:background="@color/product_background"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:padding="@dimen/product_padding">
+
+            <ImageView
+                android:id="@+id/second_product_IV"
+                android:layout_width="@dimen/product_image_width"
+                android:layout_height="@dimen/product_image_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_image_margin_top"
+                android:contentDescription="@string/inProgressLeads_bucket_text"
+                android:src="@drawable/product_2" />
+
+            <TextView
+                android:id="@+id/second_product_model_name_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <TextView
+                android:id="@+id/second_product_model_id_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <TextView
+                android:id="@+id/second_product_price_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/product_text_top_margin"
+                android:textSize="@dimen/product_text_size" />
+
+            <LinearLayout
+                android:id="@+id/secondAddToOrderList_LL"
+                android:layout_width="@dimen/addToOrderList_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logout_button_style"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/addToOrderList_padding" >
+
+                <TextView
+                    android:id="@+id/secondToOrderList_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/add_to_order_list"
+                    android:textColor="@color/hmWhite"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="@dimen/addToOrderList_text_size"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

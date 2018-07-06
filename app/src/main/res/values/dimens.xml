@@ -98,7 +98,7 @@
     <dimen name="update_status_icon_width">30dp</dimen>
     <dimen name="update_status_icon_height">30dp</dimen>
     <dimen name="update_status_rl_bottom_margin">0dp</dimen>
-    <dimen name="linear_layout_margin_bottom_top">2dp</dimen>
+    <dimen name="linear_layout_margin_bottom_top">5dp</dimen>
 
     <!-- activity accordian -->
 
@@ -161,5 +161,46 @@
     <dimen name="spinner_arrow_size">16dp</dimen>
     <dimen name="spinner_hint_size">16dp</dimen>
     <dimen name="sales_button_setting_width">150dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_size">18dp</dimen>
+    <dimen name="hint_text_size">10dp</dimen>
+    <dimen name="basic_info_bt_width">150dp</dimen>
+    <dimen name="basic_info_bt_text_left_margin">25dp</dimen>
+
+    <!--product catalog-->
+
+    <dimen name="product_cardview_margin_left_right">2dp</dimen>
+    <dimen name="product_cardview_margin_top">5dp</dimen>
+    <dimen name="product_cardview_radius">2dp</dimen>
+    <dimen name="product_cardview_radius_elevation">5dp</dimen>
+
+    <dimen name="product_name_margin_left">22dp</dimen>
+    <dimen name="product_name_margin_top">40dp</dimen>
+
+    <dimen name="product_parent_row_height">275dp</dimen>
+    <dimen name="product_row_height">250dp</dimen>
+    <dimen name="product_width">300dp</dimen>
+    <dimen name="product_image_width">150dp</dimen>
+    <dimen name="product_image_height">150dp</dimen>
+    <dimen name="product_padding">0dp</dimen>
+    <dimen name="product_image_margin_top">2dp</dimen>
+    <dimen name="product_text_top_margin">1dp</dimen>
+    <dimen name="product_text_size">14dp</dimen>
+    <dimen name="product_price_text_size">16dp</dimen>
+    <dimen name="product_left_margin">10dp</dimen>
+    <dimen name="product_details_margin">15dp</dimen>
+    <dimen name="product_details_top_margin">30dp</dimen>
+    <dimen name="productDetailsText_size">18dp</dimen>
+    <dimen name="productDetailsValue_size">16dp</dimen>
+    <dimen name="productImage_banner_relativeLayout_width">600dp</dimen>
+    <dimen name="productImage_banner_relativeLayout_height">900dp</dimen>
+    <dimen name="productImage_banner_top_margin">5dp</dimen>
+    <dimen name="productImage_banner_left_margin">15dp</dimen>
+    <dimen name="productImage_banner_right_margin">15dp</dimen>
+    <dimen name="addToOrderList_width">100dp</dimen>
+    <dimen name="addToOrderList_padding">10dp</dimen>
+    <dimen name="addToOrderList_text_size">16dp</dimen>
 </resources>

@@ -21,12 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,13 +36,12 @@ import com.happiest.minds.ffms.Webserver;
 import com.happiest.minds.ffms.sales.pojo.CustomerVo;
 import com.happiest.minds.ffms.sales.pojo.ProspectCreation;
 import com.happiest.minds.ffms.sales.pojo.SpinnerItems;
-import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -58,11 +55,11 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
     Context context;
     MaterialSpinner title_CN_SP, branch_CN_SP, area_CN_SP;
     EditText firstName_CN_ET, middleName_CN_ET, lastName_CN_ET,
-            mobileNo_CN_ET, alternateMobileNo_ET, officeNo_CN_ET,
+            mobileNo_CN_ET, alternateMobileNo_CN_ET, officeNo_CN_ET,
             email_CN_ET, alternateEmail_CN_ET, city_CN_ET,
             communication_address_CN_ET, preferredCallTime_CN_ET;
     Button submit_CN_BT;
-    ImageButton calendar_IB;
+    ImageButton calendar_CN_IB;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Date dateValueSelected;
     int selectedYear, selectedMonth, selectedDay;
@@ -103,7 +100,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         middleName_CN_ET = view.findViewById(R.id.middleName_CN_ET);
         lastName_CN_ET = view.findViewById(R.id.lastName_CN_ET);
         mobileNo_CN_ET = view.findViewById(R.id.mobileNo_CN_ET);
-        alternateMobileNo_ET = view.findViewById(R.id.alternateMobileNo_ET);
+        alternateMobileNo_CN_ET = view.findViewById(R.id.alternateMobileNo_CN_ET);
         officeNo_CN_ET = view.findViewById(R.id.officeNo_CN_ET);
         email_CN_ET = view.findViewById(R.id.email_CN_ET);
         alternateEmail_CN_ET = view.findViewById(R.id.alternateEmail_CN_ET);
@@ -111,10 +108,10 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         communication_address_CN_ET = view.findViewById(R.id.communication_address_CN_ET);
         preferredCallTime_CN_ET = view.findViewById(R.id.preferredCallTime_CN_ET);
 
-        calendar_IB = view.findViewById(R.id.calendar_IB);
+        calendar_CN_IB = view.findViewById(R.id.calendar_CN_IB);
         submit_CN_BT = view.findViewById(R.id.submit_CN_BT);
 
-        calendar_IB.setOnClickListener(this);
+        calendar_CN_IB.setOnClickListener(this);
         submit_CN_BT.setOnClickListener(this);
 
 
@@ -151,13 +148,13 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
                 validateInputFields();
 
-                return;
+                break;
 
-            case R.id.calendar_IB:
+            case R.id.calendar_CN_IB:
 
                 showDatePickerDialog();
 
-                return;
+                break;
         }
 
     }
@@ -171,7 +168,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         String middleName = middleName_CN_ET.getText().toString().trim();
         String lastName = lastName_CN_ET.getText().toString().trim();
         String mobileNumber = mobileNo_CN_ET.getText().toString().trim();
-        String alternateMobileNumber = alternateMobileNo_ET.getText().toString().trim();
+        String alternateMobileNumber = alternateMobileNo_CN_ET.getText().toString().trim();
         String officeNumber = officeNo_CN_ET.getText().toString().trim();
         String emailId = email_CN_ET.getText().toString().trim();
         String alternateEmailId = alternateEmail_CN_ET.getText().toString().trim();
@@ -474,7 +471,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         middleName_CN_ET.setText("");
         lastName_CN_ET.setText("");
         mobileNo_CN_ET.setText("");
-        alternateMobileNo_ET.setText("");
+        alternateMobileNo_CN_ET.setText("");
         officeNo_CN_ET.setText("");
         email_CN_ET.setText("");
         alternateEmail_CN_ET.setText("");

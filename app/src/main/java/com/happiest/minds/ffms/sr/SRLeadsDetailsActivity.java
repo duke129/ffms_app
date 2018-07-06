@@ -1,9 +1,7 @@
 package com.happiest.minds.ffms.sr;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +18,7 @@ public class SRLeadsDetailsActivity extends AppCompatActivity implements ActionB
     ActionBar actionBar;
     View actionBar_V;
     ImageView backButton_IV;
-    private TabPagerAdapter tabPagerAdapter;
+    private SRTabPagerAdapter tabPagerAdapter;
     private String[] tabNames = { "Details", "Flow", "Activities" };
 
 
@@ -30,7 +28,7 @@ public class SRLeadsDetailsActivity extends AppCompatActivity implements ActionB
         setContentView(R.layout.activity_srleads_details);
         context = this;
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
+        tabPagerAdapter = new SRTabPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabPagerAdapter);
         actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -75,6 +73,7 @@ public class SRLeadsDetailsActivity extends AppCompatActivity implements ActionB
     @Override
     public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
 
+        viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override

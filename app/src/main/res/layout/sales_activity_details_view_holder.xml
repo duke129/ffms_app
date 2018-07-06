@@ -27,7 +27,7 @@
             app:ms_hintTextSize="@dimen/spinner_hint_size"
             app:ms_multiline="true" />
 
-        <android.support.design.widget.TextInputLayout
+        <!--<android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/details_edittext_margin_top">
@@ -38,7 +38,22 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/assetDetails" />
 
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
+
+        <LinearLayout
+            android:id="@+id/product_recyclerView_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/product_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -50,7 +65,7 @@
         android:visibility="gone"
         android:orientation="vertical">
 
-        <fr.ganfra.materialspinner.MaterialSpinner
+        <!--<fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/assetCategory_or_SP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,8 +141,22 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/actualAmountToBePaid" />
 
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
 
+        <LinearLayout
+            android:id="@+id/order_recyclerView_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

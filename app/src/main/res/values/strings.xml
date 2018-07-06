@@ -111,6 +111,7 @@
     <string name="branch_spinner_hint">Select Branch</string>
     <string name="area_spinner_floating_label">Area</string>
     <string name="area_spinner_hint">Select Area</string>
+    <string name="basic_info_update_bt_text">Update</string>
 
     <!--sales activity-->
 
@@ -163,4 +164,30 @@
     <string name="title_activity_srleads_details">SRLeadsDetailsActivity</string>
     <string name="service_request_lead">Service Request Lead</string>
 
+
+    <string name="action_settings">Settings</string>
+
+    <!-- basic info-->
+
+    <string name="enter_current_address_line1">Please Enter Current Address Line1</string>
+    <string name="enter_current_address_line2">Please Enter Current Address Line2</string>
+    <string name="enter_current_address_landmark">Please Enter Current Address Landmark</string>
+    <string name="enter_current_address_pincode">Please Enter Current Address Pincode</string>
+
+    <string name="enter_billing_address_line1">Please Enter Billing Address Line1</string>
+    <string name="enter_billing_address_line2">Please Enter Billing Address Line2</string>
+    <string name="enter_billing_address_landmark">Please Enter Billing Address Landmark</string>
+    <string name="enter_billing_address_pincode">Please Enter Billing Address Pincode</string>
+    <string name="basic_info_upadte_alert_message">Do you want to update lead details..?</string>
+
+    <!--product-->
+    <string name="product_description_text">Product Image</string>
+    <string name="title_activity_product_details">ProductDetails</string>
+
+    <string name="product_details_fragment">product details fragment</string>
+    <string name="product_image_fragment">product image fragment</string>
+    <string name="product_video_fragment">product video fragment</string>
+    <string name="gross_capacity">Gross Capacity</string>
+    <string name="add_to_order_list">Add Order</string>
+    <string name="specificationLabel">Specifications</string>
 </resources>

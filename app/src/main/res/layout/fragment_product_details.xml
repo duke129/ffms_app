@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hmWhite">
+
+    <LinearLayout
+        android:id="@+id/productDetails_LL"
+        android:layout_width="@dimen/parent_ll_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/product_details_margin"
+        android:layout_marginRight="@dimen/product_details_margin"
+        android:background="@color/hmWhite"
+        android:orientation="vertical"
+        android:padding="@dimen/userProfileDetails_padding">
+
+        <LinearLayout
+            android:id="@+id/productHeader_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/productName_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_activity_product_details"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/productDetailsText_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/grossCapacity_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/grossCapacity_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gross_capacity"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/grossCapacityValue_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="280 L"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cyclopentaneInsulation_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/cyclopentaneInsulation_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cyclopentane Insulation"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/cyclopentaneInsulationValue_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/worksWithoutStabilizer_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/worksWithoutStabilizer_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Works Without Stabilizer"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/worksWithoutStabilizerValue_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes (130V-300V)"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/starRating_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/starRating_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Star Rating"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/starRatingValue_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:text="5 star"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/warranty_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/warranty_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Warranty"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/warrantyValue_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 Years"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/door_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/door_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Door"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/doorValue_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Multi Door"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/width_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/width_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Width"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/widthValue_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="588mm"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/depth_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/depth_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Depth"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/depthValue_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:text="655mm"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/height_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding">
+
+            <TextView
+                android:id="@+id/height_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/productDetailsText_size" />
+
+            <TextView
+                android:id="@+id/heightValue_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:text="1520mm"
+                android:textColor="@color/roleValue_color"
+                android:textSize="@dimen/productDetailsValue_size" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

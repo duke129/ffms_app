@@ -25,18 +25,20 @@
                 app:ms_floatingLabelText="@string/title_spinner_floating_label"
                 app:ms_hint="@string/title_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
                 app:ms_multiline="true" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/firstName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/first_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -44,12 +46,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/middleName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/middle_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -57,12 +62,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/lastName_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/last_name" />
 
             </android.support.design.widget.TextInputLayout>
@@ -70,6 +78,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -78,6 +87,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/mobile_no"
                     android:inputType="phone"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:maxLength="10" />
 
             </android.support.design.widget.TextInputLayout>
@@ -85,12 +96,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/alternateMobileNo_ET"
+                    android:id="@+id/alternateMobileNo_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/alternate_mobile_no"
                     android:inputType="phone"
                     android:maxLength="10" />
@@ -100,6 +114,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -108,6 +123,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/office_number"
                     android:inputType="phone"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:maxLength="10" />
 
             </android.support.design.widget.TextInputLayout>
@@ -115,6 +132,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -122,6 +140,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email_id"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
@@ -129,6 +149,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -136,6 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/alternate_email_id"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:inputType="textEmailAddress" />
 
             </android.support.design.widget.TextInputLayout>
@@ -143,6 +166,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
@@ -151,6 +175,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:hint="@string/city"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:text="Bangalore" />
 
             </android.support.design.widget.TextInputLayout>
@@ -165,7 +191,6 @@
                 app:ms_floatingLabelText="@string/branch_spinner_floating_label"
                 app:ms_hint="@string/branch_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
                 app:ms_multiline="true" />
 
             <fr.ganfra.materialspinner.MaterialSpinner
@@ -178,12 +203,12 @@
                 app:ms_floatingLabelText="@string/area_spinner_floating_label"
                 app:ms_hint="@string/area_spinner_hint"
                 app:ms_hintColor="@color/spinner_hint"
-                app:ms_hintTextSize="@dimen/spinner_hint_size"
                 app:ms_multiline="true" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top"
                 android:visibility="gone">
 
@@ -191,6 +216,8 @@
                     android:id="@+id/current_address_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/current_addressLine1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -198,12 +225,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
                     android:id="@+id/communication_address_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
                     android:hint="@string/communication_address" />
 
             </android.support.design.widget.TextInputLayout>
@@ -217,6 +247,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/text_hint"
                     android:layout_marginTop="@dimen/details_edittext_margin_top"
                     android:layout_weight="3"
                     android:orientation="horizontal">
@@ -226,11 +257,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size"
                         android:hint="@string/preferred_callTime" />
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/calendar_IB"
+                    android:id="@+id/calendar_CN_IB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

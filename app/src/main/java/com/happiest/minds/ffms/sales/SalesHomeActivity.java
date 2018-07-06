@@ -186,7 +186,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         fragmentContainerFrameLayout = (FrameLayout) findViewById(R.id.fragmentContainer);
 
-        newLeads_LL = (LinearLayout) findViewById(R.id.newLeads_LL);
+        newLeads_LL = (LinearLayout) findViewById(R.id.product_first_LL);
         inProgressLeads_LL = (LinearLayout) findViewById(R.id.inProgressLeads_LL);
         completedLeads_LL = (LinearLayout) findViewById(R.id.completedLeads_LL);
         searchLeads_LL = (LinearLayout) findViewById(R.id.searchLeads_LL);
@@ -261,7 +261,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 break;
 
-            case R.id.newLeads_LL:
+            case R.id.product_first_LL:
 
                 callServiceForCardView();
 
