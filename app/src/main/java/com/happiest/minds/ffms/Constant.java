@@ -18,4 +18,17 @@ public interface Constant {
     String EMAIL_RE = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
     Long CITY_BANGALORE_ID = 1L;
     String DATE_FORMATE = "dd/MM/yyyy HH:mm:ss";
+
+    int NEW = 103;
+    int IN_PROGRESS = 104;
+    int REJECTED = 105;
+    int COMPLETED = 106;
+
+    int BASIC_INFO_UPDATE = 1;
+    int DEMO = 2;
+    int ORDER = 3;
+
+    int ACTIVITY_COMPLETED = 101;
+    int ACTIVITY_NOT_DONE = 102;
+
 }

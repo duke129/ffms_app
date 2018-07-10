@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,22 +27,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.APIResponse;
+import com.happiest.minds.ffms.sales.pojo.AddressVo;
 import com.happiest.minds.ffms.sales.pojo.CustomerVo;
 import com.happiest.minds.ffms.sales.pojo.ProspectCreation;
 import com.happiest.minds.ffms.sales.pojo.SpinnerItems;
+import com.happiest.minds.ffms.sales.pojo.TypeHeadVo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -57,7 +65,9 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
     EditText firstName_CN_ET, middleName_CN_ET, lastName_CN_ET,
             mobileNo_CN_ET, alternateMobileNo_CN_ET, officeNo_CN_ET,
             email_CN_ET, alternateEmail_CN_ET, city_CN_ET,
-            communication_address_CN_ET, preferredCallTime_CN_ET;
+            communication_addressLine1_CN_ET, communication_addressLine2_CN_ET,
+            communication_addressLandmark_CN_ET, communication_addressPincode_CN_ET,
+            preferredCallTime_CN_ET;
     Button submit_CN_BT;
     ImageButton calendar_CN_IB;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -69,6 +79,10 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
     ProspectCreation prospectCreation;
+    APIResponse apiResponse;
+    ArrayList<TypeHeadVo> branchTypeHeadVoArrayList;
+    ArrayList<TypeHeadVo> areaTypeHeadVoArrayList;
+    ArrayList<TypeHeadVo> titleTypeHeadVoArrayList;
 
     @Nullable
     @Override
@@ -83,18 +97,20 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
         initGUI();
 
-        initSpinner();
+        callTitleService();
+
+        callBranchService();
 
         return view;
 
     }
 
-    private void initGUI(){
+    private void initGUI() {
 
 
-         title_CN_SP = view.findViewById(R.id.title_CN_SP);
-         branch_CN_SP = view.findViewById(R.id.branch_CN_SP);
-         area_CN_SP = view.findViewById(R.id.area_CN_SP);
+        title_CN_SP = view.findViewById(R.id.title_CN_SP);
+        branch_CN_SP = view.findViewById(R.id.branch_CN_SP);
+        area_CN_SP = view.findViewById(R.id.area_CN_SP);
 
         firstName_CN_ET = view.findViewById(R.id.firstName_CN_ET);
         middleName_CN_ET = view.findViewById(R.id.middleName_CN_ET);
@@ -105,9 +121,11 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         email_CN_ET = view.findViewById(R.id.email_CN_ET);
         alternateEmail_CN_ET = view.findViewById(R.id.alternateEmail_CN_ET);
         city_CN_ET = view.findViewById(R.id.city_CN_ET);
-        communication_address_CN_ET = view.findViewById(R.id.communication_address_CN_ET);
+        communication_addressLine1_CN_ET = view.findViewById(R.id.communication_addressLine1_CN_ET);
+        communication_addressLine2_CN_ET = view.findViewById(R.id.communication_addressLine2_CN_ET);
+        communication_addressLandmark_CN_ET = view.findViewById(R.id.communication_addressLandmark_CN_ET);
+        communication_addressPincode_CN_ET = view.findViewById(R.id.communication_addressPincode_CN_ET);
         preferredCallTime_CN_ET = view.findViewById(R.id.preferredCallTime_CN_ET);
-
         calendar_CN_IB = view.findViewById(R.id.calendar_CN_IB);
         submit_CN_BT = view.findViewById(R.id.submit_CN_BT);
 
@@ -115,6 +133,328 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         submit_CN_BT.setOnClickListener(this);
 
 
+    }
+
+    private void callTitleService() {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.TITLE_SERVICE;
+        String url = host + "" + uri;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callTitleService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    titleTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initTitleSpinner(titleTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callTitleService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callTitleService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void initTitleSpinner(ArrayList<TypeHeadVo> titleTypeHeadVoArrayListArg){
+
+        title_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, titleTypeHeadVoArrayListArg);
+        title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        title_CN_SP.setAdapter(title_adapter);
+        title_CN_SP.setPaddingSafe(0, 0, 0, 0);
+    }
+
+    private void callBranchService() {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.BRANCH_URI;
+        String url = host + "" + uri + "/1";
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callBranchService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    branchTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initBranchSpinner(branchTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callBranchService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callBranchService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void callAreaService(String branchId) {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.AREA_URI;
+        String url = host + "" + uri + "/" + branchId;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callAreaService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "callAreaService :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    areaTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initAreaSpinner(areaTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callAreaService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callAreaService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void initBranchSpinner(ArrayList<TypeHeadVo> branchTypeHeadVoArrayList) {
+
+        branch_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, branchTypeHeadVoArrayList);
+        branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        branch_CN_SP.setAdapter(branch_adapter);
+        branch_CN_SP.setPaddingSafe(0, 0, 0, 0);
+
+        operationOnBranchSelection();
+
+    }
+
+    private void initAreaSpinner(ArrayList<TypeHeadVo> areaTypeHeadVoArrayList) {
+
+        area_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, areaTypeHeadVoArrayList);
+        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        area_CN_SP.setAdapter(area_adapter);
+        area_CN_SP.setPaddingSafe(0, 0, 0, 0);
+    }
+
+    private void operationOnBranchSelection(){
+
+        branch_CN_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                int selectedPosition = branch_CN_SP.getSelectedItemPosition();
+
+                if(selectedPosition >0) {
+
+                    TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedPosition -1);
+
+                    Long branchId = typeHeadVo.getId();
+
+                    Log.i(TAG, " selectedPosition : " + selectedPosition + " branchId : " + branchId);
+
+                    callAreaService(""+branchId);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -125,24 +465,12 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         title_CN_SP.setAdapter(title_adapter);
         title_CN_SP.setPaddingSafe(0, 0, 0, 0);
-
-        branch_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, SpinnerItems.BRANCH_ITEMS);
-        branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        branch_CN_SP.setAdapter(branch_adapter);
-        branch_CN_SP.setPaddingSafe(0, 0, 0, 0);
-
-        area_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, SpinnerItems.AREA_ITEMS);
-        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        area_CN_SP.setAdapter(area_adapter);
-        area_CN_SP.setPaddingSafe(0, 0, 0, 0);
-
-
     }
 
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case R.id.submit_CN_BT:
 
@@ -159,11 +487,11 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
     }
 
-    private void validateInputFields(){
+    private void validateInputFields() {
 
         boolean isInputValid = false;
 
-        String title = title_CN_SP.getSelectedItem().toString();
+
         String firstName = firstName_CN_ET.getText().toString().trim();
         String middleName = middleName_CN_ET.getText().toString().trim();
         String lastName = lastName_CN_ET.getText().toString().trim();
@@ -173,18 +501,32 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         String emailId = email_CN_ET.getText().toString().trim();
         String alternateEmailId = alternateEmail_CN_ET.getText().toString().trim();
         String cityName = city_CN_ET.getText().toString().trim();
-        String branchName = branch_CN_SP.getSelectedItem().toString();
-        String areaName = area_CN_SP.getSelectedItem().toString();
-        String communicationAddress = communication_address_CN_ET.getText().toString().trim();
+        String communicationAddressLine1 = communication_addressLine1_CN_ET.getText().toString().trim();
+        String communicationAddressLine2 = communication_addressLine2_CN_ET.getText().toString().trim();
+        String communicationAddressLandmark = communication_addressLandmark_CN_ET.getText().toString().trim();
+        String communicationAddressPincode = communication_addressPincode_CN_ET.getText().toString().trim();
         String preferredCallTime = preferredCallTime_CN_ET.getText().toString().trim();
-
         SimpleDateFormat formatter = new SimpleDateFormat(Constant.DATE_FORMATE);
         CustomerVo customerVo = new CustomerVo();
         prospectCreation = new ProspectCreation();
 
 
-        if (title.equals(context.getResources().getString(
-                R.string.title_spinner_hint))) {
+        int selectedTitlePosition = title_CN_SP.getSelectedItemPosition();
+
+        if(selectedTitlePosition >0) {
+
+            TypeHeadVo typeHeadVo = titleTypeHeadVoArrayList.get(selectedTitlePosition -1);
+
+            String title = typeHeadVo.getName();
+
+            customerVo.setTitle(title);
+
+            isInputValid = true;
+
+            Log.i(TAG, " selectedTitlePosition : " + selectedTitlePosition + " title : " + title);
+
+        }else{
+
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -192,12 +534,6 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             }
             isInputValid = false;
             return;
-
-        } else {
-            customerVo.setCustomerTittle(title);
-
-            isInputValid = true;
-
         }
 
         if (firstName.isEmpty()) {
@@ -210,13 +546,13 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             return;
 
         } else {
-            customerVo.setCustomerFirstName(firstName);
+            customerVo.setFirstName(firstName);
 
             isInputValid = true;
 
         }
 
-        customerVo.setCustomerMiddletName(middleName);
+        customerVo.setMiddleName(middleName);
 
         if (lastName.isEmpty()) {
 
@@ -228,7 +564,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             return;
 
         } else {
-            customerVo.setCustomerLastName(lastName);
+            customerVo.setLastName(lastName);
 
             isInputValid = true;
 
@@ -243,7 +579,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             isInputValid = false;
             return;
 
-        } else if(mobileNumber.length()<10){
+        } else if (mobileNumber.length() < 10) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -252,16 +588,16 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             isInputValid = false;
             return;
 
-        } else{
-            customerVo.setCustomerMobileNumber(mobileNumber);
+        } else {
+            customerVo.setMobileNumber(mobileNumber);
 
             isInputValid = true;
 
         }
 
-        customerVo.setCustomerAternateMobileNumber(alternateMobileNumber);
+        customerVo.setAlternateMobileNumber(alternateMobileNumber);
 
-        customerVo.setCustomerOfficeNumber(officeNumber);
+        customerVo.setOfficeNumber(officeNumber);
 
         if (emailId.isEmpty()) {
 
@@ -272,7 +608,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             isInputValid = false;
             return;
 
-        } else if(!emailId.matches(Constant.EMAIL_RE)){
+        } else if (!emailId.matches(Constant.EMAIL_RE)) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -281,20 +617,34 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             isInputValid = false;
             return;
 
-        } else{
-            customerVo.setCustomerEmailId(emailId);
+        } else {
+            customerVo.setEmailId(emailId);
 
             isInputValid = true;
 
         }
 
 
-        customerVo.setCustomerAternateEmailId(alternateEmailId);
+        customerVo.setAlternateEmailId(alternateEmailId);
 
         customerVo.setCityId(Constant.CITY_BANGALORE_ID);
 
-        if (branchName.equals(context.getResources().getString(
-                R.string.branch_spinner_hint))) {
+        int selectedBranchPosition = branch_CN_SP.getSelectedItemPosition();
+
+        if(selectedBranchPosition >0) {
+
+            TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedBranchPosition -1);
+
+            Long branchId = typeHeadVo.getId();
+
+            customerVo.setBranchId(branchId);
+
+            isInputValid = true;
+
+            Log.i(TAG, " selectedBranchPosition : " + selectedBranchPosition + " branchId : " + branchId);
+
+        }else{
+
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -302,18 +652,24 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             }
             isInputValid = false;
             return;
+        }
 
-        } else {
-            customerVo.setBranchId(2L);
+        int selectedAreaPosition = area_CN_SP.getSelectedItemPosition();
+
+        if(selectedAreaPosition >0) {
+
+            TypeHeadVo typeHeadVo = areaTypeHeadVoArrayList.get(selectedAreaPosition -1);
+
+            Long areaId = typeHeadVo.getId();
+
+            customerVo.setAreaId(areaId);
 
             isInputValid = true;
 
-        }
+            Log.i(TAG, " selectedAreaPosition : " + selectedAreaPosition + " areaId : " + areaId);
 
-        customerVo.setCityId(Constant.CITY_BANGALORE_ID);
+        }else{
 
-        if (areaName.equals(context.getResources().getString(
-                R.string.area_spinner_hint))) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -321,29 +677,76 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             }
             isInputValid = false;
             return;
-
-        } else {
-            customerVo.setBranchId(2L);
-
-            isInputValid = true;
-
         }
 
-        if (communicationAddress.isEmpty()) {
+        if (communicationAddressLine1.isEmpty()) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_communication_address));
+                        .getResources().getString(R.string.enter_current_address_line1));
             }
             isInputValid = false;
             return;
 
         } else {
-            customerVo.setCustomerCommunicationAddress(communicationAddress);
 
             isInputValid = true;
 
         }
+
+        if (communicationAddressLine2.isEmpty()) {
+
+            if (context != null) {
+                CommonUtility.showToastMessage(context, context
+                        .getResources().getString(R.string.enter_current_address_line2));
+            }
+            isInputValid = false;
+            return;
+
+        } else {
+
+            isInputValid = true;
+
+        }
+
+        if (communicationAddressLandmark.isEmpty()) {
+
+            if (context != null) {
+                CommonUtility.showToastMessage(context, context
+                        .getResources().getString(R.string.enter_current_address_landmark));
+            }
+            isInputValid = false;
+            return;
+
+        } else {
+
+            isInputValid = true;
+
+        }
+
+        if (communicationAddressPincode.isEmpty()) {
+
+            if (context != null) {
+                CommonUtility.showToastMessage(context, context
+                        .getResources().getString(R.string.enter_current_address_pincode));
+            }
+            isInputValid = false;
+            return;
+
+        } else {
+
+            isInputValid = true;
+
+        }
+
+        AddressVo customerCommunicationAddress = new AddressVo();
+
+        customerCommunicationAddress.setAddress1(communicationAddressLine1);
+        customerCommunicationAddress.setAddress2(communicationAddressLine2);
+        customerCommunicationAddress.setLandmark(communicationAddressLandmark);
+        customerCommunicationAddress.setPincode(communicationAddressPincode);
+
+        customerVo.setCommunicationAddress(customerCommunicationAddress);
 
         if (preferredCallTime.isEmpty()) {
 
@@ -366,8 +769,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         }
 
 
-
-        if(isInputValid){
+        if (isInputValid) {
 
             prospectCreation.setCustomer(customerVo);
 
@@ -377,7 +779,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
     }
 
-    private void callCreateLeadService(){
+    private void callCreateLeadService() {
 
         try {
 
@@ -415,7 +817,8 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
                                     "callCreateLeadService response : "
                                             + response);
 
-                            CommonUtility.showToastMessage(context,"Leads Created Successfully");
+                            CommonUtility.showServerResponseMessage(context, context
+                                    .getResources().getString(R.string.prospect_created_successfully));
 
                             resetForm();
 
@@ -437,7 +840,6 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
                 }
             });
-
 
 
             ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
@@ -464,7 +866,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
     }
 
-    private void resetForm(){
+    private void resetForm() {
 
         initSpinner();
         firstName_CN_ET.setText("");
@@ -476,7 +878,10 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
         email_CN_ET.setText("");
         alternateEmail_CN_ET.setText("");
         city_CN_ET.setText("");
-        communication_address_CN_ET.setText("");
+        communication_addressLine1_CN_ET.setText("");
+        communication_addressLine2_CN_ET.setText("");
+        communication_addressLandmark_CN_ET.setText("");
+        communication_addressPincode_CN_ET.setText("");
         preferredCallTime_CN_ET.setText("");
 
     }

@@ -14,22 +14,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.FFMSRequestQueue;
@@ -37,14 +40,14 @@ import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
 import com.happiest.minds.ffms.sales.pojo.APIResponse;
 import com.happiest.minds.ffms.sales.pojo.ActivityChild;
+import com.happiest.minds.ffms.sales.pojo.ActivityVo;
 import com.happiest.minds.ffms.sales.pojo.AddressVo;
 import com.happiest.minds.ffms.sales.pojo.BasicInfoUpdate;
-import com.happiest.minds.ffms.sales.pojo.CustomerVo;
-import com.happiest.minds.ffms.sales.pojo.ProspectCreation;
 import com.happiest.minds.ffms.sales.pojo.SalesActivityName;
 import com.happiest.minds.ffms.sales.pojo.SalesActivityType;
 import com.happiest.minds.ffms.sales.pojo.SpinnerItems;
 import com.happiest.minds.ffms.sales.pojo.TicketDetails;
+import com.happiest.minds.ffms.sales.pojo.TypeHeadVo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,8 +82,8 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
     EditText ticketNumber_ET, ticketCreatedDate_ET, firstName_ET, middleName_ET,
             lastName_ET, mobileNo_ET, alternateMobileNo_ET, officeNo_ET, email_ET,
             alternateEmail_ET, city_ET, current_addressLine1_ET, current_addressLine2_ET,
-            current_addressLandmark_ET, current_addressPincode_ET, billing_addressLine1_ET,
-            billing_addressLine2_ET, billing_addressLandmark_ET, billing_addressPincode_ET,
+            current_addressLandmark_ET, current_addressPincode_ET, communication_addressLine1_ET,
+            communication_addressLine2_ET, communication_addressLandmark_ET, communication_addressPincode_ET,
             preferredCallTime_ET;
 
     LinearLayout basicInfo_update_BT_LL, sales_activity_LL;
@@ -92,7 +95,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
     int selectedYear, selectedMonth, selectedDay;
     TimePickerDialog timePickerDialog;
 
-    private ArrayAdapter<String> title_adapter, branch_adapter, area_adapter;
+    private ArrayAdapter title_adapter, branch_adapter, area_adapter;
 
     private TicketDetails ticketDetails = SalesLeadsCardViewRecyclerAdapter.ticketDetailsArrayList.get(0);
 
@@ -104,6 +107,11 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
     APIResponse apiResponse;
+
+    ArrayList<TypeHeadVo> titleTypeHeadVoArrayList;
+    ArrayList<TypeHeadVo> branchTypeHeadVoArrayList;
+    ArrayList<TypeHeadVo> areaTypeHeadVoArrayList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,11 +126,15 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         initGUI();
 
-       // initRecycler();
-
-        //initSpinner();
+        // initRecycler();
 
         setDetailsToUI();
+
+        callTitleService();
+
+        callBranchService();
+
+        //initSpinner();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.activity_recycler_view);
 
@@ -154,10 +166,10 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         current_addressLine2_ET = view.findViewById(R.id.current_addressLine2_ET);
         current_addressLandmark_ET = view.findViewById(R.id.current_addressLandmark_ET);
         current_addressPincode_ET = view.findViewById(R.id.current_addressPincode_ET);
-        billing_addressLine1_ET = view.findViewById(R.id.billing_addressLine1_ET);
-        billing_addressLine2_ET = view.findViewById(R.id.billing_addressLine2_ET);
-        billing_addressLandmark_ET = view.findViewById(R.id.billing_addressLandmark_ET);
-        billing_addressPincode_ET = view.findViewById(R.id.billing_addressPincode_ET);
+        communication_addressLine1_ET = view.findViewById(R.id.communication_addressLine1_ET);
+        communication_addressLine2_ET = view.findViewById(R.id.communication_addressLine2_ET);
+        communication_addressLandmark_ET = view.findViewById(R.id.communication_addressLandmark_ET);
+        communication_addressPincode_ET = view.findViewById(R.id.communication_addressPincode_ET);
         title_SP = view.findViewById(R.id.title_SP);
         branch_SP = view.findViewById(R.id.branch_SP);
         area_SP = view.findViewById(R.id.area_SP);
@@ -168,24 +180,333 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         basicInfo_update_BT_LL = view.findViewById(R.id.basicInfo_update_BT_LL);
         sales_activity_LL = view.findViewById(R.id.sales_activity_LL);
         basicInfo_update_BT_LL.setOnClickListener(this);
-        //sales_activity_LL.setVisibility(View.GONE);
+        sales_activity_LL.setVisibility(View.GONE);
 
     }
 
 
-    private List<? extends ParentListItem> generateSalesTicketTypes() {
-        // TODO Auto-generated method stub
+    private void callTitleService() {
 
-        SalesActivityType salesActivityType = SalesActivityType.get(getActivity());
-        salesActivityNames = salesActivityType.getTicketNames();
-        List<ParentListItem> parentListItems = new ArrayList<>();
-        for (SalesActivityName t2 : salesActivityNames) {
-            List<ActivityChild> activityChildItemList = new ArrayList<>();
-            activityChildItemList.add(new ActivityChild(t2.getName()));
-            t2.setChildItemList(activityChildItemList);
-            parentListItems.add(t2);
-        }
-        return parentListItems;
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.TITLE_SERVICE;
+        String url = host + "" + uri;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callTitleService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    titleTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initTitleSpinner(titleTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callTitleService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callTitleService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void initTitleSpinner(ArrayList<TypeHeadVo> titleTypeHeadVoArrayListArg){
+
+        title_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, titleTypeHeadVoArrayListArg);
+        title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        title_SP.setAdapter(title_adapter);
+        title_SP.setPaddingSafe(0, 0, 0, 0);
+        title_SP.setSelection(getIndex(title_SP, ticketDetails.getTitle()));
+    }
+
+    private void callBranchService() {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.BRANCH_URI;
+        String url = host + "" + uri + "/1";
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callBranchService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    branchTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initBranchSpinner(branchTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callBranchService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callBranchService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void initBranchSpinner(ArrayList<TypeHeadVo> branchTypeHeadVoArrayList) {
+
+        branch_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, branchTypeHeadVoArrayList);
+        branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        branch_SP.setAdapter(branch_adapter);
+        branch_SP.setPaddingSafe(0, 0, 0, 0);
+        branch_SP.setSelection(getIndex(branch_SP, ticketDetails.getBranchName()));
+        operationOnBranchSelection();
+
+    }
+
+    private void initAreaSpinner(ArrayList<TypeHeadVo> areaTypeHeadVoArrayList) {
+
+        area_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, areaTypeHeadVoArrayList);
+        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        area_SP.setAdapter(area_adapter);
+        area_SP.setPaddingSafe(0, 0, 0, 0);
+        area_SP.setSelection(getIndex(area_SP, ticketDetails.getAreaName()));
+    }
+
+    private void operationOnBranchSelection() {
+
+        branch_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                int selectedPosition = branch_SP.getSelectedItemPosition();
+
+                if (selectedPosition > 0) {
+
+                    TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedPosition - 1);
+
+                    Long branchId = typeHeadVo.getId();
+
+                    Log.i(TAG, " selectedPosition : " + selectedPosition + " branchId : " + branchId);
+
+                    callAreaService("" + branchId);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void callAreaService(String branchId) {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.AREA_URI;
+        String url = host + "" + uri + "/" + branchId;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callAreaService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "callAreaService :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    areaTypeHeadVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            TypeHeadVo.class));
+
+                                    initAreaSpinner(areaTypeHeadVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callAreaService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+                CommonUtility
+                        .showServerResponseMessage(
+                                context,
+                                context.getResources()
+                                        .getString(
+                                                R.string.invalid_server_response_for_webservice)
+                                        + " callAreaService");
+
+
+            }
+
+        });
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
 
     }
 
@@ -197,16 +518,20 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         title_SP.setAdapter(title_adapter);
         title_SP.setPaddingSafe(0, 0, 0, 0);
 
+
         branch_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, SpinnerItems.BRANCH_ITEMS);
         branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         branch_SP.setAdapter(branch_adapter);
         branch_SP.setPaddingSafe(0, 0, 0, 0);
+
+        branch_SP.setSelection(getIndex(branch_SP, ticketDetails.getBranchName()));
 
         area_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, SpinnerItems.AREA_ITEMS);
         area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         area_SP.setAdapter(area_adapter);
         area_SP.setPaddingSafe(0, 0, 0, 0);
 
+        area_SP.setSelection(getIndex(area_SP, ticketDetails.getAreaName()));
 
     }
 
@@ -227,48 +552,96 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         current_addressLine2_ET.setText(ticketDetails.getCommunicationAddress().getAddress2());
         current_addressLandmark_ET.setText(ticketDetails.getCommunicationAddress().getLandmark());
         current_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
-        billing_addressLine1_ET.setText(ticketDetails.getCommunicationAddress().getAddress1());
-        billing_addressLine2_ET .setText(ticketDetails.getCommunicationAddress().getAddress2());
-        billing_addressLandmark_ET.setText(ticketDetails.getCommunicationAddress().getLandmark());
-        billing_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
+        communication_addressLine1_ET.setText(ticketDetails.getCommunicationAddress().getAddress1());
+        communication_addressLine2_ET.setText(ticketDetails.getCommunicationAddress().getAddress2());
+        communication_addressLandmark_ET.setText(ticketDetails.getCommunicationAddress().getLandmark());
+        communication_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
+        preferredCallTime_ET.setText("" + ticketDetails.getPreferredCallTime());
 
-        ArrayList<String> titleArrayList = new ArrayList<String>();
-        titleArrayList.add(ticketDetails.getTitle());
-        title_adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, titleArrayList);
-        title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        title_SP.setAdapter(title_adapter);
-        title_SP.setPaddingSafe(0, 0, 0, 0);
+        checkForActivity();
+    }
 
-        int titleSpinnerPosition = title_adapter
-                .getPosition(ticketDetails.getTitle());
-        Log.i(TAG, "titleSpinnerPosition :"+titleSpinnerPosition);
-        title_SP.setSelection(1);
 
-        ArrayList<String> branchArrayList = new ArrayList<String>();
-        branchArrayList.add("Indira Nagar");
-        branch_adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, branchArrayList);
-        branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        branch_SP.setAdapter(branch_adapter);
-        branch_SP.setPaddingSafe(0, 0, 0, 0);
-        int branchSpinnerPosition = branch_adapter
-                .getPosition("Indira Nagar");
-        Log.i(TAG, "branchSpinnerPosition :"+branchSpinnerPosition);
-        branch_SP.setSelection(1);
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString) {
 
-        ArrayList<String> areaArrayList = new ArrayList<String>();
-        areaArrayList.add("BTM Layout");
-        area_adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, areaArrayList);
-        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        area_SP.setAdapter(area_adapter);
-        area_SP.setPaddingSafe(0, 0, 0, 0);
+        Log.i(TAG, "spinner.getCount() : " + spinner.getCount());
 
-        int areaSpinnerPosition = area_adapter
-                .getPosition("BTM Layout");
-        Log.i(TAG, "areaSpinnerPosition :"+areaSpinnerPosition);
-        area_SP.setSelection(1);
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i - 1).toString().equalsIgnoreCase(myString)) {
+
+                Log.i(TAG, "Spinner Value : " + spinner.getItemAtPosition(i - 1).toString() + " myString : " + myString);
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+
+    private void checkForActivity() {
+
+        List<ActivityVo> activityVoList = ticketDetails.getActivities();
+
+        for (int i = 0; i < activityVoList.size(); i++) {
+
+            ActivityVo activityVo = activityVoList.get(i);
+
+            int activityId = activityVo.getId();
+
+            int status = 0;
+
+            if (activityVo.getStatus() != null) {
+                status = activityVo.getStatus();
+            }
+
+            switch (activityId) {
+
+                case Constant.BASIC_INFO_UPDATE:
+
+
+                    if (status == Constant.ACTIVITY_COMPLETED) {
+
+                        operationForBasicInfoUpdated();
+
+                    } else {
+
+                        operationForBasicInfoNotUpdated();
+
+                    }
+
+                    break;
+
+            }
+        }
+
+    }
+
+    private void enableUIDetails() {
+
+        ticketNumber_ET.setEnabled(false);
+        ticketCreatedDate_ET.setEnabled(false);
+        firstName_ET.setEnabled(true);
+        middleName_ET.setEnabled(true);
+        lastName_ET.setEnabled(true);
+        mobileNo_ET.setEnabled(true);
+        alternateMobileNo_ET.setEnabled(true);
+        officeNo_ET.setEnabled(true);
+        email_ET.setEnabled(true);
+        alternateEmail_ET.setEnabled(true);
+        city_ET.setEnabled(false);
+        current_addressLine1_ET.setEnabled(true);
+        current_addressLine2_ET.setEnabled(true);
+        current_addressLandmark_ET.setEnabled(true);
+        current_addressPincode_ET.setEnabled(true);
+        communication_addressLine1_ET.setEnabled(true);
+        communication_addressLine2_ET.setEnabled(true);
+        communication_addressLandmark_ET.setEnabled(true);
+        communication_addressPincode_ET.setEnabled(true);
+        calendar_IB.setEnabled(true);
+        title_SP.setEnabled(true);
+        branch_SP.setEnabled(true);
+        area_SP.setEnabled(true);
 
     }
 
@@ -289,15 +662,17 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         current_addressLine2_ET.setEnabled(false);
         current_addressLandmark_ET.setEnabled(false);
         current_addressPincode_ET.setEnabled(false);
-        billing_addressLine1_ET.setEnabled(false);
-        billing_addressLine2_ET.setEnabled(false);
-        billing_addressLandmark_ET.setEnabled(false);
-        billing_addressPincode_ET.setEnabled(false);
+        communication_addressLine1_ET.setEnabled(false);
+        communication_addressLine2_ET.setEnabled(false);
+        communication_addressLandmark_ET.setEnabled(false);
+        communication_addressPincode_ET.setEnabled(false);
+        calendar_IB.setEnabled(false);
         title_SP.setEnabled(false);
         branch_SP.setEnabled(false);
         area_SP.setEnabled(false);
 
     }
+
 
 
     /*public void activateError(View view) {
@@ -311,7 +686,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         shown = !shown;
 
     }*/
-
 
 
     private void setData() {
@@ -328,7 +702,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.basicInfo_update_BT_LL:
 
@@ -349,7 +723,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         }
     }
 
-    private void validateUserInput(){
+    private void validateUserInput() {
 
         Log.i(TAG, "validateUserInput");
 
@@ -357,7 +731,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         String ticketId = ticketNumber_ET.getText().toString().trim();
         String createdDate = ticketCreatedDate_ET.getText().toString().trim();
-        String title = title_SP.getSelectedItem().toString();
         String firstName = firstName_ET.getText().toString().trim();
         String middleName = middleName_ET.getText().toString().trim();
         String lastName = lastName_ET.getText().toString().trim();
@@ -373,10 +746,10 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         String currentAddressLine2 = current_addressLine2_ET.getText().toString().trim();
         String currentAddressLandmark = current_addressLandmark_ET.getText().toString().trim();
         String currentAddressPincode = current_addressPincode_ET.getText().toString().trim();
-        String billingAddressLine1 = billing_addressLine1_ET.getText().toString().trim();
-        String billingAddressLine2 = billing_addressLine2_ET.getText().toString().trim();
-        String billingAddressLandmark = billing_addressLandmark_ET.getText().toString().trim();
-        String billingAddressPincode = billing_addressPincode_ET.getText().toString().trim();
+        String communicationAddressLine1 = communication_addressLine1_ET.getText().toString().trim();
+        String communicationAddressLine2 = communication_addressLine2_ET.getText().toString().trim();
+        String communicationAddressLandmark = communication_addressLandmark_ET.getText().toString().trim();
+        String communicationAddressPincode = communication_addressPincode_ET.getText().toString().trim();
         String preferredCallTime = preferredCallTime_ET.getText().toString().trim();
         SimpleDateFormat formatter = new SimpleDateFormat(Constant.DATE_FORMATE);
 
@@ -385,8 +758,22 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         basicInfoUpdate.setTicketId(Long.parseLong(ticketId));
         //basicInfoUpdate.setCreatedDate(createdDate);
 
-        if (title.equals(context.getResources().getString(
-                R.string.title_spinner_hint))) {
+        int selectedTitlePosition = title_SP.getSelectedItemPosition();
+
+        if(selectedTitlePosition >0) {
+
+            TypeHeadVo typeHeadVo = titleTypeHeadVoArrayList.get(selectedTitlePosition -1);
+
+            String title = typeHeadVo.getName();
+
+            basicInfoUpdate.setTitle(title);
+
+            isInputValid = true;
+
+            Log.i(TAG, " selectedTitlePosition : " + selectedTitlePosition + " title : " + title);
+
+        }else{
+
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -394,12 +781,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             }
             isInputValid = false;
             return;
-
-        } else {
-            basicInfoUpdate.setTitle(title);
-
-            isInputValid = true;
-
         }
 
         if (firstName.isEmpty()) {
@@ -445,7 +826,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             isInputValid = false;
             return;
 
-        } else if(mobileNumber.length()<10){
+        } else if (mobileNumber.length() < 10) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -454,7 +835,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             isInputValid = false;
             return;
 
-        } else{
+        } else {
             basicInfoUpdate.setMobileNumber(mobileNumber);
 
             isInputValid = true;
@@ -474,7 +855,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             isInputValid = false;
             return;
 
-        } else if(!emailId.matches(Constant.EMAIL_RE)){
+        } else if (!emailId.matches(Constant.EMAIL_RE)) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -483,7 +864,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             isInputValid = false;
             return;
 
-        } else{
+        } else {
             basicInfoUpdate.setEmailId(emailId);
 
             isInputValid = true;
@@ -495,8 +876,22 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         //basicInfoUpdate.setCityId(Constant.CITY_BANGALORE_ID);
 
-        if (branchName.equals(context.getResources().getString(
-                R.string.branch_spinner_hint))) {
+        int selectedBranchPosition = branch_SP.getSelectedItemPosition();
+
+        if(selectedBranchPosition >0) {
+
+            TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedBranchPosition -1);
+
+            Long branchId = typeHeadVo.getId();
+
+           // basicInfoUpdate.setBranchId(branchId);
+
+            isInputValid = true;
+
+            Log.i(TAG, " selectedBranchPosition : " + selectedBranchPosition + " branchId : " + branchId);
+
+        }else{
+
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -504,18 +899,26 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             }
             isInputValid = false;
             return;
+        }
 
-        } else {
-            //basicInfoUpdate.setBranchId(2L);
+        // basicInfoUpdate.setCityId(Constant.CITY_BANGALORE_ID);
+
+        int selectedAreaPosition = area_SP.getSelectedItemPosition();
+
+        if(selectedAreaPosition >0) {
+
+            TypeHeadVo typeHeadVo = areaTypeHeadVoArrayList.get(selectedAreaPosition -1);
+
+            Long areaId = typeHeadVo.getId();
+
+            // basicInfoUpdate.setAreaId(areaId);
 
             isInputValid = true;
 
-        }
+            Log.i(TAG, " selectedAreaPosition : " + selectedAreaPosition + " areaId : " + areaId);
 
-       // basicInfoUpdate.setCityId(Constant.CITY_BANGALORE_ID);
+        }else{
 
-        if (areaName.equals(context.getResources().getString(
-                R.string.area_spinner_hint))) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
@@ -523,12 +926,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             }
             isInputValid = false;
             return;
-
-        } else {
-           // basicInfoUpdate.setBranchId(2L);
-
-            isInputValid = true;
-
         }
 
         if (currentAddressLine1.isEmpty()) {
@@ -600,11 +997,11 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         basicInfoUpdate.setCurrentAddress(currentAddressVo);
 
-        if (billingAddressLine1.isEmpty()) {
+        if (communicationAddressLine1.isEmpty()) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_billing_address_line1));
+                        .getResources().getString(R.string.enter_communication_address_line1));
             }
             isInputValid = false;
             return;
@@ -615,11 +1012,11 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         }
 
-        if (billingAddressLine2.isEmpty()) {
+        if (communicationAddressLine2.isEmpty()) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_billing_address_line2));
+                        .getResources().getString(R.string.enter_communication_address_line2));
             }
             isInputValid = false;
             return;
@@ -630,11 +1027,11 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         }
 
-        if (billingAddressLandmark.isEmpty()) {
+        if (communicationAddressLandmark.isEmpty()) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_billing_address_landmark));
+                        .getResources().getString(R.string.enter_communication_address_landmark));
             }
             isInputValid = false;
             return;
@@ -645,11 +1042,11 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         }
 
-        if (billingAddressPincode.isEmpty()) {
+        if (communicationAddressPincode.isEmpty()) {
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_billing_address_pincode));
+                        .getResources().getString(R.string.enter_communication_address_pincode));
             }
             isInputValid = false;
             return;
@@ -660,14 +1057,14 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         }
 
-        AddressVo billingAddressVo = new AddressVo();
+        AddressVo communicationAddressVo = new AddressVo();
 
-        billingAddressVo.setAddress1(billingAddressLine1);
-        billingAddressVo.setAddress2(billingAddressLine2);
-        billingAddressVo.setLandmark(billingAddressLandmark);
-        billingAddressVo.setPincode(billingAddressPincode);
+        communicationAddressVo.setAddress1(communicationAddressLine1);
+        communicationAddressVo.setAddress2(communicationAddressLine2);
+        communicationAddressVo.setLandmark(communicationAddressLandmark);
+        communicationAddressVo.setPincode(communicationAddressPincode);
 
-        basicInfoUpdate.setCurrentAddress(billingAddressVo);
+        basicInfoUpdate.setCommunicationAddress(communicationAddressVo);
 
         if (preferredCallTime.isEmpty()) {
 
@@ -679,21 +1076,17 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
             return;
 
         } else {
-            /*try {
-                basicInfoUpdate.setPreferredCallTime(formatter.parse(preferredCallTime));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }*/
+
+            basicInfoUpdate.setPreferredCallTime(preferredCallTime);
 
             isInputValid = true;
 
         }
 
 
+        if (isInputValid) {
 
-        if(isInputValid){
-
-            Log.i(TAG, "isInputValid : "+isInputValid);
+            Log.i(TAG, "isInputValid : " + isInputValid);
 
             showConfirmationAlertDialog();
         }
@@ -735,7 +1128,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         alertDailog.show();
     }
 
-    private void callUpdateLeadService(){
+    private void callUpdateLeadService() {
 
         try {
 
@@ -773,7 +1166,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
                                     "callUpdateLeadService response : "
                                             + response);
 
-                            CommonUtility.showToastMessage(context,"Lead details updated successfully");
+                            CommonUtility.showToastMessage(context, "Lead details updated successfully");
 
 
                             try {
@@ -790,7 +1183,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
                                         String dataString = objectMapper.writeValueAsString(data);
 
-                                        Log.i(TAG, "dataString : "+dataString);
+                                        Log.i(TAG, "dataString : " + dataString);
                                     }
                                 }
 
@@ -799,7 +1192,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
                             }
 
 
-                            onBasicInfoUpdate();
+                            operationForBasicInfoUpdated();
 
 
                         }
@@ -819,7 +1212,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
                 }
             });
-
 
 
             ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
@@ -846,11 +1238,18 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
     }
 
-    private void onBasicInfoUpdate(){
+    private void operationForBasicInfoUpdated() {
 
         sales_activity_LL.setVisibility(View.VISIBLE);
         basicInfo_update_BT_LL.setVisibility(View.GONE);
         disableUIDetails();
+    }
+
+    private void operationForBasicInfoNotUpdated() {
+
+        sales_activity_LL.setVisibility(View.GONE);
+        basicInfo_update_BT_LL.setVisibility(View.VISIBLE);
+        enableUIDetails();
     }
 
     private void showDatePickerDialog() {
@@ -986,6 +1385,22 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
                     }
                 }, mHour, mMinute, true);
+
+    }
+
+    private List<? extends ParentListItem> generateSalesTicketTypes() {
+        // TODO Auto-generated method stub
+
+        SalesActivityType salesActivityType = SalesActivityType.get(getActivity());
+        salesActivityNames = salesActivityType.getTicketNames();
+        List<ParentListItem> parentListItems = new ArrayList<>();
+        for (SalesActivityName t2 : salesActivityNames) {
+            List<ActivityChild> activityChildItemList = new ArrayList<>();
+            activityChildItemList.add(new ActivityChild(t2.getName()));
+            t2.setChildItemList(activityChildItemList);
+            parentListItems.add(t2);
+        }
+        return parentListItems;
 
     }
 }

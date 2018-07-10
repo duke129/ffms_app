@@ -266,7 +266,7 @@
                     android:id="@+id/billing_addressLine1_SR_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLine1" />
+                    android:hint="@string/communication_addressLine1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -279,7 +279,7 @@
                     android:id="@+id/billing_addressLine2_SR_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLine2" />
+                    android:hint="@string/communication_addressLine2" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -292,7 +292,7 @@
                     android:id="@+id/billing_addressLandmark_SR_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressLandmark" />
+                    android:hint="@string/communication_addressLandmark" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -305,7 +305,7 @@
                     android:id="@+id/billing_addressPincode_SR_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/billing_addressPincode" />
+                    android:hint="@string/communication_addressPincode" />
 
             </android.support.design.widget.TextInputLayout>
 

@@ -164,7 +164,7 @@
             android:layout_marginTop="@dimen/headRow3_linear_layout_margin_top">
 
             <RelativeLayout
-                android:id="@+id/demo_demarcation_RL"
+                android:id="@+id/biu_demarcation_RL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -174,13 +174,34 @@
                 android:padding="@dimen/relative_padding">
 
                 <TextView
+                    android:id="@+id/biu_CV_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/activity_biu"
+                    android:textSize="@dimen/activity_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/demo_demarcation_RL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/demarcation_rl_right_margin_document"
+                android:layout_toRightOf="@+id/biu_demarcation_RL"
+                android:background="@drawable/grey_arrow"
+                android:padding="@dimen/relative_padding">
+
+                <TextView
                     android:id="@+id/demo_CV_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:text="@string/activity_demo"
+                    android:text="@string/activity_order"
                     android:textSize="@dimen/activity_text_size" />
             </RelativeLayout>
 
@@ -227,6 +248,7 @@
                     android:layout_height="@dimen/update_status_icon_height"
                     android:layout_alignParentRight="true"
                     android:contentDescription="@string/contentDescription_update_status"
+                    android:visibility="gone"
                     android:src="@drawable/update_status" />
             </RelativeLayout>
         </RelativeLayout>

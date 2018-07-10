@@ -14,7 +14,8 @@ public class BasicInfoUpdate {
 	private String alternateEmailId;
 	private AddressVo communicationAddress;
 	private AddressVo currentAddress;
-
+	private String preferredCallTime;
+	
 	public Long getTicketId() {
 		return ticketId;
 	}
@@ -87,6 +88,15 @@ public class BasicInfoUpdate {
 	public void setCurrentAddress(AddressVo currentAddress) {
 		this.currentAddress = currentAddress;
 	}
+	
+	
+	public String getPreferredCallTime() {
+		return preferredCallTime;
+	}
+	public void setPreferredCallTime(String preferredCallTime) {
+		this.preferredCallTime = preferredCallTime;
+	}
+	
 	@Override
 	public String toString() {
 		return "BasicInfoUpdate [ticketId=" + ticketId + ", tittle=" + title + ", firstName=" + firstName

@@ -10,86 +10,85 @@ package com.happiest.minds.ffms.sales.pojo;
 public class CustomerVo {
 	
 	
-	private String customerTittle;
-	private String customerFirstName;
-	private String customerMiddletName;
-	private String customerLastName;
-	private String customerMobileNumber;
-	private String customerAternateMobileNumber;
-	private String customerOfficeNumber;
-	private String customerEmailId;
-	private String customerAternateEmailId;
-	private String customerCommunicationAddress;
-	private String customerCurrentAddress;
+	private String title;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String mobileNumber;
+	private String alternateMobileNumber;
+	private String officeNumber;
+	private String emailId;
+	private String alternateEmailId;
+	private AddressVo communicationAddress;
+	private AddressVo currentAddress;
 	private Long cityId;
 	private Long branchId;
 	private Long areaId;
-	
-	public String getCustomerTittle() {
-		return customerTittle;
+	public String getTitle() {
+		return title;
 	}
-	public void setCustomerTittle(String customerTittle) {
-		this.customerTittle = customerTittle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getCustomerFirstName() {
-		return customerFirstName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setCustomerFirstName(String customerFirstName) {
-		this.customerFirstName = customerFirstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getCustomerMiddletName() {
-		return customerMiddletName;
+	public String getMiddleName() {
+		return middleName;
 	}
-	public void setCustomerMiddletName(String customerMiddletName) {
-		this.customerMiddletName = customerMiddletName;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
-	public String getCustomerLastName() {
-		return customerLastName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setCustomerLastName(String customerLastName) {
-		this.customerLastName = customerLastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getCustomerMobileNumber() {
-		return customerMobileNumber;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
-	public void setCustomerMobileNumber(String customerMobileNumber) {
-		this.customerMobileNumber = customerMobileNumber;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
-	public String getCustomerAternateMobileNumber() {
-		return customerAternateMobileNumber;
+	public String getAlternateMobileNumber() {
+		return alternateMobileNumber;
 	}
-	public void setCustomerAternateMobileNumber(String customerAternateMobileNumber) {
-		this.customerAternateMobileNumber = customerAternateMobileNumber;
+	public void setAlternateMobileNumber(String alternateMobileNumber) {
+		this.alternateMobileNumber = alternateMobileNumber;
 	}
-	public String getCustomerOfficeNumber() {
-		return customerOfficeNumber;
+	public String getOfficeNumber() {
+		return officeNumber;
 	}
-	public void setCustomerOfficeNumber(String customerOfficeNumber) {
-		this.customerOfficeNumber = customerOfficeNumber;
+	public void setOfficeNumber(String officeNumber) {
+		this.officeNumber = officeNumber;
 	}
-	public String getCustomerEmailId() {
-		return customerEmailId;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setCustomerEmailId(String customerEmailId) {
-		this.customerEmailId = customerEmailId;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
-	public String getCustomerAternateEmailId() {
-		return customerAternateEmailId;
+	public String getAlternateEmailId() {
+		return alternateEmailId;
 	}
-	public void setCustomerAternateEmailId(String customerAternateEmailId) {
-		this.customerAternateEmailId = customerAternateEmailId;
+	public void setAlternateEmailId(String alternateEmailId) {
+		this.alternateEmailId = alternateEmailId;
 	}
-	public String getCustomerCommunicationAddress() {
-		return customerCommunicationAddress;
+	public AddressVo getCommunicationAddress() {
+		return communicationAddress;
 	}
-	public void setCustomerCommunicationAddress(String customerCommunicationAddress) {
-		this.customerCommunicationAddress = customerCommunicationAddress;
+	public void setCommunicationAddress(AddressVo communicationAddress) {
+		this.communicationAddress = communicationAddress;
 	}
-	public String getCustomerCurrentAddress() {
-		return customerCurrentAddress;
+	public AddressVo getCurrentAddress() {
+		return currentAddress;
 	}
-	public void setCustomerCurrentAddress(String customerCurrentAddress) {
-		this.customerCurrentAddress = customerCurrentAddress;
+	public void setCurrentAddress(AddressVo currentAddress) {
+		this.currentAddress = currentAddress;
 	}
 	public Long getCityId() {
 		return cityId;
@@ -109,6 +108,9 @@ public class CustomerVo {
 	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
+	
+
+	
 	
 	
 	

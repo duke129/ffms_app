@@ -209,16 +209,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/text_hint"
-                android:layout_marginTop="@dimen/details_edittext_margin_top"
-                android:visibility="gone">
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/current_address_CN_ET"
+                    android:id="@+id/communication_addressLine1_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size"
-                    android:hint="@string/current_addressLine1" />
+                    android:hint="@string/communication_addressLine1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -229,12 +228,46 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/communication_address_CN_ET"
+                    android:id="@+id/communication_addressLine2_CN_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size"
-                    android:hint="@string/communication_address" />
+                    android:hint="@string/communication_addressLine2" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/communication_addressLandmark_CN_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
+                    android:hint="@string/communication_addressLandmark" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/text_hint"
+                android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+                <EditText
+                    android:id="@+id/communication_addressPincode_CN_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:hint="@string/current_addressPincode" />
 
             </android.support.design.widget.TextInputLayout>
 

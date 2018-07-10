@@ -70,6 +70,7 @@
     <string name="application_version_text">App version</string>
 
     <!--SE card view-->
+    <string name="activity_biu">BIU</string>
     <string name="activity_demo">Demo</string>
     <string name="activity_order">Order</string>
     <string name="contentDescription_lock_status">Notification Icon</string>
@@ -96,10 +97,10 @@
     <string name="communication_address">Communication Address</string>
     <string name="current_addressLandmark">Current Address Landmark (Optional)</string>
     <string name="current_addressPincode">Current Address Pincode</string>
-    <string name="billing_addressLine1">Billing Address Line1</string>
-    <string name="billing_addressLine2">Billing Address Line2 (Optional)</string>
-    <string name="billing_addressLandmark">Billing Address Landmark (Optional)</string>
-    <string name="billing_addressPincode">Billing Address Pincode</string>
+    <string name="communication_addressLine1">Communication Address Line1</string>
+    <string name="communication_addressLine2">Communication Address Line2 (Optional)</string>
+    <string name="communication_addressLandmark">Communication Address Landmark (Optional)</string>
+    <string name="communication_addressPincode">Communication Address Pincode</string>
     <string name="preferred_callTime">Preferred Call Time</string>
 
     <string name="activity_name_demo">Demo</string>
@@ -147,12 +148,17 @@
     <string name="select_branch">Please select Branch</string>
     <string name="select_area">Please select Area</string>
     <string name="enter_communication_address">Please enter Communication Address</string>
+    <string name="enter_currentAddressLine1">Please enter Current Address Line1</string>
+    <string name="enter_currentAddressLine2">Please enter Current Address Line2</string>
+    <string name="enter_currentAddressLandmark">Please enter Current Address Landmark</string>
+    <string name="enter_currentAddressPincode">Please enter Current Address Pincode</string>
     <string name="select_preferred_call_time">Please select Preferred Call Time</string>
     <string name="lead_create_alert_message">Do you want to Create Lead..?</string>
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_ok">Ok</string>
     <string name="alert_button_no">No</string>
     <string name="please_wait">Please wait...</string>
+    <string name="prospect_created_successfully">Prospect Created Successfully..!</string>
 
     <string name="title_prompt">Title</string>
     <string-array name="title_array">
@@ -174,10 +180,10 @@
     <string name="enter_current_address_landmark">Please Enter Current Address Landmark</string>
     <string name="enter_current_address_pincode">Please Enter Current Address Pincode</string>
 
-    <string name="enter_billing_address_line1">Please Enter Billing Address Line1</string>
-    <string name="enter_billing_address_line2">Please Enter Billing Address Line2</string>
-    <string name="enter_billing_address_landmark">Please Enter Billing Address Landmark</string>
-    <string name="enter_billing_address_pincode">Please Enter Billing Address Pincode</string>
+    <string name="enter_communication_address_line1">Please Enter Communication Address Line1</string>
+    <string name="enter_communication_address_line2">Please Enter Communication Address Line2</string>
+    <string name="enter_communication_address_landmark">Please Enter Communication Address Landmark</string>
+    <string name="enter_communication_address_pincode">Please Enter Communication Address Pincode</string>
     <string name="basic_info_upadte_alert_message">Do you want to update lead details..?</string>
 
     <!--product-->

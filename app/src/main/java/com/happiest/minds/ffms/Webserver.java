@@ -10,6 +10,7 @@ public interface Webserver {
 
     /*Sales service URI*/
 
+    String SALES_COUNT_SERVICE = "/ticket/dashboard-count";
     String SALES_CARD_VIEW_URI = "/ticket/list-view";
     String SALES_LEAD_DETAILS = "/ticket/details";
     String SALES_LEAD_CREATE = "/ticket/create";
@@ -17,4 +18,7 @@ public interface Webserver {
     String ASSET_TYPE_URI = "/asset/selection";
     String MODEL_FOR_ASSET_TYPE_URI = "/product/assetType";
     String MODEL_SPECIFICATION_URI = "/productspec/model/";
+    String BRANCH_URI = "/location/branchByCityId";
+    String AREA_URI ="/location/areaByBranchId";
+    String TITLE_SERVICE = "/customer/title";
 }

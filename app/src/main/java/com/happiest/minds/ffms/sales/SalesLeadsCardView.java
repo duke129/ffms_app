@@ -20,7 +20,6 @@ import com.happiest.minds.ffms.sales.pojo.SalesCardViewPojo;
 
 public class SalesLeadsCardView extends Fragment {
 
-
     private static final String TAG = SalesLeadsCardView.class
             .getSimpleName();
 

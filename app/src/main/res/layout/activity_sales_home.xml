@@ -59,7 +59,7 @@
                     android:weightSum="2">
 
                     <LinearLayout
-                        android:id="@+id/product_first_LL"
+                        android:id="@+id/newLeads_LL"
                         android:layout_width="@dimen/grid_button_sr_width"
                         android:layout_height="@dimen/grid_button_sr_height"
                         android:layout_weight="1"

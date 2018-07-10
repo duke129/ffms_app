@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,12 +32,16 @@ import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.UserProfileFragment;
 import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.APIResponse;
+import com.happiest.minds.ffms.sales.pojo.DashBoardSummaryCountVo;
 import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 
 public class SalesHomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +58,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     static TextView welcome_TV;
 
-    RelativeLayout button_grid_RL,footer_RL,banner_RL;
+    RelativeLayout button_grid_RL, footer_RL, banner_RL;
 
     private ViewPager viewPager;
 
@@ -64,7 +69,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     Timer timer;
 
     LinearLayout newLeads_LL, inProgressLeads_LL, completedLeads_LL, searchLeads_LL, createNewLeads_LL, rejectedLeads_LL;
-    TextView newLeads_TV, inProgressLeads_TV, completedLeads_TV, searchLeads_TV, createNewLeads_TV, rejectedLeads_TV;
+    TextView newLeads_TV, inProgressLeads_TV, completedLeads_TV, searchLeads_TV, createNewLeads_TV, rejectedLeads_TV,
+    newLeadsCount_TV,inprogressCount_TV,completedCount_TV,rejectedCount_TV;
     private FrameLayout fragmentContainerFrameLayout;
 
     private CustomPageAdapter customPagerAdapter;
@@ -75,11 +81,13 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     UserProfileFragment userProfileFragment;
 
-    public static boolean flag,isOnHome,isOnProfile, isOnLeadsDetails,isOnCardView,isSearch,isOnCreate;
+    public static boolean flag, isOnHome, isOnProfile, isOnLeadsDetails, isOnCardView, isSearch, isOnCreate;
 
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
+    APIResponse apiResponse;
     public static ArrayList<TicketCardViewData> ticketCardViewDataList;
+    ArrayList<DashBoardSummaryCountVo> dashBoardSummaryCountVoArrayList;
 
 
     @Override
@@ -186,7 +194,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         fragmentContainerFrameLayout = (FrameLayout) findViewById(R.id.fragmentContainer);
 
-        newLeads_LL = (LinearLayout) findViewById(R.id.product_first_LL);
+        newLeads_LL = (LinearLayout) findViewById(R.id.newLeads_LL);
         inProgressLeads_LL = (LinearLayout) findViewById(R.id.inProgressLeads_LL);
         completedLeads_LL = (LinearLayout) findViewById(R.id.completedLeads_LL);
         searchLeads_LL = (LinearLayout) findViewById(R.id.searchLeads_LL);
@@ -200,12 +208,19 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         createNewLeads_TV = (TextView) findViewById(R.id.createNewLeads_TV);
         rejectedLeads_TV = (TextView) findViewById(R.id.rejectedLeads_TV);
 
+        newLeadsCount_TV = (TextView) findViewById(R.id.newLeadsCount_TV);
+        inprogressCount_TV = (TextView) findViewById(R.id.inprogressCount_TV);
+        completedCount_TV = (TextView) findViewById(R.id.completedCount_TV);
+        rejectedCount_TV = (TextView) findViewById(R.id.rejectedCount_TV);
+
         newLeads_LL.setOnClickListener(this);
         inProgressLeads_LL.setOnClickListener(this);
         completedLeads_LL.setOnClickListener(this);
         searchLeads_LL.setOnClickListener(this);
         createNewLeads_LL.setOnClickListener(this);
         rejectedLeads_LL.setOnClickListener(this);
+
+        callCountService();
 
     }
 
@@ -236,12 +251,12 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                     user_SB.setVisibility(View.GONE);
 
-                    removeFragmentFromHome();
+                    int clickedBucketId = CommonUtility.getSeButtonClickedValue(context);
 
-                    redirectToCardViewFragment();
+                    callServiceForCardView(clickedBucketId);
 
 
-                }else if (isOnCreate) {
+                } else if (isOnCreate) {
 
                     onHomeButtonClick();
 
@@ -257,31 +272,41 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                             R.string.welcome_text)
                             + " " + "HM");
 
+                    callCountService();
+
                 }
 
                 break;
 
-            case R.id.product_first_LL:
+            case R.id.newLeads_LL:
 
-                callServiceForCardView();
+                CommonUtility.saveSeButtonClickedValue(context, Constant.NEW);
+
+                callServiceForCardView(Constant.NEW);
 
                 break;
 
             case R.id.inProgressLeads_LL:
 
-                callServiceForCardView();
+                CommonUtility.saveSeButtonClickedValue(context, Constant.IN_PROGRESS);
+
+                callServiceForCardView(Constant.IN_PROGRESS);
 
                 break;
 
             case R.id.completedLeads_LL:
 
-                callServiceForCardView();
+                CommonUtility.saveSeButtonClickedValue(context, Constant.COMPLETED);
+
+                callServiceForCardView(Constant.COMPLETED);
 
                 break;
 
             case R.id.rejectedLeads_LL:
 
-                callServiceForCardView();
+                CommonUtility.saveSeButtonClickedValue(context, Constant.REJECTED);
+
+                callServiceForCardView(Constant.REJECTED);
 
                 break;
 
@@ -297,7 +322,6 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 break;
         }
-
 
 
     }
@@ -363,7 +387,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void redirectToCreateNewFragment(){
+    private void redirectToCreateNewFragment() {
 
         // boolean ticketAvailable = checkTicketCount();
 
@@ -428,7 +452,6 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         // TODO Auto-generated method stub
 
 
-
         if (flag) {
 
             profileMenu_IV.setImageResource(R.drawable.back_button);
@@ -475,7 +498,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 isOnCardView = false;
 
-            }else if (userProfileFragment != null
+            } else if (userProfileFragment != null
                     && getFragmentManager()
                     .findFragmentById(
                             this.userProfileFragment
@@ -490,7 +513,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 isOnProfile = false;
 
-            } else{
+            } else {
 
                 Log.i(TAG, "Something went wrong in removeFragmentFromHome");
             }
@@ -565,11 +588,11 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void callServiceForCardView(){
+    private void callServiceForCardView(int clickedBucketId) {
 
         String host = Webserver.SERVER_HOST;
         String uri = Webserver.SALES_CARD_VIEW_URI;
-        String url = host + "" + uri;
+        String url = host+""+uri+"/"+clickedBucketId;
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -609,27 +632,27 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                    if (error != null) {
+                if (error != null) {
 
-                        Log.e(TAG,
-                                "callServiceForCardView onErrorResponse : "
-                                        + error.toString());
+                    Log.e(TAG,
+                            "callServiceForCardView onErrorResponse : "
+                                    + error.toString());
 
+                }
+                if (!SalesHomeActivity.this.isFinishing()) {
+
+                    if (context != null
+                            && !SalesHomeActivity.this
+                            .isFinishing()) {
+                        CommonUtility
+                                .showServerResponseMessage(
+                                        context,
+                                        context.getResources()
+                                                .getString(
+                                                        R.string.invalid_server_response_for_webservice)
+                                                + " SALES_CARD_VIEW_URI");
                     }
-                    if (!SalesHomeActivity.this.isFinishing()) {
-
-                        if (context != null
-                                && !SalesHomeActivity.this
-                                .isFinishing()) {
-                            CommonUtility
-                                    .showServerResponseMessage(
-                                            context,
-                                            context.getResources()
-                                                    .getString(
-                                                            R.string.invalid_server_response_for_webservice)
-                                                    + " SALES_CARD_VIEW_URI");
-                        }
-                    }
+                }
 
 
             }
@@ -640,10 +663,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void processForCardViewRedirect(){
-
-        CommonUtility.saveSeButtonClickedValue(context,
-                Constant.NEW_LEADS);
+    private void processForCardViewRedirect() {
 
         welcome_TV.setText(context.getResources().getString(
                 R.string.newLeads_bucket_text));
@@ -651,5 +671,134 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         removeFragmentFromHome();
 
         redirectToCardViewFragment();
+    }
+
+    private void callCountService() {
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.SALES_COUNT_SERVICE;
+
+        String url = host + "" + uri;
+
+        Log.i(TAG, "callCountService url : " + url);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.i(TAG,
+                                "callCountService response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    dashBoardSummaryCountVoArrayList = objectMapper.readValue(
+                                            dataString,
+                                            TypeFactory.defaultInstance()
+                                                    .constructCollectionType(
+                                                            ArrayList.class,
+                                                            DashBoardSummaryCountVo.class));
+
+                                    if(dashBoardSummaryCountVoArrayList != null) {
+
+                                        setCountToUI(dashBoardSummaryCountVoArrayList);
+
+                                    }else{
+
+                                        Log.i(TAG, "dashBoardSummaryCountVoArrayList is null");
+                                    }
+
+                                    Log.i(TAG, "dataString : " + dataString);
+                                }
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.e(TAG,
+                        "callCountService onErrorResponse : "
+                                + error);
+            }
+        });
+
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void setCountToUI(ArrayList<DashBoardSummaryCountVo> dashBoardSummaryCountVoArrayListArgs){
+
+        for(int i = 0; i< dashBoardSummaryCountVoArrayListArgs.size(); i++){
+
+            DashBoardSummaryCountVo dashBoardSummaryCountVo = dashBoardSummaryCountVoArrayListArgs.get(i);
+
+            int bucketId = dashBoardSummaryCountVo.getStatusId();
+
+            switch (bucketId){
+
+                case Constant.NEW:
+
+                    newLeadsCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+
+                    break;
+
+                case Constant.IN_PROGRESS :
+
+                    inprogressCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+
+                    break;
+
+                case Constant.COMPLETED :
+
+                    completedCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+
+                    break;
+
+                case Constant.REJECTED :
+
+                    rejectedCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+
+                    break;
+
+                 default :
+
+                    break;
+
+
+
+            }
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.i(TAG, " onResume ");
+
     }
 }

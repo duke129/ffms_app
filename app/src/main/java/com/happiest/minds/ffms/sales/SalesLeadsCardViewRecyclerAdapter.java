@@ -21,13 +21,17 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
+import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.ActivityVo;
 import com.happiest.minds.ffms.sales.pojo.TicketCardViewData;
 import com.happiest.minds.ffms.sales.pojo.TicketDetails;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<SalesLeadsCardViewRecyclerAdapter.SalesCardViewHolder> {
 
@@ -95,6 +99,69 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
         holder.customerName_CV_TV.setText(ticketCardViewDataArrayList.get(
                 position).getCustomerName());
 
+        List<ActivityVo> activityVoList = ticketCardViewDataArrayList.get(
+                position).getActivities();
+
+        for (int i = 0; i < activityVoList.size(); i++) {
+
+            ActivityVo activityVo = activityVoList.get(i);
+
+            int activityId = activityVo.getId();
+
+            int status = 0;
+
+            if (activityVo.getStatus() != null) {
+                status = activityVo.getStatus();
+            }
+
+            switch (activityId) {
+
+                case Constant.BASIC_INFO_UPDATE:
+
+
+                    if (status == Constant.ACTIVITY_COMPLETED) {
+
+                        holder.biu_demarcation_RL.setBackgroundResource(R.drawable.first_green_arrow);
+
+                    } else if (status == Constant.ACTIVITY_NOT_DONE) {
+
+                        holder.biu_demarcation_RL.setBackgroundResource(R.drawable.first_grey_arrow);
+                    }
+
+                    break;
+
+                case Constant.DEMO:
+
+                    if (status == Constant.ACTIVITY_COMPLETED) {
+
+                        holder.demo_demarcation_RL.setBackgroundResource(R.drawable.green_arrow);
+
+                    } else if (status == Constant.ACTIVITY_NOT_DONE) {
+
+                        holder.demo_demarcation_RL.setBackgroundResource(R.drawable.grey_arrow);
+                    }
+
+                    break;
+
+                case Constant.ORDER:
+
+                    if (status == Constant.ACTIVITY_COMPLETED) {
+
+                        holder.order_demarcation_RL.setBackgroundResource(R.drawable.green_arrow);
+
+                    } else if (status == Constant.ACTIVITY_NOT_DONE) {
+
+                        holder.order_demarcation_RL.setBackgroundResource(R.drawable.grey_arrow);
+                    }
+
+                    break;
+
+
+            }
+
+
+        }
+
         holder.update_Status_IV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +188,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
         TextView ticketNo_CV_TV, customerName_CV_TV, mobileNo_CV_TV,
                 createdDate_CV_TV, etr_CV_TV, address_CV_TV;
 
-        RelativeLayout demo_demarcation_RL, order_demarcation_RL;
+        RelativeLayout biu_demarcation_RL, demo_demarcation_RL, order_demarcation_RL;
 
         ImageView lock_Status_IV, update_Status_IV;
 
@@ -145,6 +212,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
             address_CV_TV = (TextView) itemView
                     .findViewById(R.id.address_CV_TV);
 
+            biu_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.biu_demarcation_RL);
             demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_RL);
             order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_RL);
             //lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
