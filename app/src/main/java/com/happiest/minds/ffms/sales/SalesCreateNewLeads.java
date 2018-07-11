@@ -461,10 +461,22 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
     private void initSpinner() {
 
         /*title spinner*/
-        title_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, SpinnerItems.TITLE_ITEMS);
+        title_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, titleTypeHeadVoArrayList);
         title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         title_CN_SP.setAdapter(title_adapter);
         title_CN_SP.setPaddingSafe(0, 0, 0, 0);
+
+        /*branch spinner*/
+        branch_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, branchTypeHeadVoArrayList);
+        branch_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        branch_CN_SP.setAdapter(branch_adapter);
+        branch_CN_SP.setPaddingSafe(0, 0, 0, 0);
+
+        /*branch spinner*/
+        area_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, areaTypeHeadVoArrayList);
+        area_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        area_CN_SP.setAdapter(area_adapter);
+        area_CN_SP.setPaddingSafe(0, 0, 0, 0);
     }
 
     @Override
@@ -574,7 +586,7 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
 
             if (context != null) {
                 CommonUtility.showToastMessage(context, context
-                        .getResources().getString(R.string.enter_lastname));
+                        .getResources().getString(R.string.enter_mobile));
             }
             isInputValid = false;
             return;
@@ -767,6 +779,9 @@ public class SalesCreateNewLeads extends Fragment implements View.OnClickListene
             isInputValid = true;
 
         }
+
+
+        prospectCreation.setTicketTypeId(Constant.TICKET_TYPE_SALES);
 
 
         if (isInputValid) {

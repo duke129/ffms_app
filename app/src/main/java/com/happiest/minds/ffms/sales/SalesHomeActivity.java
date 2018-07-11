@@ -264,6 +264,8 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                             R.string.welcome_text)
                             + " " + "HM");
 
+                    callCountService();
+
                 } else {
 
                     onHomeButtonClick();

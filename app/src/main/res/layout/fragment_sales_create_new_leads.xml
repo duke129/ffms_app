@@ -267,7 +267,7 @@
                     android:textSize="@dimen/text_size"
                     android:inputType="number"
                     android:maxLength="6"
-                    android:hint="@string/current_addressPincode" />
+                    android:hint="@string/communication_addressPincode" />
 
             </android.support.design.widget.TextInputLayout>
 

@@ -6,7 +6,7 @@ public interface Webserver {
     String SERVER_IP = "10.16.35.96:";
     int SERVER_PORT = 8081;
 
-    String SERVER_HOST = "http://10.16.33.160:8081";
+    String SERVER_HOST = "http://10.16.35.96:8081";
 
     /*Sales service URI*/
 

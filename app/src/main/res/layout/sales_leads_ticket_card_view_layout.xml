@@ -29,7 +29,7 @@
                 android:layout_margin="@dimen/se_card_view_header_margin"
                 android:background="@drawable/card_view_header_shape"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="5">
 
                 <TextView
                     android:id="@+id/ticketNo_CV_TV"
@@ -40,7 +40,7 @@
                     android:layout_marginLeft="@dimen/headRow_linear_layout_margin_left"
                     android:layout_marginRight="@dimen/headRow_linear_layout_margin_left"
                     android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
-                    android:layout_weight="0.5"
+                    android:layout_weight="2"
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/card_view_header_text_color"
@@ -50,9 +50,10 @@
                     android:id="@+id/customerName_CV_TV"
                     android:layout_width="@dimen/ne_card_view_text_width"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/card_view_header_text_color"
@@ -65,7 +66,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/headRow2_linear_layout_margin_top"
-                    android:layout_weight="0.5"
+                    android:layout_weight="2"
                     android:gravity="center"
                     android:singleLine="true"
                     android:text=""

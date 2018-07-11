@@ -124,6 +124,8 @@
                     android:id="@+id/mobileNo_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="10"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size"
                     android:hint="@string/mobile_no" />
@@ -141,6 +143,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
+                    android:inputType="phone"
+                    android:maxLength="10"
                     android:textSize="@dimen/text_size"
                     android:hint="@string/alternate_mobile_no" />
 
@@ -157,6 +161,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
+                    android:inputType="phone"
+                    android:maxLength="10"
                     android:textSize="@dimen/text_size"
                     android:hint="@string/office_number" />
 
@@ -174,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/email_id" />
 
             </android.support.design.widget.TextInputLayout>
@@ -185,11 +192,12 @@
                 android:layout_marginTop="@dimen/details_edittext_margin_top">
 
                 <EditText
-                    android:id="@+id/aternateEmail_ET"
+                    android:id="@+id/alternateEmail_ET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/alternate_email_id" />
 
             </android.support.design.widget.TextInputLayout>

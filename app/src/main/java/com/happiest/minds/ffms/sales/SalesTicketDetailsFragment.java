@@ -160,7 +160,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         alternateMobileNo_ET = view.findViewById(R.id.alternateMobileNo_CN_ET);
         officeNo_ET = view.findViewById(R.id.officeNo_ET);
         email_ET = view.findViewById(R.id.email_CN_ET);
-        alternateEmail_ET = view.findViewById(R.id.aternateEmail_ET);
+        alternateEmail_ET = view.findViewById(R.id.alternateEmail_ET);
         city_ET = view.findViewById(R.id.city_ET);
         current_addressLine1_ET = view.findViewById(R.id.current_addressLine1_ET);
         current_addressLine2_ET = view.findViewById(R.id.current_addressLine2_ET);
@@ -884,7 +884,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
             Long branchId = typeHeadVo.getId();
 
-           // basicInfoUpdate.setBranchId(branchId);
+            basicInfoUpdate.setBranchId(branchId);
 
             isInputValid = true;
 
@@ -911,7 +911,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
             Long areaId = typeHeadVo.getId();
 
-            // basicInfoUpdate.setAreaId(areaId);
+            basicInfoUpdate.setAreaId(areaId);
 
             isInputValid = true;
 

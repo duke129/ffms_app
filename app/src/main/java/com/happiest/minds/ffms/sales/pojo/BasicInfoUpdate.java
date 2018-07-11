@@ -16,6 +16,9 @@ public class BasicInfoUpdate {
 	private AddressVo currentAddress;
 	private String preferredCallTime;
 	
+	private Long branchId;
+	private Long areaId;
+	
 	public Long getTicketId() {
 		return ticketId;
 	}
@@ -97,6 +100,20 @@ public class BasicInfoUpdate {
 		this.preferredCallTime = preferredCallTime;
 	}
 	
+	
+	
+	public Long getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(Long branchId) {
+		this.branchId = branchId;
+	}
+	public Long getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
 	@Override
 	public String toString() {
 		return "BasicInfoUpdate [ticketId=" + ticketId + ", tittle=" + title + ", firstName=" + firstName
