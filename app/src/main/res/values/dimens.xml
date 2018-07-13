@@ -95,8 +95,8 @@
     <dimen name="sales_cardview_textView_margin_leftt">7dp</dimen>
     <dimen name="lock_icon_width">30dp</dimen>
     <dimen name="lock_icon_height">30dp</dimen>
-    <dimen name="update_status_icon_width">30dp</dimen>
-    <dimen name="update_status_icon_height">30dp</dimen>
+    <dimen name="update_status_icon_width">35dp</dimen>
+    <dimen name="update_status_icon_height">35dp</dimen>
     <dimen name="update_status_rl_bottom_margin">0dp</dimen>
     <dimen name="linear_layout_margin_bottom_top">5dp</dimen>
 
@@ -203,4 +203,9 @@
     <dimen name="addToOrderList_width">100dp</dimen>
     <dimen name="addToOrderList_padding">10dp</dimen>
     <dimen name="addToOrderList_text_size">16dp</dimen>
+    <dimen name="placeOrder_width">125dp</dimen>
+    <dimen name="placeOrder_margin_top">15dp</dimen>
+    <dimen name="placeOrder_text_padding">10dp</dimen>
+    <dimen name="itemButton_width">35dp</dimen>
+    <dimen name="itemButton_height">35dp</dimen>
 </resources>

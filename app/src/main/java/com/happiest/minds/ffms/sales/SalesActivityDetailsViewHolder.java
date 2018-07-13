@@ -1,12 +1,16 @@
 package com.happiest.minds.ffms.sales;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -14,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,50 +29,134 @@ import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
 import com.happiest.minds.ffms.sales.pojo.APIResponse;
+import com.happiest.minds.ffms.sales.pojo.OrderActivityUpdate;
+import com.happiest.minds.ffms.sales.pojo.OrderVo;
 import com.happiest.minds.ffms.sales.pojo.ProductCatalog;
 import com.happiest.minds.ffms.sales.pojo.ProductDTO;
 import com.happiest.minds.ffms.sales.pojo.TypeHeadVo;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
     private static final String TAG = SalesActivityDetailsViewHolder.class.getSimpleName();
-    Context context;
-    private LinearLayout demo_activity_LL, order_activity_LL, product_recyclerView_LL;
+    public static Context context;
+    private LinearLayout demo_activity_LL, order_activity_LL, product_recyclerView_LL, placeOrder_LL;
+    private EditText customerComment_ET;
     private MaterialSpinner assetCategory_SP;
     private ArrayAdapter assetCategory_adapter, assetCategoryOr_adapter, assetQuantity_adapter, assetModel_adapter;
-    private RecyclerView product_recyclerView, order_recyclerView;
+    public static RecyclerView product_recyclerView, order_recyclerView;
     private ProductRecyclerAdapter productRecyclerAdapter;
-    private OrderRecyclerAdapter orderRecyclerAdapter;
+    public static OrderRecyclerAdapter orderRecyclerAdapter;
     FFMSRequestQueue ffmsRequestQueue;
     ObjectMapper objectMapper;
     ArrayList<TypeHeadVo> typeHeadVoArrayList;
     APIResponse apiResponse;
     int MY_SOCKET_TIMEOUT_MS = 30000;
     ArrayList<ProductDTO> productDTOArrayList;
-    public static ArrayList<ProductDTO> orderedProductDTOArrayList;
+    private static ArrayList<ProductDTO> orderedProductDTOArrayList = new ArrayList<>();
+
+    OrderActivityUpdate orderActivityUpdate;
+
+    String ticketId;
+
+    ArrayList<OrderVo> orderVoArrayList;
+
+    public static void addToOrderedProductDTOArrayList(ProductDTO productDTO) {
+        orderedProductDTOArrayList.add(productDTO);
+    }
+
+    public static ArrayList<ProductDTO> getOrderedProductDTOArrayList() {
+        return orderedProductDTOArrayList;
+    }
+
+    public static void removeFromList(int position) {
+
+        if (position < orderedProductDTOArrayList.size()) {
+
+            orderedProductDTOArrayList.remove(position);
+        }
+
+
+    }
+
 
     public SalesActivityDetailsViewHolder(View itemView) {
         super(itemView);
 
         context = SalesTicketDetailsFragment.context;
+        ticketId = CommonUtility.getTicketId(context);
         demo_activity_LL = (LinearLayout) itemView.findViewById(R.id.demo_activity_LL);
         order_activity_LL = (LinearLayout) itemView.findViewById(R.id.order_activity_LL);
         assetCategory_SP = (MaterialSpinner) itemView.findViewById(R.id.assetCategory_SP);
         product_recyclerView_LL = (LinearLayout) itemView.findViewById(R.id.product_recyclerView_LL);
         product_recyclerView = (RecyclerView) itemView.findViewById(R.id.product_recyclerView);
         order_recyclerView = (RecyclerView) itemView.findViewById(R.id.order_recyclerView);
+        placeOrder_LL = (LinearLayout) itemView.findViewById(R.id.placeOrder_LL);
+        customerComment_ET = (EditText) itemView.findViewById(R.id.customerComment_ET);
 
-        orderedProductDTOArrayList = new ArrayList<>();
+        if (SalesTicketDetailsFragment.orderStatus == Constant.ACTIVITY_COMPLETED) {
+
+            demo_activity_LL.setVisibility(View.GONE);
+            customerComment_ET.setEnabled(false);
+            placeOrder_LL.setVisibility(View.GONE);
+            assetCategory_SP.setEnabled(false);
+
+        }else{
+
+            placeOrder_LL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String customerComment = customerComment_ET.getText().toString();
+
+                    int totalProductCount = 0;
+                    int totalAmount = 0;
+
+                    orderActivityUpdate = new OrderActivityUpdate();
+
+                    List<OrderVo> orderVoList = new ArrayList<>();
+
+
+                    for (int i = 0; i < orderedProductDTOArrayList.size(); i++) {
+
+                        OrderVo orderVo = new OrderVo();
+
+                        orderVo.setPrice(orderedProductDTOArrayList.get(i).getPrice());
+                        orderVo.setProductId(Long.parseLong(orderedProductDTOArrayList.get(i).getIdProduct()));
+                        orderVo.setQuantity(OrderRecyclerAdapter.productCount[i]);
+                        orderVoList.add(orderVo);
+
+                        totalProductCount = OrderRecyclerAdapter.productCount[i] + totalProductCount;
+
+                        totalAmount = totalAmount + (OrderRecyclerAdapter.productCount[i] * Integer.parseInt(orderedProductDTOArrayList.get(i).getPrice()));
+                    }
+
+                    orderActivityUpdate.setOrdersVo(orderVoList);
+                    orderActivityUpdate.setComments(customerComment);
+                    orderActivityUpdate.setTicketId(Long.parseLong(CommonUtility.getTicketId(context)));
+
+                    showConfirmationAlertDialog(totalProductCount, totalAmount);
+
+
+                }
+            });
+        }
+
+
+
+
     }
+
 
     public void onBind(SalesActivityDetails salesActivityDetails, ExpandableGroup group) {
 
@@ -75,19 +164,39 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
         if (group.getTitle().equals(Constant.SALES_ACTIVITY_DEMO)) {
 
-            demo_activity_LL.setVisibility(View.VISIBLE);
-            order_activity_LL.setVisibility(View.GONE);
+            if(SalesTicketDetailsFragment.orderStatus == Constant.COMPLETED) {
 
-            callAssetTypeService();
+                demo_activity_LL.setVisibility(View.GONE);
+
+            }else{
+
+                demo_activity_LL.setVisibility(View.VISIBLE);
+                order_activity_LL.setVisibility(View.GONE);
+
+                callAssetTypeService();
+            }
 
             //operationOnAssetTypeSelction();
 
-           // initRecyclerAdapter();
+            // initRecyclerAdapter();
 
         } else if (group.getTitle().equals(Constant.SALES_ACTIVITY_ORDER)) {
-            demo_activity_LL.setVisibility(View.GONE);
-            order_activity_LL.setVisibility(View.VISIBLE);
-            initOrderRecyclerAdapter(orderedProductDTOArrayList);
+
+            if(SalesTicketDetailsFragment.orderStatus == Constant.ACTIVITY_COMPLETED) {
+
+                demo_activity_LL.setVisibility(View.GONE);
+                order_activity_LL.setVisibility(View.VISIBLE);
+                Log.i(TAG, "orderedProductDTOArrayList : " + orderedProductDTOArrayList.size());
+
+                callOrderSyncService(ticketId);
+
+            }else{
+
+                demo_activity_LL.setVisibility(View.GONE);
+                order_activity_LL.setVisibility(View.VISIBLE);
+                Log.i(TAG, "orderedProductDTOArrayList : " + orderedProductDTOArrayList.size());
+                initOrderRecyclerAdapter(orderedProductDTOArrayList);
+            }
         } else {
         }
 
@@ -184,19 +293,12 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
     private void initAssetTypeSpinner(ArrayList<TypeHeadVo> typeHeadVoArrayListArg) {
 
-        ArrayList<String> assetTypeStringArrayList = new ArrayList<>();
-
-        for(int i= 0; i<typeHeadVoArrayListArg.size(); i++){
-
-            assetTypeStringArrayList.add(typeHeadVoArrayListArg.get(i).getName());
-        }
-
-        assetCategory_adapter = new ArrayAdapter<String>(SalesTicketDetailsFragment.context, android.R.layout.simple_spinner_item, assetTypeStringArrayList);
+        assetCategory_adapter = new ArrayAdapter(SalesTicketDetailsFragment.context, android.R.layout.simple_spinner_item, typeHeadVoArrayListArg);
         assetCategory_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         assetCategory_SP.setAdapter(assetCategory_adapter);
         assetCategory_SP.setPaddingSafe(0, 0, 0, 0);
 
-        operationOnAssetTypeSelction();
+        operationOnAssetTypeSelection(typeHeadVoArrayListArg);
     }
 
     private void initRecyclerAdapter(ArrayList<ProductDTO> productDTOArrayListArg) {
@@ -208,7 +310,9 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
         product_recyclerView.setAdapter(productRecyclerAdapter);
     }
 
-    private void initOrderRecyclerAdapter(ArrayList<ProductDTO> productDTOArrayListArg) {
+    public static void initOrderRecyclerAdapter(ArrayList<ProductDTO> productDTOArrayListArg) {
+
+        Log.i(TAG, "productDTOArrayListArg.size() : " + productDTOArrayListArg.size());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         order_recyclerView.setLayoutManager(layoutManager);
@@ -217,67 +321,34 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
         order_recyclerView.setAdapter(orderRecyclerAdapter);
     }
 
-    private ArrayList<ProductCatalog> getProductList() {
+    public static void initOrderRecyclerAdapterForCompletedOrder(ArrayList<OrderVo> orderVoArrayListArg) {
 
-        ArrayList<ProductCatalog> productCatalogArrayList = new ArrayList<>();
+        Log.i(TAG, "orderVoArrayListArg.size() : " + orderVoArrayListArg.size());
 
-        for (int i = 0; i <= 2; i++) {
-
-            ProductCatalog productCatalog = new ProductCatalog();
-
-            productCatalog.setFirstModelName("ABC");
-            productCatalog.setFirstModelId("ABC" + i);
-            productCatalog.setFirstPrice("123" + i);
-            productCatalog.setSecondModelName("XYZ");
-            productCatalog.setSecondModelId("XYZ" + i);
-            productCatalog.setSecondPrice("321" + i);
-            productCatalogArrayList.add(productCatalog);
-        }
-
-        ProductCatalog productCatalog = new ProductCatalog();
-        productCatalog.setFirstModelName("ABC");
-        productCatalog.setFirstModelId("ABC123");
-        productCatalog.setFirstPrice("123");
-        productCatalogArrayList.add(productCatalog);
-
-        return productCatalogArrayList;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        order_recyclerView.setLayoutManager(layoutManager);
+        orderRecyclerAdapter = new OrderRecyclerAdapter(context, orderVoArrayListArg, CommonUtility.getTicketId(context));
+        order_recyclerView.setAdapter(orderRecyclerAdapter);
     }
 
-
-    private void operationOnAssetTypeSelction(){
+    private void operationOnAssetTypeSelection(final ArrayList<TypeHeadVo> typeHeadVoArrayListArg) {
 
         assetCategory_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                /*String selectedAssetCategory = "";
+                int selectedAssetTypePosition = assetCategory_SP.getSelectedItemPosition();
 
-                if(assetCategory_SP != null){
+                if (selectedAssetTypePosition > 0) {
 
-                     selectedAssetCategory = assetCategory_SP
-                            .getSelectedItem().toString().trim();
+                    TypeHeadVo typeHeadVo = typeHeadVoArrayListArg.get(selectedAssetTypePosition - 1);
+
+                    Long assetTypeId = typeHeadVo.getId();
+
+                    Log.i(TAG, " selectedAssetTypePosition : " + selectedAssetTypePosition + " assetTypeId : " + assetTypeId);
+
+                    callModelDetailsForAssetCategory(assetTypeId);
                 }
-
-
-                if( selectedAssetCategory != null && !selectedAssetCategory.equals("")){
-
-                    if(selectedAssetCategory.equalsIgnoreCase("Select Asset Category")){
-
-                        CommonUtility.showToastMessage(context, "Please Select Asset Category");
-                    }else if(selectedAssetCategory.equalsIgnoreCase("Refrigerator")){
-
-
-                    }else {
-
-                        CommonUtility.showToastMessage(context, "Data not available for selected category");
-                    }
-                }*/
-
-                //Log.i(TAG, " selectedAssetCategory : "+selectedAssetCategory);
-
-
-                callModelDetailsForAssetCategory();
-
             }
 
             @Override
@@ -288,14 +359,14 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
     }
 
-    private void callModelDetailsForAssetCategory(){
+    private void callModelDetailsForAssetCategory(Long assetTypeId) {
 
         ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
         objectMapper = new ObjectMapper();
 
         String host = Webserver.SERVER_HOST;
         String uri = Webserver.MODEL_FOR_ASSET_TYPE_URI;
-        String url = host + "" + uri+"/1";
+        String url = host + "" + uri + "/" + assetTypeId;
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -307,6 +378,8 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
                         Log.i(TAG,
                                 "callModelDetailsForAssetCategory  response : "
                                         + response);
+
+                        CommonUtility.cancelProgressDailog(context);
 
                         try {
 
@@ -322,16 +395,27 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
                                     String dataString = objectMapper.writeValueAsString(data);
 
-                                    productDTOArrayList = objectMapper.readValue(
-                                            dataString,
-                                            TypeFactory.defaultInstance()
-                                                    .constructCollectionType(
-                                                            ArrayList.class,
-                                                            ProductDTO.class));
+                                    if (dataString != null && !dataString.isEmpty()) {
 
-                                   // CommonUtility.cancelProgressDailog(context);
+                                        productDTOArrayList = objectMapper.readValue(
+                                                dataString,
+                                                TypeFactory.defaultInstance()
+                                                        .constructCollectionType(
+                                                                ArrayList.class,
+                                                                ProductDTO.class));
 
-                                    initRecyclerAdapter(productDTOArrayList);
+                                        initRecyclerAdapter(productDTOArrayList);
+
+                                    } else {
+
+                                        Log.i(TAG, "dataString is null or empty");
+
+                                        CommonUtility.showServerResponseMessage(context, "Date Not Available..!");
+                                    }
+
+                                } else {
+
+                                    Log.i(TAG, "data is null");
 
                                 }
                             }
@@ -352,6 +436,8 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                CommonUtility.cancelProgressDailog(context);
 
                 if (error != null) {
 
@@ -380,11 +466,215 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-       // CommonUtility.showProgressDailog(context, "Fetching data...");
+        CommonUtility.showProgressDailog(context, "Fetching data...");
 
         ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
 
 
+    }
+
+    private void showConfirmationAlertDialog(int totalProductCount, int totalAmount) {
+
+        Log.i(TAG, " showConfirmationAlertDialog ");
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+        alertDialogBuilder.setMessage("Do you want to place order,  Number of product : " + totalProductCount + " Total Amount : " + totalAmount);
+        alertDialogBuilder.setCancelable(false);
+
+        alertDialogBuilder.setPositiveButton(
+                context.getResources().getString(R.string.alert_button_yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        callOrderUpdateService();
+
+                        dialog.cancel();
+                    }
+
+                });
+
+        alertDialogBuilder.setNegativeButton(
+                context.getResources().getString(R.string.alert_button_no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDailog = alertDialogBuilder.create();
+        alertDailog.show();
+    }
+
+    private void callOrderUpdateService() {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        try {
+
+            String jsonData = objectMapper
+                    .writeValueAsString(orderActivityUpdate);
+
+            JSONObject jsonObject = new JSONObject(jsonData);
+
+            String host = Webserver.SERVER_HOST;
+            String uri = Webserver.ORDER_URI;
+
+            String url = host + "" + uri;
+
+            Log.i(TAG, "callOrderUpdateService url : " + url
+                    + " jsonObject : " + jsonObject);
+
+            if (context != null && !((Activity) context).isFinishing()) {
+                CommonUtility.showProgressDailog(context,
+                        "Please Wait...");
+            }
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url, jsonObject,
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            if (context != null
+                                    && !((Activity) context).isFinishing()) {
+                                CommonUtility.cancelProgressDailog(context);
+                            }
+
+                            Log.i(TAG,
+                                    "callOrderUpdateService response : "
+                                            + response);
+
+                            CommonUtility.showToastMessage(context, "Order Placed successfully");
+
+                            placeOrder_LL.setEnabled(false);
+
+                            orderedProductDTOArrayList = new ArrayList<>();
+
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Log.e(TAG,
+                            "callCreateLeadService onErrorResponse : "
+                                    + error);
+
+                    if (context != null
+                            && !((Activity) context).isFinishing()) {
+                        CommonUtility.cancelProgressDailog(context);
+                    }
+
+                }
+            });
+
+
+            ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+        } catch (JsonGenerationException e)
+
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonMappingException e)
+
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e)
+
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
+
+    private void callOrderSyncService(String ticketId) {
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.ORDER_SYNC_URI;
+
+        String url = host + "" + uri+"/"+ticketId;
+
+        Log.i(TAG, "callOrderSyncService url : " + url);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callOrderSyncService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    OrderActivityUpdate orderActivityUpdate = objectMapper.readValue(
+                                            dataString,OrderActivityUpdate.class);
+
+                                    customerComment_ET.setText(orderActivityUpdate.getComments());
+
+                                    orderVoArrayList = (ArrayList<OrderVo>) orderActivityUpdate.getOrdersVo();
+
+                                    initOrderRecyclerAdapterForCompletedOrder(orderVoArrayList);
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.e(TAG,
+                        "callOrderSyncService onErrorResponse : "
+                                + error);
+
+
+            }
+        });
+
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
 }

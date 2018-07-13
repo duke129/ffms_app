@@ -126,6 +126,9 @@
     <string name="assetModel_spinner_floating_label">Asset Model</string>
     <string name="assetModel_hint">Select Asset Model</string>
 
+    <string name="productCount">Number of Product </string>
+    <string name="totalAmount">Total Amount</string>
+    <string name="customerComments">Customer Comment</string>
     <string name="amountCharged">Amount Charged</string>
     <string name="discountGiven">Discount Given</string>
     <string name="actualAmountToBePaid">Actual Amount To Be Paid</string>
@@ -196,4 +199,5 @@
     <string name="gross_capacity">Gross Capacity</string>
     <string name="add_to_order_list">Add Order</string>
     <string name="specificationLabel">Specifications</string>
+    <string name="place_order">Place Order</string>
 </resources>

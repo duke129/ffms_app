@@ -21,4 +21,7 @@ public interface Webserver {
     String BRANCH_URI = "/location/branchByCityId";
     String AREA_URI ="/location/areaByBranchId";
     String TITLE_SERVICE = "/customer/title";
+    String IMAGE_URI = "/product/imagelist/model";
+    String ORDER_URI = "/order/save";
+    String ORDER_SYNC_URI = "/order/getByTicketId";
 }

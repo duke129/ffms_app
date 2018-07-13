@@ -1,7 +1,11 @@
 package com.happiest.minds.ffms.sales;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import com.happiest.minds.ffms.R;
 
 public class ProductImagePageAdapter extends PagerAdapter {
 
+	private static final String TAG = ProductImagePageAdapter.class.getSimpleName();
 	Context mContext;
 	LayoutInflater mLayoutInflater;
 
@@ -20,18 +25,20 @@ public class ProductImagePageAdapter extends PagerAdapter {
 	 * R.drawable.act_banner_second, R.drawable.act_banner_third };
 	 */
 
-	int[] mResources;
+	String[] imageBase64ArrayString;
 
-	public ProductImagePageAdapter(Context context, int[] images) {
+	public ProductImagePageAdapter(Context context, String[] imageBase64ArrayStringArg) {
+
+		Log.i(TAG, " base64ImageArrayString.size() "+imageBase64ArrayStringArg.length);
 		mContext = context;
 		mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mResources = images;
+		imageBase64ArrayString = imageBase64ArrayStringArg;
 	}
 
 	@Override
 	public int getCount() {
-		return mResources.length;
+		return imageBase64ArrayString.length;
 	}
 
 	@Override
@@ -45,10 +52,12 @@ public class ProductImagePageAdapter extends PagerAdapter {
 				false);
 
 		ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
-		imageView.setImageResource(mResources[position]);
+
+		byte[] decodedString = Base64.decode(imageBase64ArrayString[position], Base64.DEFAULT);
+		Bitmap decodedByteSecond = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+		imageView.setImageBitmap(decodedByteSecond);
 
 		container.addView(itemView);
-
 		return itemView;
 	}
 

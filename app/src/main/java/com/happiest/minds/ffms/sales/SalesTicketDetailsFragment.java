@@ -67,6 +67,8 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
     private static final String TAG = SalesTicketDetailsFragment.class.getSimpleName();
     public static Context context;
+    String ticketId;
+    public static int orderStatus;
 
     View view;
 
@@ -120,6 +122,8 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         view = inflater.inflate(R.layout.fragment_sales_ticket_details, container, false);
 
         context = getActivity();
+
+        ticketId = CommonUtility.getTicketId(context);
 
         ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
         objectMapper = new ObjectMapper();
@@ -608,6 +612,24 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
                         operationForBasicInfoNotUpdated();
 
+                    }
+
+                    break;
+
+                case Constant.ORDER:
+
+
+                    if (status == Constant.ACTIVITY_COMPLETED) {
+
+                        orderStatus = Constant.ACTIVITY_COMPLETED;
+
+                        CommonUtility.saveOrderStatus(context, ticketId);
+
+
+
+                    } else {
+
+                        orderStatus = 0;
                     }
 
                     break;

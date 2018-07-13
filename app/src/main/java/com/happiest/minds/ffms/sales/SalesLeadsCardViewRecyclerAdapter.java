@@ -229,6 +229,8 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                             .valueOf(ticketCardViewDataArrayList.get(
                                     getAdapterPosition()).getTicketId());
 
+                    CommonUtility.saveTicketId(context, ticketId);
+
                     callServiceForTicketDetails(ticketId);
 
                     //redirectToSalesTicketDetailsFragment();

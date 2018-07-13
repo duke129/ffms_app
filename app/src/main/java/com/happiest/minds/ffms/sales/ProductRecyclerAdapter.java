@@ -21,8 +21,6 @@ import com.happiest.minds.ffms.sales.pojo.ProductDTO;
 
 import java.util.ArrayList;
 
-import static com.happiest.minds.ffms.sales.SalesActivityDetailsViewHolder.orderedProductDTOArrayList;
-
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerAdapterViewHolder> {
 
     private static final String TAG = ProductRecyclerAdapter.class.getSimpleName();
@@ -60,36 +58,36 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         int firstObjectPosition = (2 * position);
         int secondObjectPosition = (2 * position) + 1;
 
-        if ( firstObjectPosition >= productDtoArrayList.size()) {
+        if (firstObjectPosition >= productDtoArrayList.size()) {
 
             holder.cardView.setVisibility(View.GONE);
             holder.product_LL.setVisibility(View.GONE);
 
-        }else{
+        } else {
 
 
-            holder.first_product_model_name_TV.setText("Model Name : " + productDtoArrayList.get(firstObjectPosition).getName());
-            holder.first_product_model_id_TV.setText("Model Id : " + productDtoArrayList.get(firstObjectPosition).getIdProduct());
-            holder.first_product_price_TV.setText("Price : " + productDtoArrayList.get(firstObjectPosition).getPrice());
+            holder.first_product_model_name_TV.setText("" + productDtoArrayList.get(firstObjectPosition).getName());
+            holder.first_product_model_id_TV.setText("" + productDtoArrayList.get(firstObjectPosition).getIdProduct());
+            holder.first_product_price_TV.setText("" + productDtoArrayList.get(firstObjectPosition).getPrice());
 
             byte[] decodedStringFirst = Base64.decode(productDtoArrayList.get(firstObjectPosition).getImage(), Base64.DEFAULT);
             Bitmap decodedByteFirst = BitmapFactory.decodeByteArray(decodedStringFirst, 0, decodedStringFirst.length);
             holder.first_product_IV.setImageBitmap(decodedByteFirst);
         }
 
-        if ( secondObjectPosition >= productDtoArrayList.size()) {
+        if (secondObjectPosition >= productDtoArrayList.size()) {
 
             holder.second_product_LL.setVisibility(View.GONE);
 
 
         } else {
 
-            holder.second_product_model_name_TV.setText("Model Name : " + productDtoArrayList.get(secondObjectPosition).getName());
-            holder.second_product_model_id_TV.setText("Model Id : " + productDtoArrayList.get(secondObjectPosition).getIdProduct());
-            holder.second_product_price_TV.setText("Price : " + productDtoArrayList.get(secondObjectPosition).getPrice());
+            holder.second_product_model_name_TV.setText("" + productDtoArrayList.get(secondObjectPosition).getName());
+            holder.second_product_model_id_TV.setText("" + productDtoArrayList.get(secondObjectPosition).getIdProduct());
+            holder.second_product_price_TV.setText("" + productDtoArrayList.get(secondObjectPosition).getPrice());
 
             byte[] decodedStringSecond = Base64.decode(productDtoArrayList.get(secondObjectPosition).getImage(), Base64.DEFAULT);
-            Bitmap decodedByteSecond = BitmapFactory.decodeByteArray(decodedStringSecond, 0,decodedStringSecond.length);
+            Bitmap decodedByteSecond = BitmapFactory.decodeByteArray(decodedStringSecond, 0, decodedStringSecond.length);
             holder.second_product_IV.setImageBitmap(decodedByteSecond);
         }
 
@@ -103,10 +101,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public class ProductRecyclerAdapterViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        LinearLayout product_LL,first_product_LL, second_product_LL,firstAddToOrderList_LL, secondAddToOrderList_LL;
+        LinearLayout product_LL, first_product_LL, second_product_LL, firstAddToOrderList_LL, secondAddToOrderList_LL;
         ImageView first_product_IV, second_product_IV;
         TextView first_product_model_name_TV, first_product_model_id_TV, first_product_price_TV,
-                second_product_model_name_TV, second_product_model_id_TV, second_product_price_TV,firstToOrderList_TV,secondToOrderList_TV;
+                second_product_model_name_TV, second_product_model_id_TV, second_product_price_TV, firstToOrderList_TV, secondToOrderList_TV;
 
 
         public ProductRecyclerAdapterViewHolder(View itemView) {
@@ -164,12 +162,18 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                 @Override
                 public void onClick(View v) {
 
+                    int firstObjectPosition = (2 * getAdapterPosition());
+
+
                     String modelId = first_product_model_id_TV.getText().toString().trim();
 
-                   CommonUtility.showToastMessage(context, "Added product Id : "+modelId);
+                    CommonUtility.showToastMessage(context, "Added product Id : " + modelId);
 
-                    orderedProductDTOArrayList.add(productDtoArrayList.get(
-                            getAdapterPosition()));
+                    SalesActivityDetailsViewHolder.addToOrderedProductDTOArrayList(productDtoArrayList.get(firstObjectPosition));
+
+                    SalesActivityDetailsViewHolder.initOrderRecyclerAdapter(SalesActivityDetailsViewHolder.getOrderedProductDTOArrayList());
+//
+//                    Log.i(TAG, "firstObjectPosition : "+firstObjectPosition+" orderedProductDTOArrayList : "+orderedProductDTOArrayList.size());
 
                     firstToOrderList_TV.setText("Added List");
 
@@ -181,12 +185,18 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                 @Override
                 public void onClick(View v) {
 
+                    int secondObjectPosition = (2 * getAdapterPosition()) + 1;
+
                     String modelId = second_product_model_id_TV.getText().toString().trim();
 
-                    CommonUtility.showToastMessage(context, "Added product Id : "+modelId);
+                    CommonUtility.showToastMessage(context, "Added product Id : " + modelId);
 
-                    orderedProductDTOArrayList.add(productDtoArrayList.get(
-                            getAdapterPosition()));
+                    SalesActivityDetailsViewHolder.addToOrderedProductDTOArrayList(productDtoArrayList.get(secondObjectPosition));
+
+                    SalesActivityDetailsViewHolder.initOrderRecyclerAdapter(SalesActivityDetailsViewHolder.getOrderedProductDTOArrayList());
+
+//                    Log.i(TAG, "secondObjectPosition : "+secondObjectPosition+" orderedProductDTOArrayList : "+orderedProductDTOArrayList.size());
+
 
                     secondToOrderList_TV.setText("Added List");
 

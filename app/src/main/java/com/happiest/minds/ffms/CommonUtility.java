@@ -211,4 +211,66 @@ public class CommonUtility {
         return modelId;
 
     }
+
+    public static void saveTicketId(Context context,
+                                             String ticketId) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+
+        editor.putString("ticketId", ticketId);
+
+        editor.commit();
+
+        Log.i(TAG,
+                "Selected ticketId id has been saved to shared prefrence : "
+                        + ticketId);
+
+    }
+
+    public static String getTicketId(Context context) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        String ticketId = sharedPreferences.getString("ticketId", null);
+
+        Log.i(TAG, "Selected ticketId  returned from  SharedPreference : "
+                + ticketId);
+
+        return ticketId;
+
+    }
+
+    public static void saveOrderStatus(Context context,
+                                    String ticketId) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+
+        editor.putInt(ticketId, Constant.COMPLETED);
+
+        editor.commit();
+
+        Log.i(TAG,
+                "Order Status for ticketId "+ticketId+" saved" );
+
+    }
+
+    public static int getOrderStatus(Context context,String ticketId) {
+
+        sharedPreferences = context.getSharedPreferences(
+                Constant.FWMP_PREFERENCE, Context.MODE_PRIVATE);
+
+        int orderStatus = sharedPreferences.getInt(ticketId, 0);
+
+        Log.i(TAG, "Order Status for ticketId : "+ticketId+" orderStatus : "+orderStatus);
+
+        return orderStatus;
+
+    }
 }

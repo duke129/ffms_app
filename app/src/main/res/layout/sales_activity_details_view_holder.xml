@@ -110,19 +110,6 @@
             android:layout_marginTop="@dimen/details_edittext_margin_top">
 
             <EditText
-                android:id="@+id/amountCharged_ET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/amountCharged" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/details_edittext_margin_top">
-
-            <EditText
                 android:id="@+id/discountGiven_ET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,6 +143,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:textColorHint="@color/text_hint"
+            android:padding="@dimen/placeOrder_text_padding"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_edittext_margin_top">
+
+            <EditText
+                android:id="@+id/customerComment_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size"
+                android:hint="@string/customerComments" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/placeOrder_LL"
+            android:layout_width="@dimen/placeOrder_width"
+            android:layout_marginTop="@dimen/placeOrder_margin_top"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logout_button_style"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/addToOrderList_padding" >
+
+            <TextView
+                android:id="@+id/placeOrder_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/place_order"
+                android:textColor="@color/hmWhite"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/addToOrderList_text_size"
+                />
         </LinearLayout>
 
     </LinearLayout>
