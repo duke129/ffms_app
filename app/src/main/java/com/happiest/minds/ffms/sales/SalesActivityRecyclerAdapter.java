@@ -44,6 +44,6 @@ public class SalesActivityRecyclerAdapter extends ExpandableRecyclerViewAdapter<
 
     @Override
     public void onBindGroupViewHolder(SalesActivityViewHolder holder, int flatPosition, ExpandableGroup group) {
-        holder.setActivityName(group);
+        holder.setActivityBand(group);
     }
 }

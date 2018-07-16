@@ -28,6 +28,7 @@
     <string name="rejectedLeads_bucket_text">Rejected Leads</string>
     <string name="count_text">Count</string>
     <string name="default_count_text">0</string>
+    <string name="leads_card_view_text">Leads Card View</string>
 
     <!-- Action Bar -->
     <string name="contentDescription_profile_menu">Profile Menu</string>
@@ -200,4 +201,10 @@
     <string name="add_to_order_list">Add Order</string>
     <string name="specificationLabel">Specifications</string>
     <string name="place_order">Place Order</string>
+
+    <!--search-->
+    <string name="ticketNumber_text">Ticket Number</string>
+    <string name="mobileNumber_text">Mobile Number</string>
+    <string name="search_text">Search</string>
+    <string name="search_cancel_text">Cancel</string>
 </resources>

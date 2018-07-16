@@ -252,7 +252,7 @@ public class CommonUtility {
 
         editor = sharedPreferences.edit();
 
-        editor.putInt(ticketId, Constant.COMPLETED);
+        editor.putInt(ticketId, Constant.ACTIVITY_COMPLETED);
 
         editor.commit();
 

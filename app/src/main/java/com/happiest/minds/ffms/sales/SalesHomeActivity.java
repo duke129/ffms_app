@@ -1,6 +1,7 @@
 package com.happiest.minds.ffms.sales;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -70,7 +71,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     LinearLayout newLeads_LL, inProgressLeads_LL, completedLeads_LL, searchLeads_LL, createNewLeads_LL, rejectedLeads_LL;
     TextView newLeads_TV, inProgressLeads_TV, completedLeads_TV, searchLeads_TV, createNewLeads_TV, rejectedLeads_TV,
-    newLeadsCount_TV,inprogressCount_TV,completedCount_TV,rejectedCount_TV;
+            newLeadsCount_TV, inprogressCount_TV, completedCount_TV, rejectedCount_TV;
     private FrameLayout fragmentContainerFrameLayout;
 
     private CustomPageAdapter customPagerAdapter;
@@ -247,13 +248,34 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
                 } else if (isOnLeadsDetails) {
 
-                    notification_IV.setVisibility(View.VISIBLE);
+                    Log.i(TAG, "isOnLeadsDetails : "+isOnLeadsDetails);
 
-                    user_SB.setVisibility(View.GONE);
+                    if (isSearch) {
 
-                    int clickedBucketId = CommonUtility.getSeButtonClickedValue(context);
+                        Log.i(TAG, "isOnLeadsDetails : "+isOnLeadsDetails+" isSearch : "+isSearch);
 
-                    callServiceForCardView(clickedBucketId);
+                        isSearch = false;
+
+                        onHomeButtonClick();
+
+                        welcome_TV.setText(context.getResources().getString(
+                                R.string.welcome_text)
+                                + " " + "HM");
+
+                        callCountService();
+
+                    } else {
+
+                        Log.i(TAG, "isOnLeadsDetails : "+isOnLeadsDetails+"else isSearch : "+isSearch);
+
+                        notification_IV.setVisibility(View.VISIBLE);
+
+                        user_SB.setVisibility(View.GONE);
+
+                        int clickedBucketId = CommonUtility.getSeButtonClickedValue(context);
+
+                        callServiceForCardView(clickedBucketId);
+                    }
 
 
                 } else if (isOnCreate) {
@@ -265,6 +287,19 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                             + " " + "HM");
 
                     callCountService();
+
+                } else if (isSearch) {
+
+                    isSearch = false;
+
+                    onHomeButtonClick();
+
+                    welcome_TV.setText(context.getResources().getString(
+                            R.string.welcome_text)
+                            + " " + "HM");
+
+                    callCountService();
+
 
                 } else {
 
@@ -323,6 +358,27 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                 redirectToCreateNewFragment();
 
                 break;
+
+            case R.id.searchLeads_LL:
+
+                isSearch = true;
+
+                CommonUtility.saveSeButtonClickedValue(context, Constant.SEARCH);
+
+                notification_IV.setVisibility(View.VISIBLE);
+
+                user_SB.setVisibility(View.GONE);
+
+                removeFragmentFromHome();
+
+                Intent prospectSearchIntent = new Intent(context,
+                        SalesSearchLeadActivityDailog.class);
+
+                startActivity(prospectSearchIntent);
+
+                // redirectToSearchLeadFragment();
+
+                break;
         }
 
 
@@ -340,9 +396,17 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
             isOnHome = false;
             isOnProfile = false;
             isOnLeadsDetails = false;
-            isSearch = false;
             isOnCardView = true;
             isOnCreate = false;
+
+            if(isSearch){
+
+                isSearch = true;
+
+            }else{
+
+                isSearch = false;
+            }
 
             hide();
 
@@ -450,6 +514,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+
     private void hide() {
         // TODO Auto-generated method stub
 
@@ -472,7 +537,6 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void show() {
-        isSearch = false;
 
     }
 
@@ -528,8 +592,6 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         removeFragmentFromHome();
 
         flag = false;
-
-        isSearch = false;
 
         hide();
 
@@ -594,7 +656,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
         String host = Webserver.SERVER_HOST;
         String uri = Webserver.SALES_CARD_VIEW_URI;
-        String url = host+""+uri+"/"+clickedBucketId;
+        String url = host + "" + uri + "/" + clickedBucketId;
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -668,7 +730,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
     private void processForCardViewRedirect() {
 
         welcome_TV.setText(context.getResources().getString(
-                R.string.newLeads_bucket_text));
+                R.string.leads_card_view_text));
 
         removeFragmentFromHome();
 
@@ -716,11 +778,11 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
                                                             ArrayList.class,
                                                             DashBoardSummaryCountVo.class));
 
-                                    if(dashBoardSummaryCountVoArrayList != null) {
+                                    if (dashBoardSummaryCountVoArrayList != null) {
 
                                         setCountToUI(dashBoardSummaryCountVoArrayList);
 
-                                    }else{
+                                    } else {
 
                                         Log.i(TAG, "dashBoardSummaryCountVoArrayList is null");
                                     }
@@ -751,44 +813,43 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void setCountToUI(ArrayList<DashBoardSummaryCountVo> dashBoardSummaryCountVoArrayListArgs){
+    private void setCountToUI(ArrayList<DashBoardSummaryCountVo> dashBoardSummaryCountVoArrayListArgs) {
 
-        for(int i = 0; i< dashBoardSummaryCountVoArrayListArgs.size(); i++){
+        for (int i = 0; i < dashBoardSummaryCountVoArrayListArgs.size(); i++) {
 
             DashBoardSummaryCountVo dashBoardSummaryCountVo = dashBoardSummaryCountVoArrayListArgs.get(i);
 
             int bucketId = dashBoardSummaryCountVo.getStatusId();
 
-            switch (bucketId){
+            switch (bucketId) {
 
                 case Constant.NEW:
 
-                    newLeadsCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+                    newLeadsCount_TV.setText("" + dashBoardSummaryCountVo.getTotalCounts());
 
                     break;
 
-                case Constant.IN_PROGRESS :
+                case Constant.IN_PROGRESS:
 
-                    inprogressCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
-
-                    break;
-
-                case Constant.COMPLETED :
-
-                    completedCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
+                    inprogressCount_TV.setText("" + dashBoardSummaryCountVo.getTotalCounts());
 
                     break;
 
-                case Constant.REJECTED :
+                case Constant.COMPLETED:
 
-                    rejectedCount_TV.setText(""+dashBoardSummaryCountVo.getTotalCounts());
-
-                    break;
-
-                 default :
+                    completedCount_TV.setText("" + dashBoardSummaryCountVo.getTotalCounts());
 
                     break;
 
+                case Constant.REJECTED:
+
+                    rejectedCount_TV.setText("" + dashBoardSummaryCountVo.getTotalCounts());
+
+                    break;
+
+                default:
+
+                    break;
 
 
             }
@@ -801,6 +862,20 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         super.onResume();
 
         Log.i(TAG, " onResume ");
+
+        if (isSearch) {
+
+            if (ticketCardViewDataList.size() > 0) {
+
+                processForCardViewRedirect();
+
+            } else {
+
+                Log.i(TAG, "Search canceled");
+
+                isSearch = false;
+            }
+        }
 
     }
 }

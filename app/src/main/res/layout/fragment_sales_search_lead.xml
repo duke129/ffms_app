@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sales.SalesSearchLeadActivityDailog">
+
+    <LinearLayout
+        android:id="@+id/searchDetails_LL"
+        android:layout_width="@dimen/parent_ll_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/changePasswordButton_margin"
+        android:layout_marginRight="@dimen/changePasswordButton_margin"
+        android:layout_gravity="center"
+        android:background="@color/hmWhite"
+        android:orientation="vertical"
+        android:padding="@dimen/changePasswordDetails_padding"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:id="@+id/ticketNumber_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ticketDetails_linear_layout_text_margin"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding" >
+
+            <TextView
+                android:id="@+id/ticketNumber_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/ticketDetails_linear_layout_text_margin"
+                android:text="@string/ticketNumber_text"
+                android:textColor="@color/textView_label_color"
+                android:textSize="@dimen/text_label_size" />
+
+            <TextView
+                android:id="@+id/colonTicketNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ticketNumber_TV"
+                android:text=""
+                android:textSize="@dimen/ticket_type_text_size_medium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/ticketNumber_ET"
+                android:layout_width="@dimen/edittext_textWidthh"
+                android:layout_height="@dimen/edittext_text_heighttt"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/sales_ticket_edit_textView_margin_left"
+                android:layout_toRightOf="@+id/colonTicketNumber"
+                android:background="@drawable/layout_bg_white"
+                android:ems="10"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:padding="@dimen/edittext_text_padding"
+                android:singleLine="true"
+                android:textColor="@color/editable_text_color"
+                android:textSize="@dimen/edit_text_size" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mobileNumber_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ticketDetails_linear_layout_text_margin"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding" >
+
+            <TextView
+                android:id="@+id/mobileNumber_TV"
+                android:layout_width="@dimen/sales_ticket_details_text_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/ticketDetails_linear_layout_text_margin"
+                android:text="@string/mobileNumber_text"
+                android:textColor="@color/textView_label_color"
+                android:textSize="@dimen/text_label_size" />
+
+            <TextView
+                android:id="@+id/colonMobileNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/newPassword_TV"
+                android:text=""
+                android:textSize="@dimen/ticket_type_text_size_medium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/mobileNumber_ET"
+                android:layout_width="@dimen/edittext_textWidthh"
+                android:layout_height="@dimen/edittext_text_heighttt"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/sales_ticket_edit_textView_margin_left"
+                android:layout_toRightOf="@+id/colonMobileNumber"
+                android:background="@drawable/layout_bg_white"
+                android:ems="10"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="@dimen/edittext_text_padding"
+                android:singleLine="true"
+                android:textColor="@color/editable_text_color"
+                android:textSize="@dimen/edit_text_size" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_parent_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ticketDetails_linear_layout_text_margin"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/ticketDetails_linear_layout_text_padding"
+            android:paddingTop="@dimen/ticketDetails_linear_layout_text_padding" >
+
+            <LinearLayout
+                android:id="@+id/search_LL"
+                android:layout_width="@dimen/changePasswordSubmit_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/changePasswordSubmit_lef_margin"
+                android:layout_marginTop="@dimen/changePasswordSubmit_top_margin"
+                android:background="@drawable/change_password_button_style"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="@dimen/changePasswordSubmit_padding" >
+
+                <TextView
+                    android:id="@+id/search_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/search_text"
+                    android:textColor="@color/hmWhite"
+                    android:textSize="@dimen/changePassword_text_size"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/searchCancel_LL"
+                android:layout_width="@dimen/changePasswordSubmit_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/changePasswordCancel_lef_margin"
+                android:layout_marginTop="@dimen/changePasswordSubmit_top_margin"
+                android:background="@drawable/change_password_button_style"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="@dimen/changePasswordSubmit_padding" >
+
+                <TextView
+                    android:id="@+id/searchCancel_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/search_cancel_text"
+                    android:textColor="@color/hmWhite"
+                    android:textSize="@dimen/changePassword_text_size"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

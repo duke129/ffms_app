@@ -23,6 +23,7 @@ public interface Constant {
     int IN_PROGRESS = 104;
     int REJECTED = 105;
     int COMPLETED = 106;
+    int SEARCH = 107;
 
     int BASIC_INFO_UPDATE = 1;
     int DEMO = 2;

@@ -24,4 +24,5 @@ public interface Webserver {
     String IMAGE_URI = "/product/imagelist/model";
     String ORDER_URI = "/order/save";
     String ORDER_SYNC_URI = "/order/getByTicketId";
+    String SEARCH_URI = "/ticket/filter";
 }

@@ -40,6 +40,14 @@
             >
 
         </activity>
+
+        <activity
+            android:name=".sales.SalesSearchLeadActivityDailog"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
     </application>
 
 </manifest>
