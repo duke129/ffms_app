@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
+import com.happiest.minds.ffms.FFMSRequestQueue;
 import com.happiest.minds.ffms.R;
+import com.happiest.minds.ffms.Webserver;
+import com.happiest.minds.ffms.sales.pojo.APIResponse;
 import com.happiest.minds.ffms.sales.pojo.ProductDTO;
+import com.happiest.minds.ffms.sales.pojo.TypeHeadVo;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ProductRecyclerAdapterViewHolder> {
@@ -28,6 +45,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     ArrayList<ProductDTO> productDtoArrayList;
 
     Context context;
+
+    FFMSRequestQueue ffmsRequestQueue;
+    ObjectMapper objectMapper;
+    APIResponse apiResponse;
 
     public ProductRecyclerAdapter(Context contextCons, ArrayList<ProductDTO> productDtoArrayListArg) {
 
@@ -70,9 +91,13 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             holder.first_product_model_id_TV.setText("" + productDtoArrayList.get(firstObjectPosition).getIdProduct());
             holder.first_product_price_TV.setText("" + productDtoArrayList.get(firstObjectPosition).getPrice());
 
-            byte[] decodedStringFirst = Base64.decode(productDtoArrayList.get(firstObjectPosition).getImage(), Base64.DEFAULT);
+            callProductImageService(productDtoArrayList.get(firstObjectPosition).getIdProduct(), holder.first_product_IV);
+
+           /* byte[] decodedStringFirst = Base64.decode(productDtoArrayList.get(firstObjectPosition).getImage(), Base64.DEFAULT);
             Bitmap decodedByteFirst = BitmapFactory.decodeByteArray(decodedStringFirst, 0, decodedStringFirst.length);
-            holder.first_product_IV.setImageBitmap(decodedByteFirst);
+            holder.first_product_IV.setImageBitmap(decodedByteFirst);*/
+
+
         }
 
         if (secondObjectPosition >= productDtoArrayList.size()) {
@@ -86,10 +111,103 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             holder.second_product_model_id_TV.setText("" + productDtoArrayList.get(secondObjectPosition).getIdProduct());
             holder.second_product_price_TV.setText("" + productDtoArrayList.get(secondObjectPosition).getPrice());
 
-            byte[] decodedStringSecond = Base64.decode(productDtoArrayList.get(secondObjectPosition).getImage(), Base64.DEFAULT);
+            callProductImageService(productDtoArrayList.get(secondObjectPosition).getIdProduct(), holder.second_product_IV);
+
+            /*byte[] decodedStringSecond = Base64.decode(productDtoArrayList.get(secondObjectPosition).getImage(), Base64.DEFAULT);
             Bitmap decodedByteSecond = BitmapFactory.decodeByteArray(decodedStringSecond, 0, decodedStringSecond.length);
-            holder.second_product_IV.setImageBitmap(decodedByteSecond);
+            holder.second_product_IV.setImageBitmap(decodedByteSecond);*/
         }
+
+    }
+
+    private void callProductImageService(String productId , final ImageView imageView){
+
+        ffmsRequestQueue = FFMSRequestQueue.getInstance(context);
+        objectMapper = new ObjectMapper();
+
+        String host = Webserver.SERVER_HOST;
+        String uri = Webserver.IMAGE_DOWNLOAD_URI;
+        String url = host + "" + uri + "/" + productId;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG,
+                                "callProductImageService  response : "
+                                        + response);
+
+                        try {
+
+                            apiResponse = objectMapper.readValue(response.toString(), APIResponse.class);
+
+                            if (apiResponse != null) {
+
+                                Log.i(TAG, "apiResponse :" + apiResponse.toString());
+
+                                Object data = apiResponse.getData();
+
+                                if (data != null) {
+
+                                    String dataString = objectMapper.writeValueAsString(data);
+
+                                    if (dataString != null && !dataString.isEmpty()) {
+
+
+                                        byte[] decodedString = Base64.decode(dataString, Base64.DEFAULT);
+                                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                        imageView.setImageBitmap(decodedByte);
+
+                                    } else {
+
+                                        Log.i(TAG, "dataString is null or empty");
+
+                                    }
+
+                                } else {
+
+                                    Log.i(TAG, "data is null");
+
+                                }
+                            }
+
+                        } catch (JsonParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (JsonMappingException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+                if (error != null) {
+
+                    Log.e(TAG,
+                            "callProductImageService onErrorResponse : "
+                                    + error.toString());
+
+                }
+
+
+            }
+
+        });
+
+
+        ffmsRequestQueue.addToRequestQueue(jsonObjectRequest);
+
 
     }
 

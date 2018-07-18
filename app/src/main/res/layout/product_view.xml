@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/product_image_margin_top"
                 android:contentDescription="@string/product_description_text"
-                android:src="@drawable/product_1" />
+                android:src="@drawable/loading" />
 
             <TextView
                 android:id="@+id/first_product_model_name_TV"
@@ -99,7 +99,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/product_image_margin_top"
                 android:contentDescription="@string/inProgressLeads_bucket_text"
-                android:src="@drawable/product_2" />
+                android:src="@drawable/loading" />
 
             <TextView
                 android:id="@+id/second_product_model_name_TV"

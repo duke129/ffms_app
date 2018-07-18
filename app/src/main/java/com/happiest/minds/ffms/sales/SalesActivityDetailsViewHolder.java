@@ -410,7 +410,7 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
 
                                         Log.i(TAG, "dataString is null or empty");
 
-                                        CommonUtility.showServerResponseMessage(context, "Date Not Available..!");
+                                        CommonUtility.showServerResponseMessage(context, "Data Not Available..!");
                                     }
 
                                 } else {
