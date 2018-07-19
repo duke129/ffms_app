@@ -79,7 +79,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
     private static final String ERROR_MSG = "Very very very long error message to get scrolling or multiline animation when the error button is clicked";
 
-    MaterialSpinner title_SP, branch_SP, area_SP;
+    MaterialSpinner title_SP, branch_SP, area_SP, customerInterest_SP, customerLowInterestReason_SP;
 
     EditText ticketNumber_ET, ticketCreatedDate_ET, firstName_ET, middleName_ET,
             lastName_ET, mobileNo_ET, alternateMobileNo_ET, officeNo_ET, email_ET,
@@ -97,7 +97,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
     int selectedYear, selectedMonth, selectedDay;
     TimePickerDialog timePickerDialog;
 
-    private ArrayAdapter title_adapter, branch_adapter, area_adapter;
+    private ArrayAdapter title_adapter, branch_adapter, area_adapter, customerInterest_adapter, customerLowInterestReason_adapter;
 
     private TicketDetails ticketDetails = SalesLeadsCardViewRecyclerAdapter.ticketDetailsArrayList.get(0);
 
@@ -130,13 +130,14 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         initGUI();
 
-        // initRecycler();
+        initRecycler();
 
         setDetailsToUI();
 
         callTitleService();
 
         callBranchService();
+
 
         //initSpinner();
 
@@ -178,6 +179,8 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         branch_SP = view.findViewById(R.id.branch_SP);
         area_SP = view.findViewById(R.id.area_SP);
         preferredCallTime_ET = view.findViewById(R.id.preferredCallTime_ET);
+        customerInterest_SP = view.findViewById(R.id.customerInterest_SP);
+        customerLowInterestReason_SP = view.findViewById(R.id.customerLowInterestReason_SP);
         calendar_IB = view.findViewById(R.id.calendar_IB);
         calendar_IB.setOnClickListener(this);
 
@@ -185,6 +188,51 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         sales_activity_LL = view.findViewById(R.id.sales_activity_LL);
         basicInfo_update_BT_LL.setOnClickListener(this);
         sales_activity_LL.setVisibility(View.GONE);
+
+    }
+
+    private void initRecycler() {
+
+        String[] customerInterest = getResources().getStringArray(R.array.customer_interest_array);
+
+        customerInterest_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, customerInterest);
+        customerInterest_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        customerInterest_SP.setAdapter(customerInterest_adapter);
+        customerInterest_SP.setPaddingSafe(0, 0, 0, 0);
+
+        operationOnCustomerInterestSelection();
+
+        String[] customerLowInterestReason = getResources().getStringArray(R.array.customer_low_interest_reason_array);
+
+        customerLowInterestReason_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, customerLowInterestReason);
+        customerLowInterestReason_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        customerLowInterestReason_SP.setAdapter(customerLowInterestReason_adapter);
+        customerLowInterestReason_SP.setPaddingSafe(0, 0, 0, 0);
+    }
+
+    private void operationOnCustomerInterestSelection() {
+
+        customerInterest_SP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                int selectedAssetTypePosition = customerInterest_SP.getSelectedItemPosition();
+
+                if (selectedAssetTypePosition == 2) {
+
+                    customerLowInterestReason_SP.setVisibility(View.VISIBLE);
+
+                } else {
+
+                    customerLowInterestReason_SP.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -278,7 +326,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
     }
 
-    private void initTitleSpinner(ArrayList<TypeHeadVo> titleTypeHeadVoArrayListArg){
+    private void initTitleSpinner(ArrayList<TypeHeadVo> titleTypeHeadVoArrayListArg) {
 
         title_adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, titleTypeHeadVoArrayListArg);
         title_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -562,9 +610,57 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         communication_addressPincode_ET.setText(ticketDetails.getCommunicationAddress().getPincode());
         preferredCallTime_ET.setText("" + ticketDetails.getPreferredCallTime());
 
-        checkForActivity();
+        setCustomerInterestSpinner();
+
+        int ticketStatus = ticketDetails.getTicketStatus();
+
+        switch (ticketStatus) {
+
+            case Constant.REJECTED:
+
+                operationForRejectedLeads();
+
+                break;
+
+            case Constant.IN_PROGRESS:
+
+                checkForActivity();
+
+                break;
+
+            default:
+
+                checkForActivity();
+
+                break;
+        }
+
+
     }
 
+
+    private void setCustomerInterestSpinner() {
+
+        String customerDisinterestReason = ticketDetails.getRejectionReason();
+
+        if (customerDisinterestReason == null) {
+
+            customerInterest_SP.setSelection(getIndex(customerInterest_SP, Constant.CUSTOMER_INTERESTED_YES));
+
+            customerLowInterestReason_SP.setVisibility(View.GONE);
+
+        } else {
+
+            customerInterest_SP.setSelection(getIndex(customerInterest_SP, Constant.CUSTOMER_INTERESTED_NO));
+
+            customerLowInterestReason_SP.setVisibility(View.VISIBLE);
+
+            customerLowInterestReason_SP.setSelection(getIndex(customerLowInterestReason_SP, ticketDetails.getRejectionReason()));
+
+        }
+
+
+    }
 
     //private method of your class
     private int getIndex(Spinner spinner, String myString) {
@@ -624,7 +720,6 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
                         orderStatus = Constant.ACTIVITY_COMPLETED;
 
                         CommonUtility.saveOrderStatus(context, ticketId);
-
 
 
                     } else {
@@ -692,6 +787,8 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
         title_SP.setEnabled(false);
         branch_SP.setEnabled(false);
         area_SP.setEnabled(false);
+        customerInterest_SP.setEnabled(false);
+        customerLowInterestReason_SP.setEnabled(false);
 
     }
 
@@ -782,9 +879,9 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         int selectedTitlePosition = title_SP.getSelectedItemPosition();
 
-        if(selectedTitlePosition >0) {
+        if (selectedTitlePosition > 0) {
 
-            TypeHeadVo typeHeadVo = titleTypeHeadVoArrayList.get(selectedTitlePosition -1);
+            TypeHeadVo typeHeadVo = titleTypeHeadVoArrayList.get(selectedTitlePosition - 1);
 
             String title = typeHeadVo.getName();
 
@@ -794,7 +891,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
             Log.i(TAG, " selectedTitlePosition : " + selectedTitlePosition + " title : " + title);
 
-        }else{
+        } else {
 
 
             if (context != null) {
@@ -900,9 +997,9 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         int selectedBranchPosition = branch_SP.getSelectedItemPosition();
 
-        if(selectedBranchPosition >0) {
+        if (selectedBranchPosition > 0) {
 
-            TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedBranchPosition -1);
+            TypeHeadVo typeHeadVo = branchTypeHeadVoArrayList.get(selectedBranchPosition - 1);
 
             Long branchId = typeHeadVo.getId();
 
@@ -912,7 +1009,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
             Log.i(TAG, " selectedBranchPosition : " + selectedBranchPosition + " branchId : " + branchId);
 
-        }else{
+        } else {
 
 
             if (context != null) {
@@ -927,9 +1024,9 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         int selectedAreaPosition = area_SP.getSelectedItemPosition();
 
-        if(selectedAreaPosition >0) {
+        if (selectedAreaPosition > 0) {
 
-            TypeHeadVo typeHeadVo = areaTypeHeadVoArrayList.get(selectedAreaPosition -1);
+            TypeHeadVo typeHeadVo = areaTypeHeadVoArrayList.get(selectedAreaPosition - 1);
 
             Long areaId = typeHeadVo.getId();
 
@@ -939,7 +1036,7 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
             Log.i(TAG, " selectedAreaPosition : " + selectedAreaPosition + " areaId : " + areaId);
 
-        }else{
+        } else {
 
 
             if (context != null) {
@@ -1105,6 +1202,43 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
 
         }
 
+        int customerInterestSelectedPosition = customerInterest_SP.getSelectedItemPosition();
+
+        if (customerInterestSelectedPosition == 0) {
+
+            if (context != null) {
+                CommonUtility.showToastMessage(context, context
+                        .getResources().getString(R.string.select_customer_interest));
+            }
+            isInputValid = false;
+            return;
+        } else if (customerInterestSelectedPosition == 2) {
+
+            int customerLowInterestReasonSelectedPosition = customerLowInterestReason_SP.getSelectedItemPosition();
+
+            if (customerLowInterestReasonSelectedPosition == 0) {
+
+                if (context != null) {
+                    CommonUtility.showToastMessage(context, context
+                            .getResources().getString(R.string.select_customer_low_interest_reason));
+                }
+                isInputValid = false;
+                return;
+            } else {
+
+                String customerLowInterestReason = customerLowInterestReason_adapter.getItem(customerLowInterestReasonSelectedPosition - 1).toString();
+
+                Log.i(TAG, " customerLowInterestReason : " + customerLowInterestReason);
+
+                basicInfoUpdate.setRejectionReason(customerLowInterestReason);
+
+                isInputValid = true;
+            }
+        } else {
+
+            isInputValid = true;
+        }
+
 
         if (isInputValid) {
 
@@ -1213,8 +1347,16 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
                                 e.printStackTrace();
                             }
 
+                            int customerInterestSelectedPosition = customerInterest_SP.getSelectedItemPosition();
 
-                            operationForBasicInfoUpdated();
+                            if (customerInterestSelectedPosition == 2) {
+
+                                operationForRejectedLeads();
+
+                            } else {
+
+                                operationForBasicInfoUpdated();
+                            }
 
 
                         }
@@ -1263,6 +1405,13 @@ public class SalesTicketDetailsFragment extends Fragment implements View.OnClick
     private void operationForBasicInfoUpdated() {
 
         sales_activity_LL.setVisibility(View.VISIBLE);
+        basicInfo_update_BT_LL.setVisibility(View.GONE);
+        disableUIDetails();
+    }
+
+    private void operationForRejectedLeads() {
+
+        sales_activity_LL.setVisibility(View.GONE);
         basicInfo_update_BT_LL.setVisibility(View.GONE);
         disableUIDetails();
     }

@@ -416,6 +416,33 @@
 
             </LinearLayout>
 
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/customerInterest_SP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/colorPrimary"
+                app:ms_arrowSize="@dimen/spinner_arrow_size"
+                app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+                app:ms_floatingLabelText="@string/customer_interest_spinner_floating_label"
+                app:ms_hint="@string/customer_interest_spinner_hint"
+                app:ms_hintColor="@color/spinner_hint"
+                app:ms_baseColor="@color/text_color"
+                app:ms_multiline="true" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/customerLowInterestReason_SP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:ms_arrowColor="@color/colorPrimary"
+                app:ms_arrowSize="@dimen/spinner_arrow_size"
+                app:ms_floatingLabelColor="@color/spinner_floating_lebel"
+                app:ms_floatingLabelText="@string/customer_low_interest_spinner_floating_label"
+                app:ms_hint="@string/customer_low_interest_reason_spinner_hint"
+                app:ms_hintColor="@color/spinner_hint"
+                app:ms_baseColor="@color/text_color"
+                app:ms_multiline="true" />
+
             <LinearLayout
                 android:id="@+id/basicInfo_update_BT_LL"
                 android:layout_width="@dimen/basic_info_bt_width"

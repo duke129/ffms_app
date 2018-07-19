@@ -49,6 +49,7 @@ public class TicketDetails {
 	private Long areaId;
 	private String areaName;
 	private List<ActivityVo> activities;
+	private String rejectionReason;
 
 	public Long getTicketId() {
 		return ticketId;
@@ -338,45 +339,11 @@ public class TicketDetails {
 		this.activities = activities;
 	}
 
-	@Override
-	public String toString() {
-		return "TicketDetails{" +
-				"ticketId=" + ticketId +
-				", ticketNo='" + ticketNo + '\'' +
-				", ticketDescription='" + ticketDescription + '\'' +
-				", currentAssigneeId=" + currentAssigneeId +
-				", currentAssigneeName='" + currentAssigneeName + '\'' +
-				", ticketStatus=" + ticketStatus +
-				", ticketCreatedTime=" + ticketCreatedTime +
-				", ticketTypeId=" + ticketTypeId +
-				", ticketTypeName='" + ticketTypeName + '\'' +
-				", ticketSource='" + ticketSource + '\'' +
-				", preferredCallTime='" + preferredCallTime + '\'' +
-				", assetId=" + assetId +
-				", assetTypeId=" + assetTypeId +
-				", assetTypeName='" + assetTypeName + '\'' +
-				", assetDescription='" + assetDescription + '\'' +
-				", assetInstallationAddress='" + assetInstallationAddress + '\'' +
-				", assetLat='" + assetLat + '\'' +
-				", assetLong='" + assetLong + '\'' +
-				", customerId=" + customerId +
-				", title='" + title + '\'' +
-				", firstName='" + firstName + '\'' +
-				", middleName='" + middleName + '\'' +
-				", lastName='" + lastName + '\'' +
-				", mobileNumber='" + mobileNumber + '\'' +
-				", alternateMobileNumber='" + alternateMobileNumber + '\'' +
-				", officeNumber='" + officeNumber + '\'' +
-				", emailId='" + emailId + '\'' +
-				", alternateEmailId='" + alternateEmailId + '\'' +
-				", communicationAddress=" + communicationAddress +
-				", cityId=" + cityId +
-				", cityName='" + cityName + '\'' +
-				", branchId=" + branchId +
-				", branchName='" + branchName + '\'' +
-				", areaId=" + areaId +
-				", areaName='" + areaName + '\'' +
-				", activities=" + activities +
-				'}';
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
 	}
 }

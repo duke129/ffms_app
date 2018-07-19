@@ -31,8 +31,13 @@ public interface Constant {
 
     int ACTIVITY_COMPLETED = 101;
     int ACTIVITY_NOT_DONE = 102;
+    Integer ACTIVITY_REJECTED = 107;
 
     Long TICKET_TYPE_SALES = 1L;
     Long TICKET_TYPE_SR = 2L;
+
+    String CUSTOMER_INTERESTED_YES = "Yes";
+    String CUSTOMER_INTERESTED_NO = "No";
+
 
 }

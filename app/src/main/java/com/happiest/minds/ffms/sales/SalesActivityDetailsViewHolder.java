@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -552,6 +553,9 @@ public class SalesActivityDetailsViewHolder extends ChildViewHolder {
                             placeOrder_LL.setEnabled(false);
 
                             orderedProductDTOArrayList = new ArrayList<>();
+
+                            Intent salesHomeIntent = new Intent(context, SalesHomeActivity.class);
+                            context.startActivity(salesHomeIntent);
 
                         }
                     }, new Response.ErrorListener() {

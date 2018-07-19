@@ -126,6 +126,9 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                     } else if (status == Constant.ACTIVITY_NOT_DONE) {
 
                         holder.biu_demarcation_RL.setBackgroundResource(R.drawable.first_grey_arrow);
+                    }else if (status == Constant.ACTIVITY_REJECTED) {
+
+                        holder.biu_demarcation_RL.setBackgroundResource(R.drawable.first_green_arrow);
                     }
 
                     break;
@@ -139,6 +142,9 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                     } else if (status == Constant.ACTIVITY_NOT_DONE) {
 
                         holder.demo_demarcation_RL.setBackgroundResource(R.drawable.grey_arrow);
+                    }else if (status == Constant.ACTIVITY_REJECTED) {
+
+                        holder.demo_demarcation_RL.setBackgroundResource(R.drawable.red_arrow);
                     }
 
                     break;
@@ -152,6 +158,9 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
                     } else if (status == Constant.ACTIVITY_NOT_DONE) {
 
                         holder.order_demarcation_RL.setBackgroundResource(R.drawable.grey_arrow);
+                    }else if (status == Constant.ACTIVITY_REJECTED) {
+
+                        holder.order_demarcation_RL.setBackgroundResource(R.drawable.red_arrow);
                     }
 
                     break;

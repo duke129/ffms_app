@@ -92,7 +92,7 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
             holder.order_price_CV_TV.setText("" + orderVoArrayList.get(position).getPrice());
             holder.order_model_specification_value_CV_TV.setText("Color : Black, Door : Multidoor, Warranty : Yes");
 
-            long productCount = orderVoArrayList.get(position).getProductId();
+            long productCount = orderVoArrayList.get(position).getQuantity();
             long price = Integer.parseInt(orderVoArrayList.get(position).getPrice());
 
             long amount = (productCount * price);

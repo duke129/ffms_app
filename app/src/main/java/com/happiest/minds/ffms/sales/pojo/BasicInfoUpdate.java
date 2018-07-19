@@ -18,6 +18,7 @@ public class BasicInfoUpdate {
 	
 	private Long branchId;
 	private Long areaId;
+	private String rejectionReason;
 	
 	public Long getTicketId() {
 		return ticketId;
@@ -114,14 +115,26 @@ public class BasicInfoUpdate {
 	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
+	
+	
+	
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
 	@Override
 	public String toString() {
-		return "BasicInfoUpdate [ticketId=" + ticketId + ", tittle=" + title + ", firstName=" + firstName
+		return "BasicInfoUpdate [ticketId=" + ticketId + ", title=" + title + ", firstName=" + firstName
 				+ ", middleName=" + middleName + ", lastName=" + lastName + ", mobileNumber=" + mobileNumber
 				+ ", alternateMobileNumber=" + alternateMobileNumber + ", officeNumber=" + officeNumber + ", emailId="
 				+ emailId + ", alternateEmailId=" + alternateEmailId + ", communicationAddress=" + communicationAddress
-				+ ", currentAddress=" + currentAddress + "]";
+				+ ", currentAddress=" + currentAddress + ", preferredCallTime=" + preferredCallTime + ", branchId="
+				+ branchId + ", areaId=" + areaId + "]";
 	}
+	
+	
 	
 	
 

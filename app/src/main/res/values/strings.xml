@@ -113,6 +113,10 @@
     <string name="branch_spinner_hint">Select Branch</string>
     <string name="area_spinner_floating_label">Area</string>
     <string name="area_spinner_hint">Select Area</string>
+    <string name="customer_interest_spinner_floating_label">Is Customer Interested</string>
+    <string name="customer_low_interest_spinner_floating_label">Customer disinterest Reason</string>
+    <string name="customer_interest_spinner_hint">Is Customer Interested?</string>
+    <string name="customer_low_interest_reason_spinner_hint">Select Customer disinterest Reason</string>
     <string name="basic_info_update_bt_text">Update</string>
 
     <!--sales activity-->
@@ -157,6 +161,8 @@
     <string name="enter_currentAddressLandmark">Please enter Current Address Landmark</string>
     <string name="enter_currentAddressPincode">Please enter Current Address Pincode</string>
     <string name="select_preferred_call_time">Please select Preferred Call Time</string>
+    <string name="select_customer_interest">Please select customer interest</string>
+    <string name="select_customer_low_interest_reason">Please select customer disinterest reason</string>
     <string name="lead_create_alert_message">Do you want to Create Lead..?</string>
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_ok">Ok</string>
@@ -164,13 +170,7 @@
     <string name="please_wait">Please wait...</string>
     <string name="prospect_created_successfully">Prospect Created Successfully..!</string>
 
-    <string name="title_prompt">Title</string>
-    <string-array name="title_array">
-        <item>Mr</item>
-        <item>Mrs</item>
-        <item>Dr</item>
-        <item>Er</item>
-    </string-array>
+
     <string name="title_activity_srleads_details">SRLeadsDetailsActivity</string>
     <string name="service_request_lead">Service Request Lead</string>
 
@@ -207,4 +207,27 @@
     <string name="mobileNumber_text">Mobile Number</string>
     <string name="search_text">Search</string>
     <string name="search_cancel_text">Cancel</string>
+
+    <!--array-->
+
+    <string name="title_prompt">Title</string>
+    <string-array name="title_array">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Dr</item>
+        <item>Er</item>
+    </string-array>
+
+    <string-array name="customer_interest_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="customer_low_interest_reason_array">
+        <item>No longer needed</item>
+        <item>Better price available</item>
+        <item>Placed request by mistake</item>
+        <item>Specification not matched with expectation</item>
+    </string-array>
+
 </resources>
