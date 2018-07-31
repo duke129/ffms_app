@@ -2,8 +2,9 @@
 
     <!-- app details-->
 
-    <string name="app_name">FFMS</string>
+    <string name="app_name">IFP</string>
     <string name="app_version">1.0.0</string>
+    <!--<string name="google_api_key">AIzaSyDwoP5D36gvGp7blYR_I6u0WxwfjiDj6UY</string>-->
 
     <!--login page-->
 
@@ -192,7 +193,7 @@
 
     <!--product-->
     <string name="product_description_text">Product Image</string>
-    <string name="title_activity_product_details">ProductDetails</string>
+    <string name="title_activity_product_details">Product Details</string>
 
     <string name="product_details_fragment">product details fragment</string>
     <string name="product_image_fragment">product image fragment</string>
@@ -207,6 +208,19 @@
     <string name="mobileNumber_text">Mobile Number</string>
     <string name="search_text">Search</string>
     <string name="search_cancel_text">Cancel</string>
+
+    <!--google map-->
+
+    <string name="action_clear">Clear</string>
+    <string name="action_circle">Draw Circle</string>
+    <string name="action_overlay">Draw Overlay</string>
+    <string name="action_polygon">Draw Polygon</string>
+    <string name="action_traffic">Toggle Traffic</string>
+    <string name="action_cycle_map_type">Cycle Map Type</string>
+
+    <string name="dialog_play_services_unavailable">Google Play Services are unavailable.</string>
+    <string name="dialog_download_play_services">Download Play Services</string>
+    <string name="dialog_close_program">Close Program</string>
 
     <!--array-->
 

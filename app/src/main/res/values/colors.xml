@@ -23,4 +23,6 @@
     <color name="text_hint">#4d4d4d</color>
     <color name="text_color">#4d4d4d</color>
     <color name="product_background">#eceef8</color>
+    <color name="fill_color">#6600FFFF</color>
+    <color name="stroke_color">#BB00FFFF</color>
 </resources>

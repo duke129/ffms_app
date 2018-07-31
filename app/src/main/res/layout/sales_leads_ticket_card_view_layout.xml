@@ -228,7 +228,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/SE_update_status_RL"
+                android:id="@+id/SE_map_icon_RL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -244,13 +244,13 @@
                     android:src="@drawable/lock" />-->
 
                 <ImageView
-                    android:id="@+id/update_Status_IV"
+                    android:id="@+id/map_icon_IV"
                     android:layout_width="@dimen/update_status_icon_width"
                     android:layout_height="@dimen/update_status_icon_height"
                     android:layout_alignParentRight="true"
                     android:contentDescription="@string/contentDescription_update_status"
                     android:visibility="gone"
-                    android:src="@drawable/update_status" />
+                    android:src="@drawable/map_icon" />
             </RelativeLayout>
         </RelativeLayout>
 

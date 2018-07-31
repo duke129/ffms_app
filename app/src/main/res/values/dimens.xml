@@ -2,6 +2,7 @@
 <resources>
     <dimen name="footer_text_margin_top">10dp</dimen>
     <dimen name="footer_text_size">25sp</dimen>
+    <dimen name="login_rl_top_margin">50dp</dimen>
     <dimen name="login_form_linearr_layout_margin_top">35dp</dimen>
     <dimen name="login_form_edittext_textWidth">490dp</dimen>
     <dimen name="edittext_text_height">45dp</dimen>
@@ -95,8 +96,8 @@
     <dimen name="sales_cardview_textView_margin_leftt">7dp</dimen>
     <dimen name="lock_icon_width">30dp</dimen>
     <dimen name="lock_icon_height">30dp</dimen>
-    <dimen name="update_status_icon_width">35dp</dimen>
-    <dimen name="update_status_icon_height">35dp</dimen>
+    <dimen name="update_status_icon_width">40dp</dimen>
+    <dimen name="update_status_icon_height">40dp</dimen>
     <dimen name="update_status_rl_bottom_margin">0dp</dimen>
     <dimen name="linear_layout_margin_bottom_top">5dp</dimen>
 
@@ -208,4 +209,5 @@
     <dimen name="placeOrder_text_padding">10dp</dimen>
     <dimen name="itemButton_width">35dp</dimen>
     <dimen name="itemButton_height">35dp</dimen>
+
 </resources>

@@ -2,6 +2,7 @@ package com.happiest.minds.ffms.sales;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.happiest.minds.ffms.CommonUtility;
 import com.happiest.minds.ffms.Constant;
 import com.happiest.minds.ffms.FFMSRequestQueue;
+import com.happiest.minds.ffms.MapActivityDailog;
 import com.happiest.minds.ffms.R;
 import com.happiest.minds.ffms.Webserver;
 import com.happiest.minds.ffms.sales.pojo.ActivityVo;
@@ -175,7 +177,10 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
             @Override
             public void onClick(View v) {
 
-                CommonUtility.showToastMessage(context, "Activity not available");
+               // CommonUtility.showToastMessage(context, "Activity not available");
+
+                Intent mapIntent = new Intent(context, MapActivityDailog.class);
+                context.startActivity(mapIntent);
             }
         });
 
@@ -225,7 +230,7 @@ public class SalesLeadsCardViewRecyclerAdapter extends RecyclerView.Adapter<Sale
             demo_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.demo_demarcation_RL);
             order_demarcation_RL = (RelativeLayout) itemView.findViewById(R.id.order_demarcation_RL);
             //lock_Status_IV = (ImageView) itemView.findViewById(R.id.lock_Status_IV);
-            update_Status_IV = (ImageView) itemView.findViewById(R.id.update_Status_IV);
+            update_Status_IV = (ImageView) itemView.findViewById(R.id.map_icon_IV);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

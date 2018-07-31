@@ -742,7 +742,7 @@ public class SalesHomeActivity extends AppCompatActivity implements View.OnClick
         String host = Webserver.SERVER_HOST;
         String uri = Webserver.SALES_COUNT_SERVICE;
 
-        String url = host + "" + uri;
+        String url = host + "" + uri+"/1";
 
         Log.i(TAG, "callCountService url : " + url);
 

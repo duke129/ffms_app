@@ -4,6 +4,19 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDwoP5D36gvGp7blYR_I6u0WxwfjiDj6UY" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ffms_launcher"
@@ -35,19 +48,15 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".sales.ProductDetailsActivity"
-            >
-
-        </activity>
-
+        <activity android:name=".sales.ProductDetailsActivity"></activity>
         <activity
             android:name=".sales.SalesSearchLeadActivityDailog"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
 
+        <activity android:name=".MapActivityDailog"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"></activity>
     </application>
 
 </manifest>
